@@ -446,8 +446,32 @@
   buildBoard();
 
   // ================= NETWORKING =================
+  // STUN membantu cari alamat publik; TURN me-relay data saat koneksi langsung
+  // gagal dibentuk (umum terjadi kalau dua pemain beda jaringan/operator seluler).
+  const ICE_CONFIG = {
+    iceServers: [
+      { urls: 'stun:stun.l.google.com:19302' },
+      { urls: 'stun:stun1.l.google.com:19302' },
+      {
+        urls: 'turn:openrelay.metered.ca:80',
+        username: 'openrelayproject',
+        credential: 'openrelayproject'
+      },
+      {
+        urls: 'turn:openrelay.metered.ca:443',
+        username: 'openrelayproject',
+        credential: 'openrelayproject'
+      },
+      {
+        urls: 'turn:openrelay.metered.ca:443?transport=tcp',
+        username: 'openrelayproject',
+        credential: 'openrelayproject'
+      }
+    ]
+  };
+
   function initPeer(id, onOpen){
-    peer = new Peer(id, {debug:0});
+    peer = new Peer(id, {debug:1, config: ICE_CONFIG});
     peer.on('open', pid=>{ myId = pid; onOpen && onOpen(pid); });
     peer.on('error', err=>{
       console.error(err);
@@ -455,8 +479,10 @@
         showToast('Kode room sudah dipakai, coba lagi...');
         $('createBtn').disabled=false;
       } else if(err.type==='peer-unavailable'){
-        $('homeStatus').textContent = 'Room tidak ditemukan. Cek kode lagi.';
+        $('homeStatus').textContent = 'Room tidak ditemukan. Cek kode lagi / pastikan host masih online.';
         $('joinBtn').disabled=false;
+      } else if(err.type==='network' || err.type==='server-error' || err.type==='socket-error' || err.type==='socket-closed'){
+        showToast('Masalah jaringan, mencoba lagi...');
       } else {
         showToast('Koneksi bermasalah: '+err.type);
       }
@@ -550,7 +576,16 @@
   // ----- CLIENT LOGIC -----
   function clientConnectToHost(code){
     hostConn = peer.connect(ROOM_PREFIX + code, {reliable:true});
+    let openedFlag = false;
+    const timeoutId = setTimeout(()=>{
+      if(!openedFlag){
+        $('homeStatus').textContent = 'Koneksi lambat/gagal. Pastikan host masih membuka room, lalu coba lagi.';
+        $('joinBtn').disabled = false;
+      }
+    }, 15000);
     hostConn.on('open', ()=>{
+      openedFlag = true;
+      clearTimeout(timeoutId);
       hostConn.send({type:'hello', name:myName});
     });
     hostConn.on('data', data=>{
