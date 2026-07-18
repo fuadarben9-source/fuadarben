@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Ular Tangga Online — Peta Harta Karun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+<style>
+  :root{
+    --parchment:#F3E7C9;
+    --parchment-dark:#E4D4A6;
+    --indigo:#241E45;
+    --indigo-light:#3A3170;
+    --gold:#D4AF37;
+    --gold-dark:#A8841E;
+    --jade:#2E8B57;
+    --crimson:#B33951;
+    --ink:#2A2237;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;font-family:'Quicksand',sans-serif;color:var(--ink);}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(212,175,55,0.15), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(212,175,55,0.12), transparent 45%),
+      linear-gradient(160deg, var(--indigo) 0%, #171233 100%);
+    display:flex;align-items:center;justify-content:center;
+    padding:16px;
+  }
+  h1,h2,h3{font-family:'Cinzel',serif;margin:0;}
+  .screen{
+    width:100%;max-width:480px;
+    display:none;
+    flex-direction:column;
+    gap:14px;
+  }
+  .screen.active{display:flex;}
+
+  /* ---------- HOME ---------- */
+  #screenHome{
+    background:var(--parchment);
+    border-radius:22px;
+    padding:30px 24px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    text-align:center;
+    border:3px solid var(--gold-dark);
+  }
+  .title{
+    font-size:30px;color:var(--indigo);
+    letter-spacing:1px;
+    text-shadow:1px 1px 0 var(--gold);
+  }
+  .subtitle{font-size:13px;color:#6b5a3a;margin-top:4px;font-weight:600;}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold-dark),transparent);margin:18px 0;}
+
+  input[type=text]{
+    width:100%;
+    padding:12px 14px;
+    border-radius:12px;
+    border:2px solid var(--gold-dark);
+    background:#fff;
+    font-family:'Quicksand',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    text-align:center;
+    color:var(--ink);
+    outline:none;
+  }
+  input[type=text]:focus{border-color:var(--indigo);}
+
+  .btn{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:15px;
+    border:none;
+    border-radius:12px;
+    padding:13px 18px;
+    cursor:pointer;
+    transition:transform .12s ease, box-shadow .12s ease;
+    letter-spacing:0.5px;
+  }
+  .btn:active{transform:scale(0.96);}
+  .btn-primary{background:linear-gradient(180deg,var(--gold),var(--gold-dark));color:var(--indigo);box-shadow:0 4px 0 #8A6A16;}
+  .btn-secondary{background:var(--indigo);color:var(--parchment);box-shadow:0 4px 0 #14102B;}
+  .btn-danger{background:var(--crimson);color:#fff;box-shadow:0 4px 0 #7C2536;}
+  .btn:disabled{opacity:0.45;cursor:not-allowed;box-shadow:none;}
+  .btn-block{width:100%;}
+
+  .row{display:flex;gap:10px;}
+  .row > *{flex:1;}
+
+  #homeStatus{font-size:12px;color:#8a4b4b;min-height:16px;font-weight:700;}
+
+  /* ---------- LOBBY ---------- */
+  #screenLobby{
+    background:var(--parchment);
+    border-radius:22px;
+    padding:24px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    border:3px solid var(--gold-dark);
+  }
+  .room-code-box{
+    background:var(--indigo);
+    color:var(--gold);
+    border-radius:14px;
+    padding:14px;
+    text-align:center;
+    margin-bottom:14px;
+  }
+  .room-code-box .code{
+    font-family:'Cinzel',serif;
+    font-size:28px;
+    letter-spacing:6px;
+    font-weight:800;
+  }
+  .room-code-box .lbl{font-size:11px;color:#C6BEE8;font-weight:700;letter-spacing:1px;}
+  .player-list{display:flex;flex-direction:column;gap:8px;margin:10px 0 18px;}
+  .player-row{
+    display:flex;align-items:center;gap:10px;
+    background:#fff;
+    border-radius:12px;
+    padding:9px 12px;
+    font-weight:700;
+    font-size:14px;
+    border:2px solid var(--parchment-dark);
+  }
+  .dot{width:16px;height:16px;border-radius:50%;flex-shrink:0;box-shadow:inset 0 -3px 0 rgba(0,0,0,0.2);}
+  .you-tag{font-size:10px;background:var(--jade);color:#fff;padding:2px 8px;border-radius:999px;margin-left:auto;}
+  .host-tag{font-size:10px;background:var(--gold-dark);color:#fff;padding:2px 8px;border-radius:999px;}
+
+  /* ---------- GAME ---------- */
+  #screenGame{width:100%;max-width:480px;}
+  .top-hud{
+    display:flex;justify-content:space-between;align-items:center;
+    color:var(--parchment);
+    padding:0 4px 10px;
+  }
+  .turn-banner{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:14px;
+    background:rgba(255,255,255,0.08);
+    padding:7px 14px;
+    border-radius:999px;
+    border:1px solid rgba(212,175,55,0.5);
+  }
+  .exit-btn{
+    background:transparent;border:1px solid rgba(255,255,255,0.3);color:var(--parchment);
+    border-radius:999px;padding:6px 12px;font-size:11px;cursor:pointer;font-weight:700;
+  }
+
+  .board-wrap{
+    position:relative;
+    width:100%;
+    aspect-ratio:1/1;
+    background:var(--parchment);
+    border-radius:14px;
+    border:6px solid var(--gold-dark);
+    box-shadow:0 16px 30px rgba(0,0,0,0.45);
+    overflow:hidden;
+  }
+  .grid{
+    position:absolute;inset:0;
+    display:grid;
+    grid-template-columns:repeat(10,1fr);
+    grid-template-rows:repeat(10,1fr);
+  }
+  .cell{
+    position:relative;
+    display:flex;align-items:flex-start;justify-content:flex-end;
+    padding:2px 4px;
+    font-size:9px;
+    font-weight:700;
+    color:#8a7444;
+    border:1px solid rgba(168,132,30,0.15);
+  }
+  .cell.alt{background:rgba(212,175,55,0.10);}
+  .cell.start{background:rgba(46,139,87,0.25);}
+  .cell.finish{background:rgba(212,175,55,0.35);}
+  svg.overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+  .pawn{
+    position:absolute;
+    width:8.5%;height:8.5%;
+    border-radius:50% 50% 50% 0;
+    transform:rotate(45deg);
+    box-shadow:0 3px 4px rgba(0,0,0,0.4), inset 0 -3px 0 rgba(0,0,0,0.25);
+    transition:left .5s cubic-bezier(.34,1.56,.64,1), top .5s cubic-bezier(.34,1.56,.64,1);
+    z-index:5;
+    border:2px solid rgba(255,255,255,0.6);
+  }
+  .pawn::after{
+    content:'';
+    position:absolute;inset:0;
+    border-radius:50%;
+    transform:rotate(-45deg);
+  }
+
+  .dice-panel{
+    margin-top:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(212,175,55,0.35);
+    border-radius:16px;
+    padding:14px;
+  }
+  .dice{
+    width:56px;height:56px;
+    background:var(--parchment);
+    border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:30px;
+    box-shadow:0 5px 0 var(--gold-dark);
+    border:2px solid var(--gold-dark);
+  }
+  .dice.rolling{animation:rollAnim .5s linear infinite;}
+  @keyframes rollAnim{
+    0%{transform:rotate(0deg) scale(1);}
+    50%{transform:rotate(180deg) scale(0.9);}
+    100%{transform:rotate(360deg) scale(1);}
+  }
+  #rollBtn{min-width:150px;}
+
+  .log-box{
+    margin-top:12px;
+    max-height:90px;
+    overflow-y:auto;
+    background:rgba(0,0,0,0.25);
+    border-radius:12px;
+    padding:10px 14px;
+    font-size:12px;
+    color:#E8DFC4;
+    line-height:1.6;
+  }
+
+  .winner-overlay{
+    position:fixed;inset:0;
+    background:rgba(20,15,40,0.85);
+    display:none;
+    align-items:center;justify-content:center;
+    z-index:50;
+    padding:20px;
+  }
+  .winner-overlay.show{display:flex;}
+  .winner-card{
+    background:var(--parchment);
+    border-radius:20px;
+    padding:30px 26px;
+    text-align:center;
+    max-width:340px;
+    border:3px solid var(--gold);
+    box-shadow:0 20px 40px rgba(0,0,0,0.5);
+  }
+  .winner-card .crown{font-size:48px;}
+  .winner-card h2{color:var(--indigo);margin:10px 0 4px;font-size:22px;}
+
+  .toast{
+    position:fixed;
+    top:16px;left:50%;
+    transform:translate(-50%,-16px);
+    background:var(--indigo);
+    color:var(--parchment);
+    padding:10px 18px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:13px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease;
+    z-index:60;
+    white-space:nowrap;
+    border:1px solid var(--gold);
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0);}
+</style>
+</head>
+<body>
+
+<!-- ===================== HOME ===================== -->
+<div class="screen active" id="screenHome">
+  <div>
+    <div class="title">🗺️ Ular Tangga</div>
+    <div class="subtitle">PETA HARTA KARUN — MAIN BARENG TEMAN</div>
+  </div>
+  <div class="divider"></div>
+  <input type="text" id="nameInput" placeholder="Nama kamu" maxlength="14">
+  <div class="divider"></div>
+  <button class="btn btn-primary btn-block" id="createBtn">✨ Buat Room Baru</button>
+  <div class="row">
+    <input type="text" id="joinCodeInput" placeholder="Kode room" maxlength="4" style="text-transform:uppercase;">
+    <button class="btn btn-secondary" id="joinBtn">Gabung</button>
+  </div>
+  <div id="homeStatus"></div>
+</div>
+
+<!-- ===================== LOBBY ===================== -->
+<div class="screen" id="screenLobby">
+  <h2 style="color:var(--indigo);text-align:center;">Ruang Tunggu</h2>
+  <div class="room-code-box">
+    <div class="lbl">KODE ROOM — BAGIKAN KE TEMAN</div>
+    <div class="code" id="roomCodeDisplay">----</div>
+  </div>
+  <div class="player-list" id="lobbyPlayerList"></div>
+  <button class="btn btn-primary btn-block" id="startGameBtn">🎲 Mulai Petualangan</button>
+  <button class="btn btn-danger btn-block" id="leaveLobbyBtn" style="margin-top:8px;">Keluar Room</button>
+  <div id="lobbyStatus" style="text-align:center;font-size:12px;color:#6b5a3a;font-weight:700;margin-top:6px;"></div>
+</div>
+
+<!-- ===================== GAME ===================== -->
+<div class="screen" id="screenGame">
+  <div class="top-hud">
+    <div class="turn-banner" id="turnBanner">Menunggu...</div>
+    <button class="exit-btn" id="exitGameBtn">Keluar</button>
+  </div>
+  <div class="board-wrap">
+    <div class="grid" id="grid"></div>
+    <svg class="overlay" id="overlaySvg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+    <div id="pawnLayer"></div>
+  </div>
+  <div class="dice-panel">
+    <div class="dice" id="diceFace">🎲</div>
+    <button class="btn btn-primary" id="rollBtn">Lempar Dadu</button>
+  </div>
+  <div class="log-box" id="logBox"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="winner-overlay" id="winnerOverlay">
+  <div class="winner-card">
+    <div class="crown">🏆</div>
+    <h2 id="winnerName">Pemenang!</h2>
+    <p style="color:#6b5a3a;font-weight:600;margin:0 0 18px;">berhasil mencapai harta karun di petak 100!</p>
+    <button class="btn btn-primary btn-block" id="playAgainBtn">Main Lagi</button>
+    <button class="btn btn-secondary btn-block" id="backHomeBtn" style="margin-top:8px;">Kembali ke Menu</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ================= CONFIG =================
+  const LADDERS = {4:14, 9:31, 21:42, 28:84, 51:67, 71:91, 80:100, 36:44};
+  const SNAKES  = {17:7, 54:34, 62:19, 64:60, 87:24, 93:73, 95:75, 98:79};
+  const COLORS = ['#B33951','#2E8B57','#3A6FD8','#D4AF37','#8B4FC7','#E0703A'];
+  const DICE_FACES = ['','⚀','⚁','⚂','⚃','⚄','⚅'];
+  const ROOM_PREFIX = 'ular-tangga-tresor-';
+
+  // ================= STATE =================
+  let peer = null;
+  let myId = null;
+  let myName = '';
+  let isHost = false;
+  let hostConn = null;        // client -> host connection
+  let clientConns = {};       // host: id -> conn
+  let roomCode = '';
+  let game = null;            // authoritative shared state (mirrored on all)
+
+  const $ = id => document.getElementById(id);
+  const screens = {home:$('screenHome'), lobby:$('screenLobby'), game:$('screenGame')};
+  function showScreen(name){
+    Object.values(screens).forEach(s=>s.classList.remove('active'));
+    screens[name].classList.add('active');
+  }
+
+  function showToast(msg){
+    const t = $('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(()=>t.classList.remove('show'), 1800);
+  }
+
+  function randomCode(){
+    const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let s='';
+    for(let i=0;i<4;i++) s+=chars[Math.floor(Math.random()*chars.length)];
+    return s;
+  }
+
+  // ================= BOARD RENDER =================
+  function cellRC(n){
+    const idx = n-1;
+    const rowFromBottom = Math.floor(idx/10);
+    const posInRow = idx%10;
+    const col = (rowFromBottom%2===0) ? posInRow : 9-posInRow;
+    const row = 9-rowFromBottom;
+    return {row,col};
+  }
+  function cellCenterPct(n){
+    const {row,col} = cellRC(n);
+    return {x: col*10+5, y: row*10+5};
+  }
+
+  function buildBoard(){
+    const grid = $('grid');
+    grid.innerHTML='';
+    for(let n=1;n<=100;n++){
+      const {row,col} = cellRC(n);
+      const div = document.createElement('div');
+      div.className = 'cell' + (((row+col)%2===0)?' alt':'') + (n===1?' start':'') + (n===100?' finish':'');
+      div.style.gridRowStart = row+1;
+      div.style.gridColumnStart = col+1;
+      div.textContent = n;
+      grid.appendChild(div);
+    }
+    const svg = $('overlaySvg');
+    svg.innerHTML='';
+    function addLine(a,b,color,dash){
+      const p1=cellCenterPct(a), p2=cellCenterPct(b);
+      const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1',p1.x);line.setAttribute('y1',p1.y);
+      line.setAttribute('x2',p2.x);line.setAttribute('y2',p2.y);
+      line.setAttribute('stroke',color);
+      line.setAttribute('stroke-width','1.6');
+      line.setAttribute('stroke-linecap','round');
+      if(dash) line.setAttribute('stroke-dasharray',dash);
+      svg.appendChild(line);
+    }
+    Object.entries(LADDERS).forEach(([a,b])=>addLine(+a,+b,'#D4AF37',null));
+    Object.entries(SNAKES).forEach(([a,b])=>addLine(+a,+b,'#2E8B57','2,1.5'));
+  }
+
+  function renderPawns(){
+    const layer = $('pawnLayer');
+    layer.innerHTML='';
+    if(!game) return;
+    game.players.forEach((p,i)=>{
+      const pos = Math.max(1, p.pos);
+      const {x,y} = cellCenterPct(pos);
+      const offset = (i%4) * 1.6 - 2.4;
+      const pawn = document.createElement('div');
+      pawn.className='pawn';
+      pawn.style.background = p.color;
+      pawn.style.left = (x+offset-4.25)+'%';
+      pawn.style.top = (y+offset-4.25)+'%';
+      pawn.title = p.name;
+      layer.appendChild(pawn);
+    });
+  }
+
+  buildBoard();
+
+  // ================= NETWORKING =================
+  function initPeer(id, onOpen){
+    peer = new Peer(id, {debug:0});
+    peer.on('open', pid=>{ myId = pid; onOpen && onOpen(pid); });
+    peer.on('error', err=>{
+      console.error(err);
+      if(err.type==='unavailable-id'){
+        showToast('Kode room sudah dipakai, coba lagi...');
+        $('createBtn').disabled=false;
+      } else if(err.type==='peer-unavailable'){
+        $('homeStatus').textContent = 'Room tidak ditemukan. Cek kode lagi.';
+        $('joinBtn').disabled=false;
+      } else {
+        showToast('Koneksi bermasalah: '+err.type);
+      }
+    });
+    if(!isHost){
+      // client doesn't need incoming connections
+    } else {
+      peer.on('connection', conn=>{
+        conn.on('open', ()=>{
+          clientConns[conn.peer] = conn;
+        });
+        conn.on('data', data=> handleHostData(conn, data));
+        conn.on('close', ()=>{
+          delete clientConns[conn.peer];
+          if(game){
+            game.players = game.players.filter(p=>p.id!==conn.peer);
+            broadcast({type:'state', game});
+            renderLobby();
+          }
+        });
+      });
+    }
+  }
+
+  function broadcast(msg){
+    Object.values(clientConns).forEach(c=>{ if(c.open) c.send(msg); });
+  }
+
+  // ----- HOST LOGIC -----
+  function hostInitGame(){
+    game = {
+      players: [{id:myId, name:myName, color:COLORS[0], pos:1}],
+      turnIndex: 0,
+      started:false,
+      winner:null,
+      log:['Room dibuat. Menunggu pemain lain...']
+    };
+  }
+
+  function handleHostData(conn, data){
+    if(data.type==='hello'){
+      if(game.started){
+        conn.send({type:'error', message:'Permainan sudah dimulai.'});
+        return;
+      }
+      if(game.players.some(p=>p.id===conn.peer)) return;
+      const color = COLORS[game.players.length % COLORS.length];
+      game.players.push({id:conn.peer, name:data.name, color, pos:1});
+      game.log.push(`${data.name} bergabung ke room.`);
+      broadcast({type:'state', game});
+      renderLobby();
+    } else if(data.type==='roll'){
+      const current = game.players[game.turnIndex];
+      if(!current || current.id !== conn.peer) return;
+      hostProcessRoll();
+    }
+  }
+
+  function hostProcessRoll(){
+    const player = game.players[game.turnIndex];
+    const roll = 1 + Math.floor(Math.random()*6);
+    animateDice(roll, ()=>{
+      let newPos = player.pos + roll;
+      let extraMsg = '';
+      if(newPos > 100){
+        newPos = player.pos; // must land exactly
+        extraMsg = ' (harus pas ke 100, tetap di tempat)';
+      } else {
+        if(LADDERS[newPos]){
+          extraMsg = ` 🪜 naik tangga ke ${LADDERS[newPos]}!`;
+          newPos = LADDERS[newPos];
+        } else if(SNAKES[newPos]){
+          extraMsg = ` 🐍 kena ular turun ke ${SNAKES[newPos]}!`;
+          newPos = SNAKES[newPos];
+        }
+      }
+      player.pos = newPos;
+      game.log.unshift(`${player.name} lempar ${roll}${extraMsg}`);
+      game.log = game.log.slice(0,30);
+
+      if(newPos >= 100){
+        game.winner = player.name;
+      } else {
+        game.turnIndex = (game.turnIndex + 1) % game.players.length;
+      }
+      broadcast({type:'state', game});
+      renderGame();
+    });
+  }
+
+  // ----- CLIENT LOGIC -----
+  function clientConnectToHost(code){
+    hostConn = peer.connect(ROOM_PREFIX + code, {reliable:true});
+    hostConn.on('open', ()=>{
+      hostConn.send({type:'hello', name:myName});
+    });
+    hostConn.on('data', data=>{
+      if(data.type==='state'){
+        game = data.game;
+        roomCode = code;
+        if(!game.started){
+          renderLobby();
+          showScreen('lobby');
+        } else {
+          showScreen('game');
+          renderGame();
+        }
+      } else if(data.type==='error'){
+        $('homeStatus').textContent = data.message;
+        $('joinBtn').disabled = false;
+      } else if(data.type==='kicked'){
+        showToast('Room ditutup oleh host.');
+        goHome();
+      }
+    });
+    hostConn.on('close', ()=>{
+      showToast('Koneksi ke host terputus.');
+    });
+    hostConn.on('error', err=>{
+      $('homeStatus').textContent = 'Gagal terhubung ke room.';
+      $('joinBtn').disabled = false;
+    });
+  }
+
+  // ================= UI: HOME =================
+  $('createBtn').onclick = ()=>{
+    const name = $('nameInput').value.trim();
+    if(!name){ $('homeStatus').textContent='Isi nama kamu dulu.'; return; }
+    myName = name;
+    isHost = true;
+    $('createBtn').disabled = true;
+    $('homeStatus').textContent = 'Membuat room...';
+    const code = randomCode();
+    initPeer(ROOM_PREFIX + code, ()=>{
+      roomCode = code;
+      hostInitGame();
+      $('roomCodeDisplay').textContent = roomCode;
+      renderLobby();
+      showScreen('lobby');
+      $('createBtn').disabled = false;
+    });
+  };
+
+  $('joinBtn').onclick = ()=>{
+    const name = $('nameInput').value.trim();
+    const code = $('joinCodeInput').value.trim().toUpperCase();
+    if(!name){ $('homeStatus').textContent='Isi nama kamu dulu.'; return; }
+    if(code.length !== 4){ $('homeStatus').textContent='Kode room 4 karakter.'; return; }
+    myName = name;
+    isHost = false;
+    $('joinBtn').disabled = true;
+    $('homeStatus').textContent = 'Menghubungkan...';
+    initPeer(null, ()=>{
+      clientConnectToHost(code);
+    });
+  };
+
+  function goHome(){
+    if(peer){ peer.destroy(); peer=null; }
+    hostConn=null; clientConns={}; game=null; isHost=false;
+    $('homeStatus').textContent='';
+    $('createBtn').disabled=false;
+    $('joinBtn').disabled=false;
+    showScreen('home');
+  }
+
+  // ================= UI: LOBBY =================
+  function renderLobby(){
+    $('roomCodeDisplay').textContent = roomCode;
+    const list = $('lobbyPlayerList');
+    list.innerHTML='';
+    game.players.forEach((p,i)=>{
+      const row=document.createElement('div');
+      row.className='player-row';
+      row.innerHTML = `<span class="dot" style="background:${p.color}"></span><span>${p.name}</span>`;
+      if(i===0){
+        const tag=document.createElement('span'); tag.className='host-tag'; tag.textContent='HOST'; row.appendChild(tag);
+      }
+      if(p.id===myId){
+        const tag=document.createElement('span'); tag.className='you-tag'; tag.textContent='KAMU'; row.appendChild(tag);
+      }
+      list.appendChild(row);
+    });
+    $('startGameBtn').style.display = isHost ? 'block' : 'none';
+    $('startGameBtn').disabled = game.players.length < 2;
+    $('lobbyStatus').textContent = isHost
+      ? (game.players.length < 2 ? 'Menunggu minimal 1 teman lagi untuk bergabung...' : 'Siap dimulai!')
+      : 'Menunggu host memulai permainan...';
+  }
+
+  $('startGameBtn').onclick = ()=>{
+    if(!isHost || game.players.length < 2) return;
+    game.started = true;
+    game.log.unshift('Permainan dimulai! Semoga beruntung 🍀');
+    broadcast({type:'state', game});
+    showScreen('game');
+    renderGame();
+  };
+
+  $('leaveLobbyBtn').onclick = goHome;
+  $('exitGameBtn').onclick = goHome;
+
+  // ================= UI: GAME =================
+  function renderGame(){
+    if(!game) return;
+    renderPawns();
+    const current = game.players[game.turnIndex];
+    const myTurn = current && current.id === myId;
+    $('turnBanner').textContent = game.winner
+      ? `🏆 ${game.winner} menang!`
+      : (myTurn ? 'Giliranmu! 🎲' : `Giliran ${current ? current.name : '...'}`);
+    $('rollBtn').disabled = !myTurn || !!game.winner;
+    $('logBox').innerHTML = game.log.map(l=>`<div>• ${l}</div>`).join('');
+
+    if(game.winner && !renderGame._shown){
+      renderGame._shown = true;
+      $('winnerName').textContent = game.winner;
+      $('winnerOverlay').classList.add('show');
+    }
+    if(!game.winner){
+      renderGame._shown = false;
+      $('winnerOverlay').classList.remove('show');
+    }
+  }
+
+  function animateDice(finalRoll, cb){
+    const dice = $('diceFace');
+    dice.classList.add('rolling');
+    let count=0;
+    const iv = setInterval(()=>{
+      dice.textContent = DICE_FACES[1+Math.floor(Math.random()*6)];
+      count++;
+      if(count>6){
+        clearInterval(iv);
+        dice.classList.remove('rolling');
+        dice.textContent = DICE_FACES[finalRoll];
+        cb && cb();
+      }
+    },70);
+  }
+
+  $('rollBtn').onclick = ()=>{
+    const current = game.players[game.turnIndex];
+    if(!current || current.id !== myId || game.winner) return;
+    $('rollBtn').disabled = true;
+    if(isHost){
+      hostProcessRoll();
+    } else {
+      hostConn.send({type:'roll'});
+      // small delay re-enable guard; state update will refresh UI/turn anyway
+      setTimeout(()=>{ if(game && game.turnIndex!==undefined){ renderGame(); } }, 900);
+    }
+  };
+
+  $('playAgainBtn').onclick = ()=>{
+    if(!isHost) return;
+    game.players.forEach(p=>p.pos=1);
+    game.turnIndex=0;
+    game.winner=null;
+    game.log = ['Permainan baru dimulai!'];
+    broadcast({type:'state', game});
+    $('winnerOverlay').classList.remove('show');
+    renderGame();
+  };
+  $('backHomeBtn').onclick = ()=>{
+    $('winnerOverlay').classList.remove('show');
+    goHome();
+  };
+
+})();
+</script>
+</body>
+</html>
