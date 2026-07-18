@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Belajar Mandarin · Level 1 & 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F2E8D6;
+    --ink: #26221C;
+    --ink-soft: #5B5348;
+    --seal: #A5372A;
+    --seal-dark: #7E2A20;
+    --jade: #4C7266;
+    --brass: #B08A3E;
+    --line: rgba(38,34,28,0.14);
+    --card-bg: #FBF6EA;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(165,55,42,0.06), transparent 60%),
+      radial-gradient(1000px 700px at 100% 0%, rgba(76,114,102,0.07), transparent 55%),
+      var(--paper);
+    background-attachment: fixed;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:40px 22px 80px;}
+
+  /* ===== Header ===== */
+  header{
+    position:relative;
+    text-align:center;
+    padding:38px 20px 34px;
+    margin-bottom:26px;
+    border-top:3px solid var(--ink);
+    border-bottom:3px solid var(--ink);
+  }
+  header::before, header::after{
+    content:"";
+    position:absolute; left:0; right:0; height:6px;
+    background: repeating-linear-gradient(90deg, var(--seal) 0 14px, transparent 14px 20px);
+    opacity:0.55;
+  }
+  header::before{top:-9px;}
+  header::after{bottom:-9px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:0.35em;
+    font-size:11px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Noto Serif SC', serif;
+    font-weight:900;
+    font-size:clamp(30px,5vw,50px);
+    margin:0 0 10px;
+  }
+  h1 .accent{color:var(--seal);}
+  .subtitle{
+    font-size:15px;
+    color:var(--ink-soft);
+    max-width:600px;
+    margin:0 auto;
+    line-height:1.6;
+  }
+  .stamp{
+    position:absolute;
+    top:18px; right:24px;
+    width:64px; height:64px;
+    border:2.5px solid var(--seal);
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(-6deg);
+    font-family:'Noto Serif SC', serif;
+    font-weight:700;
+    font-size:20px;
+    color:var(--seal);
+    background:rgba(165,55,42,0.05);
+  }
+
+  /* ===== Level switcher (top-level tabs) ===== */
+  .level-switch{
+    display:flex; justify-content:center; gap:10px;
+    margin-bottom:36px;
+  }
+  .level-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:11px 22px;
+    border-radius:24px;
+    border:1.6px solid var(--line);
+    background:var(--card-bg);
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:all .15s;
+    text-align:left;
+  }
+  .level-btn b{display:block; font-family:'Noto Serif SC',serif; font-size:15px; color:var(--ink); margin-bottom:2px;}
+  .level-btn:hover{border-color:var(--seal);}
+  .level-btn.active{
+    background:var(--ink); border-color:var(--ink); color:var(--paper);
+  }
+  .level-btn.active b{color:var(--paper);}
+
+  .level-view{display:none;}
+  .level-view.active{display:block;}
+
+  /* ===== Level 1: controls / tabs / cards ===== */
+  .controls{
+    display:flex; flex-wrap:wrap; gap:10px;
+    align-items:center; justify-content:space-between;
+    margin-bottom:22px;
+    position:sticky; top:0; z-index:20;
+    background:var(--paper);
+    padding:12px 0;
+  }
+  .search-box{flex:1 1 260px; position:relative;}
+  .search-box input{
+    width:100%;
+    padding:11px 14px 11px 38px;
+    border-radius:8px;
+    border:1.5px solid var(--line);
+    background:var(--card-bg);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s;
+  }
+  .search-box input:focus{border-color:var(--seal);}
+  .search-box svg{
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:15px; height:15px; opacity:0.5;
+  }
+  .count-badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    white-space:nowrap;
+    padding:0 4px;
+  }
+  .count-badge b{color:var(--seal); font-weight:600;}
+
+  .tabs{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-bottom:30px;
+    padding-bottom:18px;
+    border-bottom:1px dashed var(--line);
+  }
+  .tab{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    padding:7px 13px;
+    border-radius:20px;
+    border:1.3px solid var(--line);
+    background:var(--card-bg);
+    color:var(--ink-soft);
+    cursor:pointer;
+    user-select:none;
+    transition:all .15s;
+    white-space:nowrap;
+  }
+  .tab:hover{border-color:var(--seal); color:var(--seal);}
+  .tab.active{background:var(--ink); border-color:var(--ink); color:var(--paper);}
+  .tab .n{opacity:0.55; margin-left:4px;}
+
+  .section{margin-bottom:44px;}
+  .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:16px;}
+  .section-num{
+    font-family:'Noto Serif SC', serif; font-weight:700; font-size:15px;
+    color:var(--paper); background:var(--seal);
+    width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  #level2 .section-num{background:var(--jade);}
+  .section-title{font-family:'Noto Serif SC', serif; font-weight:700; font-size:20px;}
+  .rule{flex:1; height:1px; background:var(--line);}
+  .section-desc{
+    font-size:13.5px; color:var(--ink-soft); margin:0 0 20px 38px;
+    max-width:640px; line-height:1.6;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(148px,1fr));
+    gap:10px;
+  }
+  .card{
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-left:3px solid var(--jade);
+    border-radius:8px;
+    padding:14px 12px 12px;
+    transition:transform .12s, box-shadow .12s, border-color .12s;
+    cursor:pointer;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 22px -12px rgba(38,34,28,0.35);
+    border-left-color:var(--seal);
+  }
+  .card:active{transform:translateY(-1px) scale(0.98);}
+  .card.speaking{border-left-color:var(--seal); box-shadow:0 0 0 2px rgba(165,55,42,0.25);}
+  .card .top-row{display:flex; align-items:flex-start; justify-content:space-between; gap:6px;}
+  .card .hz{font-family:'Noto Serif SC', serif; font-weight:700; font-size:27px; line-height:1.1; margin-bottom:6px;}
+  .card .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin-bottom:8px;}
+  .card .id{font-size:12.5px; color:var(--ink-soft); line-height:1.4; padding-top:7px; border-top:1px dashed var(--line);}
+  .speaker-icon{flex-shrink:0; width:16px; height:16px; opacity:0.35; transition:opacity .15s, transform .15s;}
+  .card:hover .speaker-icon{opacity:0.7;}
+  .card.speaking .speaker-icon{opacity:1; color:var(--seal); transform:scale(1.15);}
+  .pcard .top .speaker-icon, .mcard .top-row .speaker-icon, .pattern-example .speaker-icon{margin-left:auto; opacity:0.4;}
+  .pcard:hover .speaker-icon, .mcard:hover .speaker-icon, .pattern-example:hover .speaker-icon{opacity:0.8;}
+  .pcard.speaking .speaker-icon, .mcard.speaking .speaker-icon, .pattern-example.speaking .speaker-icon{opacity:1; color:var(--seal); transform:scale(1.15);}
+
+  .empty{
+    text-align:center; padding:60px 20px; color:var(--ink-soft);
+    font-family:'JetBrains Mono', monospace; font-size:13px;
+  }
+
+  /* ===== Level 2 specific ===== */
+  .part-nav{
+    display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+    margin-bottom:40px;
+  }
+  .part-nav a{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    padding:8px 16px;
+    border-radius:20px;
+    border:1.3px solid var(--line);
+    background:var(--card-bg);
+    color:var(--ink-soft);
+    text-decoration:none;
+    transition:all .15s;
+  }
+  .part-nav a:hover{border-color:var(--seal); color:var(--seal);}
+
+  .pcard{
+    background:var(--card-bg); border:1px solid var(--line); border-left:3px solid var(--brass);
+    border-radius:8px; padding:14px 16px;
+    cursor:pointer; transition:box-shadow .12s, border-color .12s;
+  }
+  .pcard:hover{border-left-color:var(--seal);}
+  .pcard.speaking{border-left-color:var(--seal); box-shadow:0 0 0 2px rgba(165,55,42,0.25);}
+  .pcard .top{display:flex; align-items:baseline; gap:10px; margin-bottom:6px;}
+  .pcard .hz{font-family:'Noto Serif SC', serif; font-weight:700; font-size:22px;}
+  .pcard .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark);}
+  .pcard .fungsi{font-size:12.5px; color:var(--ink); margin-bottom:8px; line-height:1.4;}
+  .pcard .ex{font-size:12px; color:var(--ink-soft); padding-top:8px; border-top:1px dashed var(--line); line-height:1.6; cursor:pointer;}
+  .pcard .ex:hover{color:var(--seal-dark);}
+  .pcard .ex .exhz{font-family:'Noto Serif SC', serif; font-size:14px; color:var(--ink); display:block;}
+  .pcard .ex .exid{display:block; margin-top:2px; font-style:italic;}
+
+  .mgrid{display:grid; grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); gap:10px;}
+  .mcard{background:var(--card-bg); border:1px solid var(--line); border-left:3px solid var(--jade); border-radius:8px; padding:13px 14px; cursor:pointer; transition:box-shadow .12s, border-color .12s;}
+  .mcard:hover{border-left-color:var(--seal);}
+  .mcard.speaking{border-left-color:var(--seal); box-shadow:0 0 0 2px rgba(165,55,42,0.25);}
+  .mcard .hz{font-family:'Noto Serif SC', serif; font-weight:700; font-size:24px;}
+  .mcard .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin:3px 0 6px;}
+  .mcard .id{font-size:12.5px; color:var(--ink-soft); margin-bottom:6px;}
+  .mcard .contoh{font-family:'Noto Serif SC', serif; font-size:13px; color:var(--jade); padding-top:6px; border-top:1px dashed var(--line);}
+
+  .pattern-list{display:flex; flex-direction:column; gap:14px;}
+  .pattern{
+    background:var(--card-bg); border:1px solid var(--line); border-radius:10px;
+    padding:18px 20px; position:relative; overflow:hidden;
+  }
+  .pattern::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--seal);}
+  .pattern-head{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:10px;}
+  .pattern-name{font-family:'Noto Serif SC', serif; font-weight:700; font-size:16px;}
+  .pattern-formula{
+    font-family:'JetBrains Mono', monospace; font-size:12px;
+    background:rgba(165,55,42,0.08); color:var(--seal-dark);
+    padding:4px 10px; border-radius:6px;
+  }
+  .pattern-example{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;
+    padding:12px 14px; background:rgba(76,114,102,0.06); border-radius:8px; margin-bottom:8px;
+    cursor:pointer; transition:background .12s, box-shadow .12s;
+  }
+  .pattern-example:hover{background:rgba(165,55,42,0.08);}
+  .pattern-example.speaking{box-shadow:0 0 0 2px rgba(165,55,42,0.3); background:rgba(165,55,42,0.1);}
+  .pattern-example .hz{font-family:'Noto Serif SC', serif; font-weight:700; font-size:20px;}
+  .pattern-example .py{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--seal-dark);}
+  .pattern-example .id{font-size:13px; color:var(--ink-soft); font-style:italic;}
+  .pattern-note{font-size:12px; color:var(--ink-soft); padding-left:2px;}
+  .pattern-note b{color:var(--jade); font-weight:600;}
+
+  /* ===== Level 3 specific ===== */
+  #level3 .section-num{background:var(--brass);}
+  #level4 .section-num{background:var(--seal-dark);}
+  #level5 .section-num{background:var(--ink);}
+
+  .dialog-card{
+    background:var(--card-bg); border:1px solid var(--line); border-radius:10px;
+    padding:18px 20px; margin-bottom:18px; position:relative; overflow:hidden;
+  }
+  .dialog-card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--jade);}
+  .dialog-title{font-family:'Noto Serif SC', serif; font-weight:700; font-size:17px; margin-bottom:6px;}
+  .dialog-sub{font-size:12px; color:var(--ink-soft); margin-bottom:14px;}
+  .dialog-line{
+    display:flex; gap:12px; align-items:flex-start; padding:11px 4px;
+    border-bottom:1px dashed var(--line); cursor:pointer; transition:background .12s; border-radius:6px;
+  }
+  .dialog-line:last-child{border-bottom:none;}
+  .dialog-line:hover{background:rgba(165,55,42,0.05);}
+  .dialog-line.speaking{background:rgba(165,55,42,0.08);}
+  .dialog-spk{
+    flex-shrink:0; width:26px; height:26px; border-radius:50%;
+    background:var(--brass); color:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:600; margin-top:1px;
+  }
+  .dialog-line[data-spk="B"] .dialog-spk{background:var(--jade);}
+  .dialog-content{flex:1; min-width:0;}
+  .dialog-hz{font-family:'Noto Serif SC', serif; font-weight:700; font-size:17px; margin-bottom:3px;}
+  .dialog-py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin-bottom:3px;}
+  .dialog-id{font-size:12.5px; color:var(--ink-soft); font-style:italic;}
+  .dialog-line .speaker-icon{flex-shrink:0; opacity:0.35; align-self:center;}
+  .dialog-line:hover .speaker-icon{opacity:0.7;}
+  .dialog-line.speaking .speaker-icon{opacity:1; color:var(--seal); transform:scale(1.15);}
+
+  .phrase-section{margin-bottom:26px;}
+  .phrase-cat-title{
+    font-family:'Noto Serif SC', serif; font-weight:700; font-size:15.5px;
+    color:var(--jade); margin-bottom:10px; padding-left:2px;
+  }
+  .phrasecard{
+    background:var(--card-bg); border:1px solid var(--line); border-left:3px solid var(--brass);
+    border-radius:8px; padding:13px 14px; cursor:pointer; transition:box-shadow .12s, border-color .12s;
+  }
+  .phrasecard:hover{border-left-color:var(--seal);}
+  .phrasecard.speaking{border-left-color:var(--seal); box-shadow:0 0 0 2px rgba(165,55,42,0.25);}
+  .phrasecard .top-row{display:flex; align-items:flex-start; justify-content:space-between; gap:6px;}
+  .phrasecard .hz{font-family:'Noto Serif SC', serif; font-weight:700; font-size:20px;}
+  .phrasecard .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin:3px 0 6px;}
+  .phrasecard .id{font-size:12.5px; color:var(--ink-soft);}
+
+  .reading-card{
+    background:var(--card-bg); border:1px solid var(--line); border-radius:10px;
+    padding:22px 24px; margin-bottom:20px;
+  }
+  .reading-title{
+    font-family:'Noto Serif SC', serif; font-weight:700; font-size:19px;
+    margin-bottom:4px; text-align:center;
+  }
+  .reading-desc{font-size:12.5px; color:var(--ink-soft); text-align:center; margin-bottom:18px;}
+  .reading-sentence{
+    padding:11px 4px; border-bottom:1px dashed var(--line); cursor:pointer;
+    transition:background .12s; border-radius:6px;
+  }
+  .reading-sentence:last-child{border-bottom:none;}
+  .reading-sentence:hover{background:rgba(165,55,42,0.05);}
+  .reading-sentence.speaking{background:rgba(165,55,42,0.08);}
+  .reading-sentence .top-row{display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .reading-sentence .hz{font-family:'Noto Serif SC', serif; font-weight:700; font-size:17px;}
+  .reading-sentence .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin-top:4px;}
+  .reading-sentence .id{font-size:12.5px; color:var(--ink-soft); font-style:italic; margin-top:3px;}
+  .reading-sentence .speaker-icon{flex-shrink:0; opacity:0.35;}
+  .reading-sentence:hover .speaker-icon{opacity:0.7;}
+  .reading-sentence.speaking .speaker-icon{opacity:1; color:var(--seal); transform:scale(1.15);}
+
+  footer{
+    text-align:center; margin-top:20px; padding-top:22px;
+    border-top:3px solid var(--ink);
+    font-family:'JetBrains Mono', monospace; font-size:11px;
+    color:var(--ink-soft); letter-spacing:0.08em;
+  }
+
+  /* ===== Signature stamp ===== */
+  .signature-stamp{
+    position:fixed;
+    bottom:20px; right:20px;
+    width:64px; height:64px;
+    border:2.5px solid var(--seal);
+    border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(-6deg);
+    background:rgba(165,55,42,0.06);
+    box-shadow:0 6px 16px -8px rgba(38,34,28,0.4);
+    z-index:60;
+    opacity:0.85;
+    pointer-events:none;
+    user-select:none;
+  }
+  .signature-stamp span{
+    font-family:'Noto Serif SC', serif;
+    font-weight:700;
+    font-size:10.5px;
+    line-height:1.25;
+    color:var(--seal);
+    text-align:center;
+    letter-spacing:0.02em;
+    text-transform:lowercase;
+  }
+  @media (max-width:520px){
+    .signature-stamp{width:50px; height:50px; bottom:12px; right:12px;}
+    .signature-stamp span{font-size:8.5px;}
+  }
+
+  @media (max-width:520px){
+    .stamp{display:none;}
+    .grid{grid-template-columns:repeat(auto-fill, minmax(128px,1fr));}
+    .mgrid{grid-template-columns:repeat(2,1fr);}
+    .controls{position:static;}
+    .level-switch{flex-direction:column; align-items:stretch;}
+  }
+</style>
+</head>
+<body>
+
+<div class="signature-stamp"><span>fuad<br>arben</span></div>
+
+<div class="wrap">
+
+  <header>
+    <div class="stamp">中文</div>
+    <div class="eyebrow">Belajar Mandarin · 学中文</div>
+    <h1>Panduan <span class="accent">Dasar</span><br>Bahasa Mandarin</h1>
+    <p class="subtitle">Level 1: 300 kosakata inti. Level 2: partikel & pola dasar. Level 3: percakapan & bacaan. Level 4: tata bahasa & kosakata menengah. Level 5: idiom & diskusi mahir — semua lengkap dengan suara.</p>
+  </header>
+
+  <div class="level-switch">
+    <div class="level-btn active" data-level="level1"><b>Level 1</b>300 Kosakata Dasar</div>
+    <div class="level-btn" data-level="level2"><b>Level 2</b>Tata Bahasa & Pola Kalimat</div>
+    <div class="level-btn" data-level="level3"><b>Level 3</b>Percakapan & Latihan Membaca</div>
+    <div class="level-btn" data-level="level4"><b>Level 4</b>Menengah: Tata Bahasa & Tematik</div>
+    <div class="level-btn" data-level="level5"><b>Level 5</b>Mahir: Idiom & Diskusi</div>
+  </div>
+
+  <!-- ============ LEVEL 1 VIEW ============ -->
+  <div class="level-view active" id="level1">
+    <div class="controls">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="search" type="text" placeholder="Cari kata (hanzi, pinyin, atau bahasa Indonesia)...">
+      </div>
+      <div class="count-badge">Menampilkan <b id="countNum">300</b> / 300 kata</div>
+    </div>
+
+    <div class="tabs" id="tabs"></div>
+
+    <div id="sections"></div>
+
+    <div class="empty" id="emptyState" style="display:none;">Tidak ada kata yang cocok. Coba kata kunci lain.</div>
+  </div>
+
+  <!-- ============ LEVEL 2 VIEW ============ -->
+  <div class="level-view" id="level2">
+    <div class="part-nav">
+      <a href="#partikel">① Partikel & Kata Fungsi</a>
+      <a href="#satuan">② Kata Bantu Bilangan</a>
+      <a href="#pola">③ Pola Kalimat</a>
+    </div>
+
+    <div class="section" id="partikel">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-title">Partikel & Kata Fungsi Penting</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Kata-kata kecil ini tidak selalu punya arti sendiri, tapi menentukan struktur dan makna kalimat — wajib dikuasai sebelum merangkai kalimat lengkap.</p>
+      <div class="grid" id="particleGrid"></div>
+    </div>
+
+    <div class="section" id="satuan">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-title">Kata Bantu Bilangan (量词)</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Dalam Mandarin, kata benda selalu butuh "satuan penghitung" sebelum angka + kata benda — mirip "seekor kucing" atau "sebuah rumah" dalam Bahasa Indonesia.</p>
+      <div class="mgrid" id="measureGrid"></div>
+    </div>
+
+    <div class="section" id="pola">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-title">20 Pola Kalimat Dasar</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Pola-pola ini menjadi kerangka hampir semua kalimat sehari-hari. Kuasai polanya, lalu ganti kata bendanya dengan kosakata dari Level 1.</p>
+      <div class="pattern-list" id="patternList"></div>
+    </div>
+  </div>
+
+  <!-- ============ LEVEL 3 VIEW ============ -->
+  <div class="level-view" id="level3">
+    <div class="part-nav">
+      <a href="#dialog3">① Dialog Percakapan</a>
+      <a href="#ungkapan3">② Ungkapan Praktis</a>
+      <a href="#bacaan3">③ Latihan Membaca</a>
+    </div>
+
+    <div class="section" id="dialog3">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-title">Dialog Percakapan Sehari-hari</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Klik setiap baris dialog untuk mendengar pelafalannya. Perhatikan bagaimana kosakata Level 1 dan pola kalimat Level 2 dirangkai menjadi percakapan nyata.</p>
+      <div id="dialogList"></div>
+    </div>
+
+    <div class="section" id="ungkapan3">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-title">Ungkapan Praktis Sehari-hari</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Ungkapan siap pakai untuk situasi umum: di bandara, di hotel, di restoran, berbelanja, dan keadaan darurat. Klik untuk mendengar suaranya.</p>
+      <div id="phraseList"></div>
+    </div>
+
+    <div class="section" id="bacaan3">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-title">Latihan Membaca</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Baca dan dengarkan cerita pendek berikut, kalimat per kalimat, untuk melatih pemahaman teks yang lebih panjang.</p>
+      <div id="readingList"></div>
+    </div>
+  </div>
+
+  <!-- ============ LEVEL 4 VIEW ============ -->
+  <div class="level-view" id="level4">
+    <div class="part-nav">
+      <a href="#pola4">① Pola Kalimat Menengah</a>
+      <a href="#tematik4">② Kosakata Tematik</a>
+      <a href="#dialog4">③ Dialog Menengah</a>
+    </div>
+
+    <div class="section" id="pola4">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-title">15 Pola Kalimat Menengah</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Pola kalimat tingkat menengah: perbandingan, pelengkap hasil/kemungkinan/arah, dan penghubung kompleks. Klik contoh kalimat untuk mendengar suaranya.</p>
+      <div class="pattern-list" id="patternList4"></div>
+    </div>
+
+    <div class="section" id="tematik4">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-title">Kosakata Tematik Menengah</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">75 kosakata baru seputar pekerjaan, kesehatan, teknologi, emosi, dan perjalanan.</p>
+      <div id="vocab4"></div>
+    </div>
+
+    <div class="section" id="dialog4">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-title">Dialog Situasi Menengah</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Lima dialog situasi nyata: wawancara kerja, di dokter, di bank, mengurus visa, dan rencana liburan.</p>
+      <div id="dialogList4"></div>
+    </div>
+  </div>
+
+  <!-- ============ LEVEL 5 VIEW ============ -->
+  <div class="level-view" id="level5">
+    <div class="part-nav">
+      <a href="#idiom5">① Peribahasa & Idiom</a>
+      <a href="#pola5">② Pola Kalimat Lanjutan</a>
+      <a href="#diskusi5">③ Diskusi & Bacaan Lanjutan</a>
+    </div>
+
+    <div class="section" id="idiom5">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-title">20 Peribahasa & Idiom (成语)</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Idiom empat aksara (chengyu) yang sering dipakai penutur asli, lengkap dengan makna dan contoh kalimat.</p>
+      <div class="pattern-list" id="idiomList5"></div>
+    </div>
+
+    <div class="section" id="pola5">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-title">14 Pola Kalimat Lanjutan</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Pola kalimat formal dan kompleks yang umum dipakai dalam diskusi, tulisan, dan presentasi.</p>
+      <div class="pattern-list" id="patternList5"></div>
+    </div>
+
+    <div class="section" id="diskusi5">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-title">Diskusi & Bacaan Lanjutan</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Dialog negosiasi bisnis, diskusi opini, dan esai panjang tentang manfaat belajar bahasa Mandarin.</p>
+      <div id="dialogList5"></div>
+      <div id="readingList5"></div>
+    </div>
+  </div>
+
+  <footer>循序渐进 · SATU LANGKAH DEMI SATU LANGKAH</footer>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const VOCAB = [{"cat": "Salam & Ungkapan", "hz": "你好", "py": "nǐ hǎo", "id": "Halo / Apa kabar"}, {"cat": "Salam & Ungkapan", "hz": "再见", "py": "zài jiàn", "id": "Sampai jumpa"}, {"cat": "Salam & Ungkapan", "hz": "谢谢", "py": "xiè xiè", "id": "Terima kasih"}, {"cat": "Salam & Ungkapan", "hz": "不客气", "py": "bú kè qi", "id": "Sama-sama"}, {"cat": "Salam & Ungkapan", "hz": "对不起", "py": "duì bu qǐ", "id": "Maaf"}, {"cat": "Salam & Ungkapan", "hz": "没关系", "py": "méi guān xi", "id": "Tidak apa-apa"}, {"cat": "Salam & Ungkapan", "hz": "请", "py": "qǐng", "id": "Silakan / Tolong"}, {"cat": "Salam & Ungkapan", "hz": "是", "py": "shì", "id": "Ya / Adalah"}, {"cat": "Salam & Ungkapan", "hz": "不是", "py": "bú shì", "id": "Bukan"}, {"cat": "Salam & Ungkapan", "hz": "早上好", "py": "zǎo shang hǎo", "id": "Selamat pagi"}, {"cat": "Salam & Ungkapan", "hz": "晚上好", "py": "wǎn shang hǎo", "id": "Selamat malam"}, {"cat": "Salam & Ungkapan", "hz": "晚安", "py": "wǎn ān", "id": "Selamat tidur"}, {"cat": "Salam & Ungkapan", "hz": "欢迎", "py": "huān yíng", "id": "Selamat datang"}, {"cat": "Salam & Ungkapan", "hz": "好的", "py": "hǎo de", "id": "Baiklah / Oke"}, {"cat": "Salam & Ungkapan", "hz": "怎么样", "py": "zěn me yàng", "id": "Bagaimana"}, {"cat": "Angka", "hz": "一", "py": "yī", "id": "Satu"}, {"cat": "Angka", "hz": "二", "py": "èr", "id": "Dua"}, {"cat": "Angka", "hz": "三", "py": "sān", "id": "Tiga"}, {"cat": "Angka", "hz": "四", "py": "sì", "id": "Empat"}, {"cat": "Angka", "hz": "五", "py": "wǔ", "id": "Lima"}, {"cat": "Angka", "hz": "六", "py": "liù", "id": "Enam"}, {"cat": "Angka", "hz": "七", "py": "qī", "id": "Tujuh"}, {"cat": "Angka", "hz": "八", "py": "bā", "id": "Delapan"}, {"cat": "Angka", "hz": "九", "py": "jiǔ", "id": "Sembilan"}, {"cat": "Angka", "hz": "十", "py": "shí", "id": "Sepuluh"}, {"cat": "Angka", "hz": "百", "py": "bǎi", "id": "Seratus"}, {"cat": "Angka", "hz": "千", "py": "qiān", "id": "Seribu"}, {"cat": "Angka", "hz": "万", "py": "wàn", "id": "Sepuluh ribu"}, {"cat": "Angka", "hz": "零", "py": "líng", "id": "Nol"}, {"cat": "Angka", "hz": "第一", "py": "dì yī", "id": "Pertama"}, {"cat": "Angka", "hz": "两", "py": "liǎng", "id": "Dua (untuk benda)"}, {"cat": "Angka", "hz": "多少", "py": "duō shao", "id": "Berapa"}, {"cat": "Angka", "hz": "几", "py": "jǐ", "id": "Berapa (jumlah kecil)"}, {"cat": "Angka", "hz": "半", "py": "bàn", "id": "Setengah"}, {"cat": "Angka", "hz": "双", "py": "shuāng", "id": "Sepasang"}, {"cat": "Keluarga", "hz": "家", "py": "jiā", "id": "Rumah / Keluarga"}, {"cat": "Keluarga", "hz": "爸爸", "py": "bà ba", "id": "Ayah"}, {"cat": "Keluarga", "hz": "妈妈", "py": "mā ma", "id": "Ibu"}, {"cat": "Keluarga", "hz": "儿子", "py": "ér zi", "id": "Anak laki-laki"}, {"cat": "Keluarga", "hz": "女儿", "py": "nǚ ér", "id": "Anak perempuan"}, {"cat": "Keluarga", "hz": "哥哥", "py": "gē ge", "id": "Kakak laki-laki"}, {"cat": "Keluarga", "hz": "姐姐", "py": "jiě jie", "id": "Kakak perempuan"}, {"cat": "Keluarga", "hz": "弟弟", "py": "dì di", "id": "Adik laki-laki"}, {"cat": "Keluarga", "hz": "妹妹", "py": "mèi mei", "id": "Adik perempuan"}, {"cat": "Keluarga", "hz": "爷爷", "py": "yé ye", "id": "Kakek (dari ayah)"}, {"cat": "Keluarga", "hz": "奶奶", "py": "nǎi nai", "id": "Nenek (dari ayah)"}, {"cat": "Keluarga", "hz": "外公", "py": "wài gōng", "id": "Kakek (dari ibu)"}, {"cat": "Keluarga", "hz": "外婆", "py": "wài pó", "id": "Nenek (dari ibu)"}, {"cat": "Keluarga", "hz": "丈夫", "py": "zhàng fu", "id": "Suami"}, {"cat": "Keluarga", "hz": "妻子", "py": "qī zi", "id": "Istri"}, {"cat": "Keluarga", "hz": "朋友", "py": "péng you", "id": "Teman"}, {"cat": "Keluarga", "hz": "孩子", "py": "hái zi", "id": "Anak"}, {"cat": "Keluarga", "hz": "叔叔", "py": "shū shu", "id": "Paman"}, {"cat": "Keluarga", "hz": "阿姨", "py": "ā yí", "id": "Bibi"}, {"cat": "Keluarga", "hz": "先生", "py": "xiān sheng", "id": "Tuan / Bapak"}, {"cat": "Kata Ganti", "hz": "我", "py": "wǒ", "id": "Saya"}, {"cat": "Kata Ganti", "hz": "你", "py": "nǐ", "id": "Kamu"}, {"cat": "Kata Ganti", "hz": "他", "py": "tā", "id": "Dia (laki-laki)"}, {"cat": "Kata Ganti", "hz": "她", "py": "tā", "id": "Dia (perempuan)"}, {"cat": "Kata Ganti", "hz": "我们", "py": "wǒ men", "id": "Kami / Kita"}, {"cat": "Kata Ganti", "hz": "你们", "py": "nǐ men", "id": "Kalian"}, {"cat": "Kata Ganti", "hz": "他们", "py": "tā men", "id": "Mereka"}, {"cat": "Kata Ganti", "hz": "这", "py": "zhè", "id": "Ini"}, {"cat": "Kata Ganti", "hz": "那", "py": "nà", "id": "Itu"}, {"cat": "Kata Ganti", "hz": "谁", "py": "shéi", "id": "Siapa"}, {"cat": "Warna", "hz": "颜色", "py": "yán sè", "id": "Warna"}, {"cat": "Warna", "hz": "红色", "py": "hóng sè", "id": "Merah"}, {"cat": "Warna", "hz": "黄色", "py": "huáng sè", "id": "Kuning"}, {"cat": "Warna", "hz": "蓝色", "py": "lán sè", "id": "Biru"}, {"cat": "Warna", "hz": "绿色", "py": "lǜ sè", "id": "Hijau"}, {"cat": "Warna", "hz": "白色", "py": "bái sè", "id": "Putih"}, {"cat": "Warna", "hz": "黑色", "py": "hēi sè", "id": "Hitam"}, {"cat": "Warna", "hz": "紫色", "py": "zǐ sè", "id": "Ungu"}, {"cat": "Warna", "hz": "橙色", "py": "chéng sè", "id": "Oranye"}, {"cat": "Warna", "hz": "粉色", "py": "fěn sè", "id": "Merah muda"}, {"cat": "Warna", "hz": "灰色", "py": "huī sè", "id": "Abu-abu"}, {"cat": "Warna", "hz": "棕色", "py": "zōng sè", "id": "Cokelat"}, {"cat": "Waktu", "hz": "时间", "py": "shí jiān", "id": "Waktu"}, {"cat": "Waktu", "hz": "现在", "py": "xiàn zài", "id": "Sekarang"}, {"cat": "Waktu", "hz": "今天", "py": "jīn tiān", "id": "Hari ini"}, {"cat": "Waktu", "hz": "明天", "py": "míng tiān", "id": "Besok"}, {"cat": "Waktu", "hz": "昨天", "py": "zuó tiān", "id": "Kemarin"}, {"cat": "Waktu", "hz": "早上", "py": "zǎo shang", "id": "Pagi"}, {"cat": "Waktu", "hz": "中午", "py": "zhōng wǔ", "id": "Siang"}, {"cat": "Waktu", "hz": "下午", "py": "xià wǔ", "id": "Sore"}, {"cat": "Waktu", "hz": "晚上", "py": "wǎn shang", "id": "Malam"}, {"cat": "Waktu", "hz": "小时", "py": "xiǎo shí", "id": "Jam (durasi)"}, {"cat": "Waktu", "hz": "分钟", "py": "fēn zhōng", "id": "Menit"}, {"cat": "Waktu", "hz": "点", "py": "diǎn", "id": "Pukul / Jam"}, {"cat": "Waktu", "hz": "年", "py": "nián", "id": "Tahun"}, {"cat": "Waktu", "hz": "月", "py": "yuè", "id": "Bulan"}, {"cat": "Waktu", "hz": "星期", "py": "xīng qī", "id": "Minggu (satuan)"}, {"cat": "Hari & Musim", "hz": "星期一", "py": "xīng qī yī", "id": "Senin"}, {"cat": "Hari & Musim", "hz": "星期二", "py": "xīng qī èr", "id": "Selasa"}, {"cat": "Hari & Musim", "hz": "星期三", "py": "xīng qī sān", "id": "Rabu"}, {"cat": "Hari & Musim", "hz": "星期四", "py": "xīng qī sì", "id": "Kamis"}, {"cat": "Hari & Musim", "hz": "星期五", "py": "xīng qī wǔ", "id": "Jumat"}, {"cat": "Hari & Musim", "hz": "星期六", "py": "xīng qī liù", "id": "Sabtu"}, {"cat": "Hari & Musim", "hz": "星期天", "py": "xīng qī tiān", "id": "Minggu"}, {"cat": "Hari & Musim", "hz": "一月", "py": "yī yuè", "id": "Januari"}, {"cat": "Hari & Musim", "hz": "二月", "py": "èr yuè", "id": "Februari"}, {"cat": "Hari & Musim", "hz": "三月", "py": "sān yuè", "id": "Maret"}, {"cat": "Hari & Musim", "hz": "四月", "py": "sì yuè", "id": "April"}, {"cat": "Hari & Musim", "hz": "五月", "py": "wǔ yuè", "id": "Mei"}, {"cat": "Hari & Musim", "hz": "六月", "py": "liù yuè", "id": "Juni"}, {"cat": "Hari & Musim", "hz": "七月", "py": "qī yuè", "id": "Juli"}, {"cat": "Hari & Musim", "hz": "八月", "py": "bā yuè", "id": "Agustus"}, {"cat": "Hari & Musim", "hz": "春天", "py": "chūn tiān", "id": "Musim semi"}, {"cat": "Hari & Musim", "hz": "夏天", "py": "xià tiān", "id": "Musim panas"}, {"cat": "Hari & Musim", "hz": "秋天", "py": "qiū tiān", "id": "Musim gugur"}, {"cat": "Hari & Musim", "hz": "冬天", "py": "dōng tiān", "id": "Musim dingin"}, {"cat": "Makanan & Minuman", "hz": "吃", "py": "chī", "id": "Makan"}, {"cat": "Makanan & Minuman", "hz": "喝", "py": "hē", "id": "Minum"}, {"cat": "Makanan & Minuman", "hz": "米饭", "py": "mǐ fàn", "id": "Nasi"}, {"cat": "Makanan & Minuman", "hz": "面条", "py": "miàn tiáo", "id": "Mi"}, {"cat": "Makanan & Minuman", "hz": "面包", "py": "miàn bāo", "id": "Roti"}, {"cat": "Makanan & Minuman", "hz": "鸡蛋", "py": "jī dàn", "id": "Telur ayam"}, {"cat": "Makanan & Minuman", "hz": "牛肉", "py": "niú ròu", "id": "Daging sapi"}, {"cat": "Makanan & Minuman", "hz": "猪肉", "py": "zhū ròu", "id": "Daging babi"}, {"cat": "Makanan & Minuman", "hz": "鸡肉", "py": "jī ròu", "id": "Daging ayam"}, {"cat": "Makanan & Minuman", "hz": "鱼", "py": "yú", "id": "Ikan"}, {"cat": "Makanan & Minuman", "hz": "蔬菜", "py": "shū cài", "id": "Sayur"}, {"cat": "Makanan & Minuman", "hz": "水果", "py": "shuǐ guǒ", "id": "Buah"}, {"cat": "Makanan & Minuman", "hz": "苹果", "py": "píng guǒ", "id": "Apel"}, {"cat": "Makanan & Minuman", "hz": "香蕉", "py": "xiāng jiāo", "id": "Pisang"}, {"cat": "Makanan & Minuman", "hz": "橙子", "py": "chéng zi", "id": "Jeruk"}, {"cat": "Makanan & Minuman", "hz": "西瓜", "py": "xī guā", "id": "Semangka"}, {"cat": "Makanan & Minuman", "hz": "水", "py": "shuǐ", "id": "Air"}, {"cat": "Makanan & Minuman", "hz": "茶", "py": "chá", "id": "Teh"}, {"cat": "Makanan & Minuman", "hz": "咖啡", "py": "kā fēi", "id": "Kopi"}, {"cat": "Makanan & Minuman", "hz": "牛奶", "py": "niú nǎi", "id": "Susu"}, {"cat": "Makanan & Minuman", "hz": "糖", "py": "táng", "id": "Gula"}, {"cat": "Makanan & Minuman", "hz": "盐", "py": "yán", "id": "Garam"}, {"cat": "Makanan & Minuman", "hz": "汤", "py": "tāng", "id": "Sup"}, {"cat": "Makanan & Minuman", "hz": "菜", "py": "cài", "id": "Sayur / Masakan"}, {"cat": "Makanan & Minuman", "hz": "早饭", "py": "zǎo fàn", "id": "Sarapan"}, {"cat": "Makanan & Minuman", "hz": "午饭", "py": "wǔ fàn", "id": "Makan siang"}, {"cat": "Makanan & Minuman", "hz": "晚饭", "py": "wǎn fàn", "id": "Makan malam"}, {"cat": "Makanan & Minuman", "hz": "饿", "py": "è", "id": "Lapar"}, {"cat": "Makanan & Minuman", "hz": "渴", "py": "kě", "id": "Haus"}, {"cat": "Makanan & Minuman", "hz": "好吃", "py": "hǎo chī", "id": "Enak (rasa makanan)"}, {"cat": "Anggota Tubuh", "hz": "头", "py": "tóu", "id": "Kepala"}, {"cat": "Anggota Tubuh", "hz": "脸", "py": "liǎn", "id": "Wajah"}, {"cat": "Anggota Tubuh", "hz": "眼睛", "py": "yǎn jing", "id": "Mata"}, {"cat": "Anggota Tubuh", "hz": "鼻子", "py": "bí zi", "id": "Hidung"}, {"cat": "Anggota Tubuh", "hz": "嘴", "py": "zuǐ", "id": "Mulut"}, {"cat": "Anggota Tubuh", "hz": "耳朵", "py": "ěr duo", "id": "Telinga"}, {"cat": "Anggota Tubuh", "hz": "头发", "py": "tóu fa", "id": "Rambut"}, {"cat": "Anggota Tubuh", "hz": "手", "py": "shǒu", "id": "Tangan"}, {"cat": "Anggota Tubuh", "hz": "脚", "py": "jiǎo", "id": "Kaki"}, {"cat": "Anggota Tubuh", "hz": "腿", "py": "tuǐ", "id": "Kaki (tungkai)"}, {"cat": "Anggota Tubuh", "hz": "肚子", "py": "dù zi", "id": "Perut"}, {"cat": "Anggota Tubuh", "hz": "心", "py": "xīn", "id": "Hati / Jantung"}, {"cat": "Anggota Tubuh", "hz": "身体", "py": "shēn tǐ", "id": "Tubuh"}, {"cat": "Anggota Tubuh", "hz": "牙齿", "py": "yá chǐ", "id": "Gigi"}, {"cat": "Anggota Tubuh", "hz": "背", "py": "bèi", "id": "Punggung"}, {"cat": "Anggota Tubuh", "hz": "手指", "py": "shǒu zhǐ", "id": "Jari tangan"}, {"cat": "Anggota Tubuh", "hz": "肩膀", "py": "jiān bǎng", "id": "Bahu"}, {"cat": "Anggota Tubuh", "hz": "皮肤", "py": "pí fū", "id": "Kulit"}, {"cat": "Tempat", "hz": "学校", "py": "xué xiào", "id": "Sekolah"}, {"cat": "Tempat", "hz": "医院", "py": "yī yuàn", "id": "Rumah sakit"}, {"cat": "Tempat", "hz": "商店", "py": "shāng diàn", "id": "Toko"}, {"cat": "Tempat", "hz": "餐厅", "py": "cān tīng", "id": "Restoran"}, {"cat": "Tempat", "hz": "银行", "py": "yín háng", "id": "Bank"}, {"cat": "Tempat", "hz": "公园", "py": "gōng yuán", "id": "Taman"}, {"cat": "Tempat", "hz": "机场", "py": "jī chǎng", "id": "Bandara"}, {"cat": "Tempat", "hz": "车站", "py": "chē zhàn", "id": "Stasiun / Halte"}, {"cat": "Tempat", "hz": "市场", "py": "shì chǎng", "id": "Pasar"}, {"cat": "Tempat", "hz": "图书馆", "py": "tú shū guǎn", "id": "Perpustakaan"}, {"cat": "Tempat", "hz": "酒店", "py": "jiǔ diàn", "id": "Hotel"}, {"cat": "Tempat", "hz": "厨房", "py": "chú fáng", "id": "Dapur"}, {"cat": "Tempat", "hz": "卧室", "py": "wò shì", "id": "Kamar tidur"}, {"cat": "Tempat", "hz": "洗手间", "py": "xǐ shǒu jiān", "id": "Kamar mandi"}, {"cat": "Tempat", "hz": "办公室", "py": "bàn gōng shì", "id": "Kantor"}, {"cat": "Tempat", "hz": "城市", "py": "chéng shì", "id": "Kota"}, {"cat": "Tempat", "hz": "国家", "py": "guó jiā", "id": "Negara"}, {"cat": "Tempat", "hz": "路", "py": "lù", "id": "Jalan"}, {"cat": "Tempat", "hz": "门", "py": "mén", "id": "Pintu"}, {"cat": "Tempat", "hz": "教室", "py": "jiào shì", "id": "Ruang kelas"}, {"cat": "Kata Kerja", "hz": "是", "py": "shì", "id": "Adalah"}, {"cat": "Kata Kerja", "hz": "有", "py": "yǒu", "id": "Punya / Ada"}, {"cat": "Kata Kerja", "hz": "去", "py": "qù", "id": "Pergi"}, {"cat": "Kata Kerja", "hz": "来", "py": "lái", "id": "Datang"}, {"cat": "Kata Kerja", "hz": "看", "py": "kàn", "id": "Melihat"}, {"cat": "Kata Kerja", "hz": "听", "py": "tīng", "id": "Mendengar"}, {"cat": "Kata Kerja", "hz": "说", "py": "shuō", "id": "Berbicara"}, {"cat": "Kata Kerja", "hz": "读", "py": "dú", "id": "Membaca"}, {"cat": "Kata Kerja", "hz": "写", "py": "xiě", "id": "Menulis"}, {"cat": "Kata Kerja", "hz": "学习", "py": "xué xí", "id": "Belajar"}, {"cat": "Kata Kerja", "hz": "工作", "py": "gōng zuò", "id": "Bekerja"}, {"cat": "Kata Kerja", "hz": "睡觉", "py": "shuì jiào", "id": "Tidur"}, {"cat": "Kata Kerja", "hz": "起床", "py": "qǐ chuáng", "id": "Bangun tidur"}, {"cat": "Kata Kerja", "hz": "走", "py": "zǒu", "id": "Berjalan"}, {"cat": "Kata Kerja", "hz": "跑", "py": "pǎo", "id": "Berlari"}, {"cat": "Kata Kerja", "hz": "坐", "py": "zuò", "id": "Duduk"}, {"cat": "Kata Kerja", "hz": "站", "py": "zhàn", "id": "Berdiri"}, {"cat": "Kata Kerja", "hz": "买", "py": "mǎi", "id": "Membeli"}, {"cat": "Kata Kerja", "hz": "卖", "py": "mài", "id": "Menjual"}, {"cat": "Kata Kerja", "hz": "给", "py": "gěi", "id": "Memberi"}, {"cat": "Kata Kerja", "hz": "做", "py": "zuò", "id": "Melakukan / Membuat"}, {"cat": "Kata Kerja", "hz": "玩", "py": "wán", "id": "Bermain"}, {"cat": "Kata Kerja", "hz": "笑", "py": "xiào", "id": "Tertawa"}, {"cat": "Kata Kerja", "hz": "哭", "py": "kū", "id": "Menangis"}, {"cat": "Kata Kerja", "hz": "爱", "py": "ài", "id": "Mencintai"}, {"cat": "Kata Kerja", "hz": "喜欢", "py": "xǐ huan", "id": "Menyukai"}, {"cat": "Kata Kerja", "hz": "想", "py": "xiǎng", "id": "Ingin / Berpikir"}, {"cat": "Kata Kerja", "hz": "知道", "py": "zhī dào", "id": "Tahu"}, {"cat": "Kata Kerja", "hz": "认识", "py": "rèn shi", "id": "Mengenal"}, {"cat": "Kata Kerja", "hz": "开", "py": "kāi", "id": "Membuka / Menyalakan"}, {"cat": "Kata Sifat", "hz": "大", "py": "dà", "id": "Besar"}, {"cat": "Kata Sifat", "hz": "小", "py": "xiǎo", "id": "Kecil"}, {"cat": "Kata Sifat", "hz": "多", "py": "duō", "id": "Banyak"}, {"cat": "Kata Sifat", "hz": "少", "py": "shǎo", "id": "Sedikit"}, {"cat": "Kata Sifat", "hz": "好", "py": "hǎo", "id": "Baik"}, {"cat": "Kata Sifat", "hz": "坏", "py": "huài", "id": "Buruk"}, {"cat": "Kata Sifat", "hz": "新", "py": "xīn", "id": "Baru"}, {"cat": "Kata Sifat", "hz": "旧", "py": "jiù", "id": "Lama / Usang"}, {"cat": "Kata Sifat", "hz": "高", "py": "gāo", "id": "Tinggi"}, {"cat": "Kata Sifat", "hz": "矮", "py": "ǎi", "id": "Pendek (orang)"}, {"cat": "Kata Sifat", "hz": "长", "py": "cháng", "id": "Panjang"}, {"cat": "Kata Sifat", "hz": "短", "py": "duǎn", "id": "Pendek (ukuran)"}, {"cat": "Kata Sifat", "hz": "快", "py": "kuài", "id": "Cepat"}, {"cat": "Kata Sifat", "hz": "慢", "py": "màn", "id": "Lambat"}, {"cat": "Kata Sifat", "hz": "热", "py": "rè", "id": "Panas"}, {"cat": "Kata Sifat", "hz": "冷", "py": "lěng", "id": "Dingin"}, {"cat": "Kata Sifat", "hz": "漂亮", "py": "piào liang", "id": "Cantik"}, {"cat": "Kata Sifat", "hz": "丑", "py": "chǒu", "id": "Jelek"}, {"cat": "Kata Sifat", "hz": "胖", "py": "pàng", "id": "Gemuk"}, {"cat": "Kata Sifat", "hz": "瘦", "py": "shòu", "id": "Kurus"}, {"cat": "Kata Sifat", "hz": "贵", "py": "guì", "id": "Mahal"}, {"cat": "Hewan", "hz": "动物", "py": "dòng wù", "id": "Hewan"}, {"cat": "Hewan", "hz": "狗", "py": "gǒu", "id": "Anjing"}, {"cat": "Hewan", "hz": "猫", "py": "māo", "id": "Kucing"}, {"cat": "Hewan", "hz": "鸟", "py": "niǎo", "id": "Burung"}, {"cat": "Hewan", "hz": "鱼", "py": "yú", "id": "Ikan"}, {"cat": "Hewan", "hz": "马", "py": "mǎ", "id": "Kuda"}, {"cat": "Hewan", "hz": "牛", "py": "niú", "id": "Sapi"}, {"cat": "Hewan", "hz": "羊", "py": "yáng", "id": "Kambing / Domba"}, {"cat": "Hewan", "hz": "猪", "py": "zhū", "id": "Babi"}, {"cat": "Hewan", "hz": "鸡", "py": "jī", "id": "Ayam"}, {"cat": "Hewan", "hz": "兔子", "py": "tù zi", "id": "Kelinci"}, {"cat": "Hewan", "hz": "老虎", "py": "lǎo hǔ", "id": "Harimau"}, {"cat": "Hewan", "hz": "狮子", "py": "shī zi", "id": "Singa"}, {"cat": "Hewan", "hz": "大象", "py": "dà xiàng", "id": "Gajah"}, {"cat": "Hewan", "hz": "熊猫", "py": "xióng māo", "id": "Panda"}, {"cat": "Hewan", "hz": "猴子", "py": "hóu zi", "id": "Monyet"}, {"cat": "Hewan", "hz": "蛇", "py": "shé", "id": "Ular"}, {"cat": "Hewan", "hz": "老鼠", "py": "lǎo shǔ", "id": "Tikus"}, {"cat": "Hewan", "hz": "蝴蝶", "py": "hú dié", "id": "Kupu-kupu"}, {"cat": "Hewan", "hz": "昆虫", "py": "kūn chóng", "id": "Serangga"}, {"cat": "Alam & Cuaca", "hz": "天气", "py": "tiān qì", "id": "Cuaca"}, {"cat": "Alam & Cuaca", "hz": "太阳", "py": "tài yáng", "id": "Matahari"}, {"cat": "Alam & Cuaca", "hz": "月亮", "py": "yuè liang", "id": "Bulan (langit)"}, {"cat": "Alam & Cuaca", "hz": "星星", "py": "xīng xing", "id": "Bintang"}, {"cat": "Alam & Cuaca", "hz": "天空", "py": "tiān kōng", "id": "Langit"}, {"cat": "Alam & Cuaca", "hz": "云", "py": "yún", "id": "Awan"}, {"cat": "Alam & Cuaca", "hz": "雨", "py": "yǔ", "id": "Hujan"}, {"cat": "Alam & Cuaca", "hz": "雪", "py": "xuě", "id": "Salju"}, {"cat": "Alam & Cuaca", "hz": "风", "py": "fēng", "id": "Angin"}, {"cat": "Alam & Cuaca", "hz": "山", "py": "shān", "id": "Gunung"}, {"cat": "Alam & Cuaca", "hz": "河", "py": "hé", "id": "Sungai"}, {"cat": "Alam & Cuaca", "hz": "海", "py": "hǎi", "id": "Laut"}, {"cat": "Alam & Cuaca", "hz": "树", "py": "shù", "id": "Pohon"}, {"cat": "Alam & Cuaca", "hz": "花", "py": "huā", "id": "Bunga"}, {"cat": "Alam & Cuaca", "hz": "草", "py": "cǎo", "id": "Rumput"}, {"cat": "Pakaian", "hz": "衣服", "py": "yī fu", "id": "Baju"}, {"cat": "Pakaian", "hz": "裤子", "py": "kù zi", "id": "Celana"}, {"cat": "Pakaian", "hz": "裙子", "py": "qún zi", "id": "Rok"}, {"cat": "Pakaian", "hz": "鞋子", "py": "xié zi", "id": "Sepatu"}, {"cat": "Pakaian", "hz": "袜子", "py": "wà zi", "id": "Kaus kaki"}, {"cat": "Pakaian", "hz": "帽子", "py": "mào zi", "id": "Topi"}, {"cat": "Pakaian", "hz": "眼镜", "py": "yǎn jìng", "id": "Kacamata"}, {"cat": "Pakaian", "hz": "手表", "py": "shǒu biǎo", "id": "Jam tangan"}, {"cat": "Pakaian", "hz": "包", "py": "bāo", "id": "Tas"}, {"cat": "Pakaian", "hz": "外套", "py": "wài tào", "id": "Jaket"}, {"cat": "Transportasi", "hz": "车", "py": "chē", "id": "Mobil / Kendaraan"}, {"cat": "Transportasi", "hz": "汽车", "py": "qì chē", "id": "Mobil"}, {"cat": "Transportasi", "hz": "公共汽车", "py": "gōng gòng qì chē", "id": "Bus"}, {"cat": "Transportasi", "hz": "出租车", "py": "chū zū chē", "id": "Taksi"}, {"cat": "Transportasi", "hz": "火车", "py": "huǒ chē", "id": "Kereta api"}, {"cat": "Transportasi", "hz": "飞机", "py": "fēi jī", "id": "Pesawat"}, {"cat": "Transportasi", "hz": "自行车", "py": "zì xíng chē", "id": "Sepeda"}, {"cat": "Transportasi", "hz": "船", "py": "chuán", "id": "Kapal"}, {"cat": "Transportasi", "hz": "地铁", "py": "dì tiě", "id": "Kereta bawah tanah"}, {"cat": "Transportasi", "hz": "摩托车", "py": "mó tuō chē", "id": "Sepeda motor"}, {"cat": "Sekolah & Pekerjaan", "hz": "老师", "py": "lǎo shī", "id": "Guru"}, {"cat": "Sekolah & Pekerjaan", "hz": "学生", "py": "xué sheng", "id": "Murid"}, {"cat": "Sekolah & Pekerjaan", "hz": "书", "py": "shū", "id": "Buku"}, {"cat": "Sekolah & Pekerjaan", "hz": "笔", "py": "bǐ", "id": "Pena/Pensil"}, {"cat": "Sekolah & Pekerjaan", "hz": "纸", "py": "zhǐ", "id": "Kertas"}, {"cat": "Sekolah & Pekerjaan", "hz": "桌子", "py": "zhuō zi", "id": "Meja"}, {"cat": "Sekolah & Pekerjaan", "hz": "椅子", "py": "yǐ zi", "id": "Kursi"}, {"cat": "Sekolah & Pekerjaan", "hz": "黑板", "py": "hēi bǎn", "id": "Papan tulis"}, {"cat": "Sekolah & Pekerjaan", "hz": "考试", "py": "kǎo shì", "id": "Ujian"}, {"cat": "Sekolah & Pekerjaan", "hz": "问题", "py": "wèn tí", "id": "Pertanyaan / Masalah"}, {"cat": "Sekolah & Pekerjaan", "hz": "医生", "py": "yī shēng", "id": "Dokter"}, {"cat": "Sekolah & Pekerjaan", "hz": "护士", "py": "hù shi", "id": "Perawat"}, {"cat": "Sekolah & Pekerjaan", "hz": "警察", "py": "jǐng chá", "id": "Polisi"}, {"cat": "Sekolah & Pekerjaan", "hz": "司机", "py": "sī jī", "id": "Sopir"}, {"cat": "Sekolah & Pekerjaan", "hz": "公司", "py": "gōng sī", "id": "Perusahaan"}];
+const L2 = {"particles": [{"hz": "的", "py": "de", "fungsi": "Penanda kepemilikan/keterangan (milik, sifat + benda)", "ch": "这是我的书", "cp": "zhè shì wǒ de shū", "ci": "Ini bukuku"}, {"hz": "了", "py": "le", "fungsi": "Menandai tindakan selesai atau perubahan keadaan", "ch": "他走了", "cp": "tā zǒu le", "ci": "Dia sudah pergi"}, {"hz": "吗", "py": "ma", "fungsi": "Membuat kalimat tanya ya/tidak", "ch": "你是学生吗？", "cp": "nǐ shì xué shēng ma", "ci": "Apakah kamu murid?"}, {"hz": "呢", "py": "ne", "fungsi": "Kata tanya lanjutan / menegaskan", "ch": "我很好，你呢？", "cp": "wǒ hěn hǎo, nǐ ne", "ci": "Saya baik, kamu?"}, {"hz": "吧", "py": "ba", "fungsi": "Ajakan atau saran lembut", "ch": "我们走吧", "cp": "wǒ men zǒu ba", "ci": "Ayo kita pergi"}, {"hz": "不", "py": "bù", "fungsi": "Negasi untuk sekarang/kebiasaan/sifat", "ch": "我不喜欢咖啡", "cp": "wǒ bù xǐ huan kā fēi", "ci": "Saya tidak suka kopi"}, {"hz": "没有", "py": "méi yǒu", "fungsi": "Negasi untuk kepemilikan atau kejadian lampau", "ch": "我没有钱", "cp": "wǒ méi yǒu qián", "ci": "Saya tidak punya uang"}, {"hz": "也", "py": "yě", "fungsi": "Juga", "ch": "我也是学生", "cp": "wǒ yě shì xué shēng", "ci": "Saya juga murid"}, {"hz": "都", "py": "dōu", "fungsi": "Semua / sama-sama", "ch": "我们都喜欢猫", "cp": "wǒ men dōu xǐ huan māo", "ci": "Kami semua suka kucing"}, {"hz": "很", "py": "hěn", "fungsi": "Sangat (penghubung wajar sebelum kata sifat)", "ch": "天气很热", "cp": "tiān qì hěn rè", "ci": "Cuacanya sangat panas"}, {"hz": "非常", "py": "fēi cháng", "fungsi": "Sangat / amat (lebih kuat dari 很)", "ch": "这本书非常好", "cp": "zhè běn shū fēi cháng hǎo", "ci": "Buku ini sangat bagus"}, {"hz": "太...了", "py": "tài...le", "fungsi": "Terlalu...", "ch": "太贵了", "cp": "tài guì le", "ci": "Terlalu mahal"}, {"hz": "一点儿", "py": "yī diǎnr", "fungsi": "Sedikit", "ch": "我会说一点儿中文", "cp": "wǒ huì shuō yī diǎnr zhōng wén", "ci": "Saya bisa bicara sedikit bahasa Mandarin"}, {"hz": "什么", "py": "shén me", "fungsi": "Apa", "ch": "你叫什么名字？", "cp": "nǐ jiào shén me míng zi", "ci": "Siapa namamu?"}, {"hz": "哪儿 / 哪里", "py": "nǎr / nǎ lǐ", "fungsi": "Di mana", "ch": "你在哪儿？", "cp": "nǐ zài nǎr", "ci": "Kamu di mana?"}, {"hz": "为什么", "py": "wèi shén me", "fungsi": "Mengapa", "ch": "你为什么迟到？", "cp": "nǐ wèi shén me chí dào", "ci": "Kenapa kamu terlambat?"}, {"hz": "怎么", "py": "zěn me", "fungsi": "Bagaimana / kenapa", "ch": "这个怎么用？", "cp": "zhè ge zěn me yòng", "ci": "Ini bagaimana cara pakainya?"}, {"hz": "什么时候", "py": "shén me shí hou", "fungsi": "Kapan", "ch": "你什么时候回家？", "cp": "nǐ shén me shí hou huí jiā", "ci": "Kapan kamu pulang?"}, {"hz": "因为", "py": "yīn wèi", "fungsi": "Karena", "ch": "因为下雨，我没去", "cp": "yīn wèi xià yǔ, wǒ méi qù", "ci": "Karena hujan, saya tidak pergi"}, {"hz": "所以", "py": "suǒ yǐ", "fungsi": "Maka / jadi", "ch": "下雨了，所以我没去", "cp": "xià yǔ le, suǒ yǐ wǒ méi qù", "ci": "Hujan turun, jadi saya tidak pergi"}, {"hz": "但是", "py": "dàn shì", "fungsi": "Tetapi", "ch": "他很累，但是很开心", "cp": "tā hěn lèi, dàn shì hěn kāi xīn", "ci": "Dia lelah, tapi senang"}, {"hz": "如果", "py": "rú guǒ", "fungsi": "Jika", "ch": "如果你忙，我们改天见", "cp": "rú guǒ nǐ máng, wǒ men gǎi tiān jiàn", "ci": "Kalau kamu sibuk, kita ketemu lain hari"}, {"hz": "和", "py": "hé", "fungsi": "Dan (menghubungkan kata benda)", "ch": "我和你", "cp": "wǒ hé nǐ", "ci": "Saya dan kamu"}, {"hz": "或者", "py": "huò zhě", "fungsi": "Atau (pernyataan)", "ch": "喝茶或者喝咖啡", "cp": "hē chá huò zhě hē kā fēi", "ci": "Minum teh atau minum kopi"}, {"hz": "还是", "py": "hái shi", "fungsi": "Atau (dalam kalimat tanya)", "ch": "你要茶还是咖啡？", "cp": "nǐ yào chá hái shi kā fēi", "ci": "Kamu mau teh atau kopi?"}, {"hz": "已经", "py": "yǐ jīng", "fungsi": "Sudah", "ch": "我已经吃饭了", "cp": "wǒ yǐ jīng chī fàn le", "ci": "Saya sudah makan"}, {"hz": "还", "py": "hái", "fungsi": "Masih", "ch": "他还在睡觉", "cp": "tā hái zài shuì jiào", "ci": "Dia masih tidur"}, {"hz": "正在", "py": "zhèng zài", "fungsi": "Sedang (tindakan berlangsung)", "ch": "我正在学习", "cp": "wǒ zhèng zài xué xí", "ci": "Saya sedang belajar"}, {"hz": "从...到...", "py": "cóng...dào...", "fungsi": "Dari...sampai...", "ch": "从九点到五点", "cp": "cóng jiǔ diǎn dào wǔ diǎn", "ci": "Dari jam 9 sampai jam 5"}, {"hz": "跟", "py": "gēn", "fungsi": "Dengan / bersama", "ch": "我跟朋友去公园", "cp": "wǒ gēn péng you qù gōng yuán", "ci": "Saya pergi ke taman bersama teman"}, {"hz": "把", "py": "bǎ", "fungsi": "Penanda objek (struktur 把)", "ch": "我把书放在桌子上", "cp": "wǒ bǎ shū fàng zài zhuō zi shàng", "ci": "Saya meletakkan buku di atas meja"}, {"hz": "被", "py": "bèi", "fungsi": "Penanda kalimat pasif", "ch": "杯子被打破了", "cp": "bēi zi bèi dǎ pò le", "ci": "Gelasnya pecah (dipecahkan)"}], "measure": [{"hz": "个", "py": "gè", "id": "(umum, untuk hampir semua benda)", "contoh": "一个人 / 一个苹果"}, {"hz": "只", "py": "zhī", "id": "Ekor (hewan) / buah (sebelah)", "contoh": "一只猫 / 一只手"}, {"hz": "本", "py": "běn", "id": "Untuk buku", "contoh": "一本书"}, {"hz": "张", "py": "zhāng", "id": "Untuk benda datar/lembar", "contoh": "一张纸 / 一张桌子"}, {"hz": "件", "py": "jiàn", "id": "Untuk pakaian / perkara", "contoh": "一件衣服"}, {"hz": "条", "py": "tiáo", "id": "Untuk benda panjang", "contoh": "一条路 / 一条鱼"}, {"hz": "杯", "py": "bēi", "id": "Untuk gelas/cangkir", "contoh": "一杯茶"}, {"hz": "碗", "py": "wǎn", "id": "Untuk mangkuk", "contoh": "一碗汤"}, {"hz": "辆", "py": "liàng", "id": "Untuk kendaraan beroda", "contoh": "一辆车"}, {"hz": "位", "py": "wèi", "id": "Untuk orang (hormat)", "contoh": "一位老师"}, {"hz": "朵", "py": "duǒ", "id": "Untuk bunga/awan", "contoh": "一朵花"}, {"hz": "双", "py": "shuāng", "id": "Untuk sepasang", "contoh": "一双鞋"}, {"hz": "块", "py": "kuài", "id": "Untuk potongan / satuan uang", "contoh": "一块钱 / 一块面包"}, {"hz": "片", "py": "piàn", "id": "Untuk lembaran tipis", "contoh": "一片面包"}, {"hz": "套", "py": "tào", "id": "Untuk satu set", "contoh": "一套衣服"}], "patterns": [{"nama": "Kalimat 'adalah'", "formula": "Subjek + 是 + Kata benda", "hz": "我是印度尼西亚人", "py": "wǒ shì yìn dù ní xī yà rén", "id": "Saya orang Indonesia", "note": "是 (shì) = adalah"}, {"nama": "Menunjuk benda", "formula": "这/那 + 是 + Kata benda", "hz": "那是我的手机", "py": "nà shì wǒ de shǒu jī", "id": "Itu handphone saya", "note": "这 = ini, 那 = itu"}, {"nama": "Kalimat sifat", "formula": "Subjek + 很 + Kata sifat", "hz": "今天很冷", "py": "jīn tiān hěn lěng", "id": "Hari ini sangat dingin", "note": "很 wajib dipakai walau artinya tidak selalu 'sangat'"}, {"nama": "Punya sesuatu", "formula": "Subjek + 有 + Kata benda", "hz": "我有一只狗", "py": "wǒ yǒu yī zhī gǒu", "id": "Saya punya seekor anjing", "note": ""}, {"nama": "Tidak punya", "formula": "Subjek + 没有 + Kata benda", "hz": "他没有车", "py": "tā méi yǒu chē", "id": "Dia tidak punya mobil", "note": "没有 khusus untuk 有"}, {"nama": "Kalimat Subjek-Predikat-Objek", "formula": "Subjek + Kata kerja + Objek", "hz": "我吃米饭", "py": "wǒ chī mǐ fàn", "id": "Saya makan nasi", "note": "Struktur dasar kalimat Mandarin"}, {"nama": "Kalimat negatif", "formula": "Subjek + 不 + Kata kerja/sifat", "hz": "我不喝咖啡", "py": "wǒ bù hē kā fēi", "id": "Saya tidak minum kopi", "note": "不 untuk sekarang & kebiasaan"}, {"nama": "Pertanyaan ya/tidak", "formula": "Kalimat + 吗？", "hz": "你喜欢中国菜吗？", "py": "nǐ xǐ huan zhōng guó cài ma", "id": "Apakah kamu suka masakan Cina?", "note": ""}, {"nama": "Pertanyaan dengan kata tanya", "formula": "Subjek + 叫/是/去 + 什么/哪儿", "hz": "你叫什么名字？", "py": "nǐ jiào shén me míng zi", "id": "Siapa namamu?", "note": "Kata tanya tetap di posisi jawabannya"}, {"nama": "Keterangan waktu di depan", "formula": "Waktu + Subjek + Kata kerja", "hz": "明天我去学校", "py": "míng tiān wǒ qù xué xiào", "id": "Besok saya pergi ke sekolah", "note": "Keterangan waktu selalu sebelum kata kerja"}, {"nama": "Ingin melakukan sesuatu", "formula": "Subjek + 想/要 + Kata kerja", "hz": "我想喝茶", "py": "wǒ xiǎng hē chá", "id": "Saya ingin minum teh", "note": "想 = ingin (halus), 要 = mau/ingin (tegas)"}, {"nama": "Tindakan sudah selesai", "formula": "Subjek + Kata kerja + 了", "hz": "他吃了早饭", "py": "tā chī le zǎo fàn", "id": "Dia sudah makan sarapan", "note": "了 setelah kata kerja = selesai"}, {"nama": "Tindakan sedang berlangsung", "formula": "Subjek + 正在/在 + Kata kerja", "hz": "妈妈在做饭", "py": "mā ma zài zuò fàn", "id": "Ibu sedang memasak", "note": "在 = sedang (progresif)"}, {"nama": "Kalimat perbandingan", "formula": "A + 比 + B + Kata sifat", "hz": "他比我高", "py": "tā bǐ wǒ gāo", "id": "Dia lebih tinggi dari saya", "note": "比 bǐ = dibanding"}, {"nama": "Sebab-akibat", "formula": "因为...，所以...", "hz": "因为我很忙，所以不能去", "py": "yīn wèi wǒ hěn máng, suǒ yǐ bù néng qù", "id": "Karena saya sibuk, jadi tidak bisa pergi", "note": ""}, {"nama": "Pertentangan", "formula": "虽然...，但是...", "hz": "虽然很累，但是很开心", "py": "suī rán hěn lèi, dàn shì hěn kāi xīn", "id": "Walaupun lelah, tapi senang", "note": ""}, {"nama": "Pengandaian", "formula": "如果...，就...", "hz": "如果下雨，我就不去", "py": "rú guǒ xià yǔ, wǒ jiù bú qù", "id": "Kalau hujan, saya tidak akan pergi", "note": ""}, {"nama": "Struktur 把 (memindahkan objek)", "formula": "Subjek + 把 + Objek + Kata kerja", "hz": "我把门关了", "py": "wǒ bǎ mén guān le", "id": "Saya menutup pintu itu", "note": "Dipakai saat objek sudah pasti/spesifik"}, {"nama": "Kalimat pasif", "formula": "Subjek + 被 + Pelaku + Kata kerja", "hz": "蛋糕被弟弟吃了", "py": "dàn gāo bèi dì di chī le", "id": "Kuenya dimakan oleh adik", "note": "被 bèi = di- (pasif)"}, {"nama": "Dua tindakan bersamaan", "formula": "一边...，一边...", "hz": "他一边走一边说话", "py": "tā yī biān zǒu yī biān shuō huà", "id": "Dia berjalan sambil berbicara", "note": ""}, {"nama": "Kemampuan", "formula": "Subjek + 会/能 + Kata kerja", "hz": "我会说中文", "py": "wǒ huì shuō zhōng wén", "id": "Saya bisa bicara bahasa Mandarin", "note": "会 = bisa (keterampilan), 能 = bisa/mampu (kondisi)"}]};
+
+/* ============ TEXT-TO-SPEECH ============ */
+const SPEAKER_SVG = `<svg class="speaker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 10 0 0 1 0 7.07"/></svg>`;
+
+let zhVoice = null;
+function pickVoice(){
+  const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+  zhVoice = voices.find(v => v.lang === 'zh-CN') || voices.find(v => v.lang && v.lang.startsWith('zh')) || null;
+}
+if('speechSynthesis' in window){
+  pickVoice();
+  window.speechSynthesis.onvoiceschanged = pickVoice;
+}
+
+function speak(text, el){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  document.querySelectorAll('.speaking').forEach(x=>x.classList.remove('speaking'));
+  if(el) el.classList.add('speaking');
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'zh-CN';
+  if(zhVoice) utter.voice = zhVoice;
+  utter.rate = 0.85;
+  utter.onend = () => { if(el) el.classList.remove('speaking'); };
+  utter.onerror = () => { if(el) el.classList.remove('speaking'); };
+  window.speechSynthesis.speak(utter);
+}
+
+/* ============ LEVEL SWITCH ============ */
+document.querySelectorAll('.level-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.level-view').forEach(v=>v.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.level).classList.add('active');
+  });
+});
+
+/* ============ LEVEL 1 LOGIC ============ */
+const catOrder = [...new Set(VOCAB.map(d => d.cat))];
+let activeCat = 'ALL';
+
+function buildTabs(){
+  const tabs = document.getElementById('tabs');
+  const allTab = document.createElement('div');
+  allTab.className = 'tab active';
+  allTab.dataset.cat = 'ALL';
+  allTab.innerHTML = `Semua <span class="n">${VOCAB.length}</span>`;
+  tabs.appendChild(allTab);
+  catOrder.forEach(cat=>{
+    const n = VOCAB.filter(d=>d.cat===cat).length;
+    const el = document.createElement('div');
+    el.className = 'tab';
+    el.dataset.cat = cat;
+    el.innerHTML = `${cat} <span class="n">${n}</span>`;
+    tabs.appendChild(el);
+  });
+  tabs.addEventListener('click', e=>{
+    const t = e.target.closest('.tab');
+    if(!t) return;
+    tabs.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    activeCat = t.dataset.cat;
+    renderVocab();
+  });
+}
+
+function renderVocab(){
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const container = document.getElementById('sections');
+  container.innerHTML = '';
+  let total = 0;
+
+  catOrder.forEach((cat, idx)=>{
+    if(activeCat !== 'ALL' && activeCat !== cat) return;
+    let items = VOCAB.filter(d=>d.cat===cat);
+    if(q){
+      items = items.filter(d =>
+        d.hz.includes(q) ||
+        d.py.toLowerCase().includes(q) ||
+        d.id.toLowerCase().includes(q)
+      );
+    }
+    if(items.length === 0) return;
+    total += items.length;
+
+    const section = document.createElement('div');
+    section.className = 'section';
+    section.innerHTML = `
+      <div class="section-head">
+        <div class="section-num">${idx+1}</div>
+        <div class="section-title">${cat}</div>
+        <div class="rule"></div>
+      </div>
+      <div class="grid"></div>
+    `;
+    const grid = section.querySelector('.grid');
+    items.forEach(d=>{
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${d.hz}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${d.py}</div>
+        <div class="id">${d.id}</div>
+      `;
+      card.addEventListener('click', () => speak(d.hz, card));
+      grid.appendChild(card);
+    });
+    container.appendChild(section);
+  });
+
+  document.getElementById('countNum').textContent = total;
+  document.getElementById('emptyState').style.display = total === 0 ? 'block' : 'none';
+}
+
+document.getElementById('search').addEventListener('input', renderVocab);
+buildTabs();
+renderVocab();
+
+/* ============ LEVEL 2 LOGIC ============ */
+function renderParticles(){
+  const grid = document.getElementById('particleGrid');
+  L2.particles.forEach(p=>{
+    const el = document.createElement('div');
+    el.className = 'pcard';
+    el.innerHTML = `
+      <div class="top">
+        <div class="hz">${p.hz}</div>
+        <div class="py">${p.py}</div>
+        ${SPEAKER_SVG}
+      </div>
+      <div class="fungsi">${p.fungsi}</div>
+      <div class="ex" data-ex="1">
+        <span class="exhz">${p.ch}</span>
+        <span>${p.cp}</span>
+        <span class="exid">"${p.ci}"</span>
+      </div>
+    `;
+    el.addEventListener('click', (e) => {
+      const exEl = e.target.closest('.ex');
+      if(exEl){ speak(p.ch, exEl); }
+      else { speak(p.hz, el); }
+    });
+    grid.appendChild(el);
+  });
+}
+
+function renderMeasure(){
+  const grid = document.getElementById('measureGrid');
+  L2.measure.forEach(m=>{
+    const el = document.createElement('div');
+    el.className = 'mcard';
+    el.innerHTML = `
+      <div class="top-row">
+        <div class="hz">${m.hz}</div>
+        ${SPEAKER_SVG}
+      </div>
+      <div class="py">${m.py}</div>
+      <div class="id">${m.id}</div>
+      <div class="contoh">${m.contoh}</div>
+    `;
+    el.addEventListener('click', () => speak(m.hz, el));
+    grid.appendChild(el);
+  });
+}
+
+function renderPatterns(){
+  const list = document.getElementById('patternList');
+  L2.patterns.forEach((p,i)=>{
+    const el = document.createElement('div');
+    el.className = 'pattern';
+    el.innerHTML = `
+      <div class="pattern-head">
+        <div class="pattern-name">${i+1}. ${p.nama}</div>
+        <div class="pattern-formula">${p.formula}</div>
+      </div>
+      <div class="pattern-example">
+        <span class="hz">${p.hz}</span>
+        <span class="py">${p.py}</span>
+        <span class="id">"${p.id}"</span>
+        ${SPEAKER_SVG}
+      </div>
+      ${p.note ? `<div class="pattern-note"><b>Catatan:</b> ${p.note}</div>` : ''}
+    `;
+    el.querySelector('.pattern-example').addEventListener('click', function(){ speak(p.hz, this); });
+    list.appendChild(el);
+  });
+}
+
+renderParticles();
+renderMeasure();
+renderPatterns();
+
+/* ============ LEVEL 3 DATA ============ */
+const L3 = {"dialogs": [
+  {"judul": "Perkenalan Diri", "baris": [
+    {"spk": "A", "hz": "你好！你叫什么名字？", "py": "nǐ hǎo! nǐ jiào shén me míng zi", "id": "Halo! Siapa namamu?"},
+    {"spk": "B", "hz": "你好，我叫王芳。你呢？", "py": "nǐ hǎo, wǒ jiào wáng fāng. nǐ ne", "id": "Halo, saya bernama Wang Fang. Kalau kamu?"},
+    {"spk": "A", "hz": "我叫李明。很高兴认识你。", "py": "wǒ jiào lǐ míng. hěn gāo xìng rèn shi nǐ", "id": "Saya bernama Li Ming. Senang berkenalan denganmu."},
+    {"spk": "B", "hz": "我也很高兴认识你。你是哪国人？", "py": "wǒ yě hěn gāo xìng rèn shi nǐ. nǐ shì nǎ guó rén", "id": "Saya juga senang berkenalan denganmu. Kamu orang mana?"},
+    {"spk": "A", "hz": "我是印度尼西亚人。你呢？", "py": "wǒ shì yìn dù ní xī yà rén. nǐ ne", "id": "Saya orang Indonesia. Kamu?"},
+    {"spk": "B", "hz": "我是中国人，我来自北京。", "py": "wǒ shì zhōng guó rén, wǒ lái zì běi jīng", "id": "Saya orang Tiongkok, saya berasal dari Beijing."}
+  ]},
+  {"judul": "Di Restoran", "baris": [
+    {"spk": "A", "hz": "欢迎光临！几位？", "py": "huān yíng guāng lín! jǐ wèi", "id": "Selamat datang! Berapa orang?"},
+    {"spk": "B", "hz": "两位，谢谢。", "py": "liǎng wèi, xiè xie", "id": "Dua orang, terima kasih."},
+    {"spk": "A", "hz": "请坐，这是菜单。", "py": "qǐng zuò, zhè shì cài dān", "id": "Silakan duduk, ini menunya."},
+    {"spk": "B", "hz": "谢谢。我要一碗米饭和一个鸡蛋汤。", "py": "xiè xie. wǒ yào yī wǎn mǐ fàn hé yī gè jī dàn tāng", "id": "Terima kasih. Saya mau semangkuk nasi dan satu sup telur."},
+    {"spk": "A", "hz": "好的，还要别的吗？", "py": "hǎo de, hái yào bié de ma", "id": "Baik, ada lagi yang mau dipesan?"},
+    {"spk": "B", "hz": "不用了，谢谢。", "py": "bú yòng le, xiè xie", "id": "Tidak, terima kasih."},
+    {"spk": "A", "hz": "请稍等，马上就好。", "py": "qǐng shāo děng, mǎ shàng jiù hǎo", "id": "Mohon tunggu sebentar, segera datang."}
+  ]},
+  {"judul": "Berbelanja di Toko", "baris": [
+    {"spk": "A", "hz": "你好，你要买什么？", "py": "nǐ hǎo, nǐ yào mǎi shén me", "id": "Halo, kamu mau beli apa?"},
+    {"spk": "B", "hz": "我想买一件衣服。", "py": "wǒ xiǎng mǎi yī jiàn yī fu", "id": "Saya ingin membeli sehelai baju."},
+    {"spk": "A", "hz": "这件怎么样？很漂亮。", "py": "zhè jiàn zěn me yàng? hěn piào liang", "id": "Yang ini bagaimana? Sangat cantik."},
+    {"spk": "B", "hz": "多少钱？", "py": "duō shao qián", "id": "Berapa harganya?"},
+    {"spk": "A", "hz": "一百块钱。", "py": "yī bǎi kuài qián", "id": "Seratus yuan."},
+    {"spk": "B", "hz": "太贵了，能便宜一点儿吗？", "py": "tài guì le, néng pián yi yī diǎnr ma", "id": "Terlalu mahal, bisa lebih murah sedikit?"},
+    {"spk": "A", "hz": "好吧，八十块钱怎么样？", "py": "hǎo ba, bā shí kuài qián zěn me yàng", "id": "Baiklah, delapan puluh yuan bagaimana?"},
+    {"spk": "B", "hz": "好的，我买了。", "py": "hǎo de, wǒ mǎi le", "id": "Baik, saya beli."}
+  ]},
+  {"judul": "Menanyakan Arah", "baris": [
+    {"spk": "A", "hz": "请问，火车站怎么走？", "py": "qǐng wèn, huǒ chē zhàn zěn me zǒu", "id": "Permisi, bagaimana cara ke stasiun kereta?"},
+    {"spk": "B", "hz": "一直走，然后往右转。", "py": "yī zhí zǒu, rán hòu wǎng yòu zhuǎn", "id": "Jalan terus, lalu belok kanan."},
+    {"spk": "A", "hz": "远吗？", "py": "yuǎn ma", "id": "Jauh tidak?"},
+    {"spk": "B", "hz": "不远，走路大概十分钟。", "py": "bù yuǎn, zǒu lù dà gài shí fēn zhōng", "id": "Tidak jauh, jalan kaki sekitar sepuluh menit."},
+    {"spk": "A", "hz": "谢谢你的帮助。", "py": "xiè xie nǐ de bāng zhù", "id": "Terima kasih atas bantuanmu."},
+    {"spk": "B", "hz": "不客气，祝你旅途愉快。", "py": "bú kè qi, zhù nǐ lǚ tú yú kuài", "id": "Sama-sama, semoga perjalananmu menyenangkan."}
+  ]}
+],
+"phrases": [
+  {"kategori": "Di Bandara", "items": [
+    {"hz": "护照", "py": "hù zhào", "id": "Paspor"},
+    {"hz": "登机牌", "py": "dēng jī pái", "id": "Boarding pass"},
+    {"hz": "行李", "py": "xíng li", "id": "Bagasi"},
+    {"hz": "我要办理登机手续", "py": "wǒ yào bàn lǐ dēng jī shǒu xù", "id": "Saya mau check-in"},
+    {"hz": "请问，几号登机口？", "py": "qǐng wèn, jǐ hào dēng jī kǒu", "id": "Permisi, gerbang berapa?"},
+    {"hz": "飞机延误了", "py": "fēi jī yán wù le", "id": "Pesawatnya tertunda"}
+  ]},
+  {"kategori": "Di Hotel", "items": [
+    {"hz": "我要预订一个房间", "py": "wǒ yào yù dìng yī gè fáng jiān", "id": "Saya mau memesan kamar"},
+    {"hz": "有空房间吗？", "py": "yǒu kòng fáng jiān ma", "id": "Ada kamar kosong?"},
+    {"hz": "多少钱一晚？", "py": "duō shao qián yī wǎn", "id": "Berapa harga semalam?"},
+    {"hz": "可以刷卡吗？", "py": "kě yǐ shuā kǎ ma", "id": "Bisa bayar dengan kartu?"},
+    {"hz": "几点退房？", "py": "jǐ diǎn tuì fáng", "id": "Jam berapa check-out?"},
+    {"hz": "请给我钥匙", "py": "qǐng gěi wǒ yào shi", "id": "Tolong berikan kuncinya"}
+  ]},
+  {"kategori": "Di Restoran", "items": [
+    {"hz": "服务员", "py": "fú wù yuán", "id": "Pelayan"},
+    {"hz": "买单", "py": "mǎi dān", "id": "Minta bon / bayar"},
+    {"hz": "打包", "py": "dǎ bāo", "id": "Bungkus (take away)"},
+    {"hz": "我不吃辣", "py": "wǒ bù chī là", "id": "Saya tidak makan pedas"},
+    {"hz": "有素菜吗？", "py": "yǒu sù cài ma", "id": "Ada masakan vegetarian?"},
+    {"hz": "很好吃", "py": "hěn hǎo chī", "id": "Sangat enak"}
+  ]},
+  {"kategori": "Berbelanja", "items": [
+    {"hz": "打折", "py": "dǎ zhé", "id": "Diskon"},
+    {"hz": "试穿", "py": "shì chuān", "id": "Mencoba (pakaian)"},
+    {"hz": "换一个", "py": "huàn yī gè", "id": "Ganti yang lain"},
+    {"hz": "收据", "py": "shōu jù", "id": "Kwitansi"},
+    {"hz": "现金", "py": "xiàn jīn", "id": "Uang tunai"},
+    {"hz": "找零钱", "py": "zhǎo líng qián", "id": "Uang kembalian"}
+  ]},
+  {"kategori": "Keadaan Darurat", "items": [
+    {"hz": "救命！", "py": "jiù mìng", "id": "Tolong!"},
+    {"hz": "我需要帮助", "py": "wǒ xū yào bāng zhù", "id": "Saya butuh bantuan"},
+    {"hz": "请叫警察", "py": "qǐng jiào jǐng chá", "id": "Tolong panggil polisi"},
+    {"hz": "我生病了", "py": "wǒ shēng bìng le", "id": "Saya sakit"},
+    {"hz": "请叫救护车", "py": "qǐng jiào jiù hù chē", "id": "Tolong panggil ambulans"},
+    {"hz": "我迷路了", "py": "wǒ mí lù le", "id": "Saya tersesat"}
+  ]}
+],
+"reading": [
+  {"judul": "我的一天 (Hari Saya)", "kalimat": [
+    {"hz": "我每天早上七点起床。", "py": "wǒ měi tiān zǎo shang qī diǎn qǐ chuáng", "id": "Saya bangun jam tujuh setiap pagi."},
+    {"hz": "起床以后，我先刷牙洗脸。", "py": "qǐ chuáng yǐ hòu, wǒ xiān shuā yá xǐ liǎn", "id": "Setelah bangun, saya gosok gigi dan cuci muka dulu."},
+    {"hz": "然后我吃早饭，喝一杯牛奶。", "py": "rán hòu wǒ chī zǎo fàn, hē yī bēi niú nǎi", "id": "Kemudian saya sarapan, minum segelas susu."},
+    {"hz": "八点，我坐公共汽车去学校。", "py": "bā diǎn, wǒ zuò gōng gòng qì chē qù xué xiào", "id": "Jam delapan, saya naik bus ke sekolah."},
+    {"hz": "下午三点，我放学回家。", "py": "xià wǔ sān diǎn, wǒ fàng xué huí jiā", "id": "Jam tiga sore, saya pulang sekolah."},
+    {"hz": "晚上，我做作业，然后看电视。", "py": "wǎn shang, wǒ zuò zuò yè, rán hòu kàn diàn shì", "id": "Malam hari, saya mengerjakan PR, lalu menonton TV."},
+    {"hz": "十点半，我上床睡觉。", "py": "shí diǎn bàn, wǒ shàng chuáng shuì jiào", "id": "Jam setengah sebelas, saya naik ranjang untuk tidur."}
+  ]}
+]};
+
+function renderDialogs(){
+  const container = document.getElementById('dialogList');
+  L3.dialogs.forEach(d=>{
+    const card = document.createElement('div');
+    card.className = 'dialog-card';
+    card.innerHTML = `<div class="dialog-title">${d.judul}</div>`;
+    d.baris.forEach(l=>{
+      const line = document.createElement('div');
+      line.className = 'dialog-line';
+      line.dataset.spk = l.spk;
+      line.innerHTML = `
+        <div class="dialog-spk">${l.spk}</div>
+        <div class="dialog-content">
+          <div class="dialog-hz">${l.hz}</div>
+          <div class="dialog-py">${l.py}</div>
+          <div class="dialog-id">${l.id}</div>
+        </div>
+        ${SPEAKER_SVG}
+      `;
+      line.addEventListener('click', () => speak(l.hz, line));
+      card.appendChild(line);
+    });
+    container.appendChild(card);
+  });
+}
+
+function renderPhrases(){
+  const container = document.getElementById('phraseList');
+  L3.phrases.forEach(cat=>{
+    const sec = document.createElement('div');
+    sec.className = 'phrase-section';
+    sec.innerHTML = `<div class="phrase-cat-title">${cat.kategori}</div><div class="mgrid"></div>`;
+    const grid = sec.querySelector('.mgrid');
+    cat.items.forEach(it=>{
+      const card = document.createElement('div');
+      card.className = 'phrasecard';
+      card.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${it.hz}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${it.py}</div>
+        <div class="id">${it.id}</div>
+      `;
+      card.addEventListener('click', () => speak(it.hz, card));
+      grid.appendChild(card);
+    });
+    container.appendChild(sec);
+  });
+}
+
+function renderReading(){
+  const container = document.getElementById('readingList');
+  L3.reading.forEach(r=>{
+    const card = document.createElement('div');
+    card.className = 'reading-card';
+    card.innerHTML = `
+      <div class="reading-title">${r.judul}</div>
+      <div class="reading-desc">Klik tiap kalimat untuk mendengar suaranya</div>
+    `;
+    r.kalimat.forEach(k=>{
+      const s = document.createElement('div');
+      s.className = 'reading-sentence';
+      s.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${k.hz}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${k.py}</div>
+        <div class="id">${k.id}</div>
+      `;
+      s.addEventListener('click', () => speak(k.hz, s));
+      card.appendChild(s);
+    });
+    container.appendChild(card);
+  });
+}
+
+renderDialogs();
+renderPhrases();
+renderReading();
+
+/* ============ LEVEL 4 DATA ============ */
+const L4 = {
+"patterns": [
+  {"nama": "Semakin lama semakin", "formula": "Subjek + 越来越 + Kata sifat", "hz": "天气越来越冷了", "py": "tiān qì yuè lái yuè lěng le", "id": "Cuaca semakin lama semakin dingin", "note": "越来越 = semakin lama semakin"},
+  {"nama": "Begitu...langsung...", "formula": "一 + Klausa A，就 + Klausa B", "hz": "我一到家就洗澡", "py": "wǒ yī dào jiā jiù xǐ zǎo", "id": "Begitu sampai rumah saya langsung mandi", "note": ""},
+  {"nama": "Tidak hanya...tapi juga...", "formula": "不但 + A，而且 + B", "hz": "他不但聪明，而且很努力", "py": "tā bú dàn cōng míng, ér qiě hěn nǔ lì", "id": "Dia tidak hanya pintar, tapi juga sangat rajin", "note": ""},
+  {"nama": "Selain...juga...", "formula": "除了 + A + 以外，还 + B", "hz": "除了英语以外，我还会说法语", "py": "chú le yīng yǔ yǐ wài, wǒ hái huì shuō fǎ yǔ", "id": "Selain bahasa Inggris, saya juga bisa bicara bahasa Prancis", "note": ""},
+  {"nama": "Kalau...maka...", "formula": "要是 + A，就 + B", "hz": "要是你有空，就来我家玩", "py": "yào shi nǐ yǒu kòng, jiù lái wǒ jiā wán", "id": "Kalau kamu senggang, datanglah main ke rumahku", "note": ""},
+  {"nama": "Asalkan...maka...", "formula": "只要 + A，就 + B", "hz": "只要努力，就能成功", "py": "zhǐ yào nǔ lì, jiù néng chéng gōng", "id": "Asalkan berusaha, pasti bisa sukses", "note": ""},
+  {"nama": "Pelengkap hasil", "formula": "Kata kerja + 完/好/懂/见 dst.", "hz": "我看完了这本书", "py": "wǒ kàn wán le zhè běn shū", "id": "Saya sudah selesai membaca buku ini", "note": "完 = selesai, ditempel setelah kata kerja"},
+  {"nama": "Pelengkap kemungkinan", "formula": "Kata kerja + 得/不 + Pelengkap", "hz": "这个字我看得懂", "py": "zhè ge zì wǒ kàn de dǒng", "id": "Karakter ini bisa saya mengerti kalau dilihat", "note": "得/不 di tengah menyatakan bisa/tidak bisa"},
+  {"nama": "Pelengkap arah", "formula": "Kata kerja + 上/下/进/出 + 来/去", "hz": "他走进来了", "py": "tā zǒu jìn lái le", "id": "Dia berjalan masuk ke arah pembicara", "note": ""},
+  {"nama": "Perbandingan negatif", "formula": "A + 没有 + B + 那么 + Kata sifat", "hz": "我没有他那么高", "py": "wǒ méi yǒu tā nà me gāo", "id": "Saya tidak setinggi dia", "note": ""},
+  {"nama": "Durasi tindakan", "formula": "Subjek + Kata kerja + Objek + Kata kerja + Durasi", "hz": "我学习中文学了三年了", "py": "wǒ xué xí zhōng wén xué le sān nián le", "id": "Saya sudah belajar bahasa Mandarin selama tiga tahun", "note": "Kata kerja diulang untuk menambahkan keterangan durasi"},
+  {"nama": "Meskipun...tetap...", "formula": "虽然 + A，还是 + B", "hz": "虽然下雨，他还是去跑步了", "py": "suī rán xià yǔ, tā hái shi qù pǎo bù le", "id": "Meskipun hujan, dia tetap pergi lari", "note": ""},
+  {"nama": "Semakin...semakin... (2 variabel)", "formula": "越 + A，越 + B", "hz": "这本书越看越有意思", "py": "zhè běn shū yuè kàn yuè yǒu yì si", "id": "Buku ini semakin dibaca semakin menarik", "note": ""},
+  {"nama": "Sebelum melakukan sesuatu", "formula": "在 + Klausa + 以前，Subjek + Kata kerja", "hz": "在睡觉以前，我喜欢看书", "py": "zài shuì jiào yǐ qián, wǒ xǐ huan kàn shū", "id": "Sebelum tidur, saya suka membaca buku", "note": ""},
+  {"nama": "Setelah melakukan sesuatu", "formula": "Klausa + 以后，Subjek + Kata kerja", "hz": "下班以后，我常常去健身房", "py": "xià bān yǐ hòu, wǒ cháng cháng qù jiàn shēn fáng", "id": "Setelah pulang kerja, saya sering pergi ke gym", "note": ""}
+],
+"vocab": [
+  {"kategori": "Pekerjaan & Kantor", "items": [
+    {"hz": "经理", "py": "jīng lǐ", "id": "Manajer"},
+    {"hz": "同事", "py": "tóng shì", "id": "Rekan kerja"},
+    {"hz": "老板", "py": "lǎo bǎn", "id": "Bos"},
+    {"hz": "会议", "py": "huì yì", "id": "Rapat"},
+    {"hz": "项目", "py": "xiàng mù", "id": "Proyek"},
+    {"hz": "加班", "py": "jiā bān", "id": "Lembur"},
+    {"hz": "工资", "py": "gōng zī", "id": "Gaji"},
+    {"hz": "面试", "py": "miàn shì", "id": "Wawancara kerja"},
+    {"hz": "简历", "py": "jiǎn lì", "id": "CV / resume"},
+    {"hz": "辞职", "py": "cí zhí", "id": "Mengundurkan diri"},
+    {"hz": "升职", "py": "shēng zhí", "id": "Naik jabatan"},
+    {"hz": "出差", "py": "chū chāi", "id": "Perjalanan dinas"},
+    {"hz": "截止日期", "py": "jié zhǐ rì qī", "id": "Tenggat waktu"},
+    {"hz": "客户", "py": "kè hù", "id": "Klien"},
+    {"hz": "同事们", "py": "tóng shì men", "id": "Para rekan kerja"}
+  ]},
+  {"kategori": "Kesehatan", "items": [
+    {"hz": "生病", "py": "shēng bìng", "id": "Sakit"},
+    {"hz": "发烧", "py": "fā shāo", "id": "Demam"},
+    {"hz": "咳嗽", "py": "ké sou", "id": "Batuk"},
+    {"hz": "头疼", "py": "tóu téng", "id": "Sakit kepala"},
+    {"hz": "感冒", "py": "gǎn mào", "id": "Flu"},
+    {"hz": "吃药", "py": "chī yào", "id": "Minum obat"},
+    {"hz": "打针", "py": "dǎ zhēn", "id": "Suntik"},
+    {"hz": "看医生", "py": "kàn yī shēng", "id": "Periksa ke dokter"},
+    {"hz": "住院", "py": "zhù yuàn", "id": "Rawat inap"},
+    {"hz": "健康", "py": "jiàn kāng", "id": "Sehat"},
+    {"hz": "运动", "py": "yùn dòng", "id": "Olahraga"},
+    {"hz": "休息", "py": "xiū xi", "id": "Istirahat"},
+    {"hz": "过敏", "py": "guò mǐn", "id": "Alergi"},
+    {"hz": "受伤", "py": "shòu shāng", "id": "Terluka"},
+    {"hz": "疼", "py": "téng", "id": "Sakit / nyeri"}
+  ]},
+  {"kategori": "Teknologi & Internet", "items": [
+    {"hz": "电脑", "py": "diàn nǎo", "id": "Komputer"},
+    {"hz": "网络", "py": "wǎng luò", "id": "Jaringan / internet"},
+    {"hz": "密码", "py": "mì mǎ", "id": "Kata sandi"},
+    {"hz": "下载", "py": "xià zài", "id": "Unduh"},
+    {"hz": "上传", "py": "shàng chuán", "id": "Unggah"},
+    {"hz": "充电", "py": "chōng diàn", "id": "Mengisi daya"},
+    {"hz": "软件", "py": "ruǎn jiàn", "id": "Perangkat lunak / aplikasi"},
+    {"hz": "网站", "py": "wǎng zhàn", "id": "Situs web"},
+    {"hz": "邮箱", "py": "yóu xiāng", "id": "Email"},
+    {"hz": "社交媒体", "py": "shè jiāo méi tǐ", "id": "Media sosial"},
+    {"hz": "视频通话", "py": "shì pín tōng huà", "id": "Video call"},
+    {"hz": "无线网", "py": "wú xiàn wǎng", "id": "Wifi"},
+    {"hz": "更新", "py": "gēng xīn", "id": "Pembaruan (update)"},
+    {"hz": "删除", "py": "shān chú", "id": "Hapus"},
+    {"hz": "屏幕", "py": "píng mù", "id": "Layar"}
+  ]},
+  {"kategori": "Perasaan & Emosi", "items": [
+    {"hz": "开心", "py": "kāi xīn", "id": "Senang"},
+    {"hz": "难过", "py": "nán guò", "id": "Sedih"},
+    {"hz": "生气", "py": "shēng qì", "id": "Marah"},
+    {"hz": "紧张", "py": "jǐn zhāng", "id": "Gugup / tegang"},
+    {"hz": "害怕", "py": "hài pà", "id": "Takut"},
+    {"hz": "担心", "py": "dān xīn", "id": "Khawatir"},
+    {"hz": "惊讶", "py": "jīng yà", "id": "Terkejut"},
+    {"hz": "无聊", "py": "wú liáo", "id": "Bosan"},
+    {"hz": "兴奋", "py": "xīng fèn", "id": "Bersemangat"},
+    {"hz": "失望", "py": "shī wàng", "id": "Kecewa"},
+    {"hz": "骄傲", "py": "jiāo ào", "id": "Bangga"},
+    {"hz": "羡慕", "py": "xiàn mù", "id": "Iri / kagum"},
+    {"hz": "放松", "py": "fàng sōng", "id": "Rileks"},
+    {"hz": "后悔", "py": "hòu huǐ", "id": "Menyesal"},
+    {"hz": "感动", "py": "gǎn dòng", "id": "Terharu"}
+  ]},
+  {"kategori": "Perjalanan & Liburan", "items": [
+    {"hz": "旅行", "py": "lǚ xíng", "id": "Perjalanan / travelling"},
+    {"hz": "签证", "py": "qiān zhèng", "id": "Visa"},
+    {"hz": "机票", "py": "jī piào", "id": "Tiket pesawat"},
+    {"hz": "行李箱", "py": "xíng li xiāng", "id": "Koper"},
+    {"hz": "导游", "py": "dǎo yóu", "id": "Pemandu wisata"},
+    {"hz": "景点", "py": "jǐng diǎn", "id": "Tempat wisata"},
+    {"hz": "拍照", "py": "pāi zhào", "id": "Memotret"},
+    {"hz": "纪念品", "py": "jì niàn pǐn", "id": "Suvenir"},
+    {"hz": "度假", "py": "dù jià", "id": "Berlibur"},
+    {"hz": "出国", "py": "chū guó", "id": "Pergi ke luar negeri"},
+    {"hz": "预订", "py": "yù dìng", "id": "Memesan (booking)"},
+    {"hz": "地图", "py": "dì tú", "id": "Peta"},
+    {"hz": "迷路", "py": "mí lù", "id": "Tersesat"},
+    {"hz": "风景", "py": "fēng jǐng", "id": "Pemandangan"},
+    {"hz": "旅游", "py": "lǚ yóu", "id": "Berwisata"}
+  ]}
+],
+"dialogs": [
+  {"judul": "Wawancara Kerja", "baris": [
+    {"spk": "A", "hz": "请自我介绍一下。", "py": "qǐng zì wǒ jiè shào yī xià", "id": "Silakan perkenalkan diri Anda."},
+    {"spk": "B", "hz": "我叫陈伟，今年二十八岁，毕业于北京大学。", "py": "wǒ jiào chén wěi, jīn nián èr shí bā suì, bì yè yú běi jīng dà xué", "id": "Nama saya Chen Wei, 28 tahun, lulusan Universitas Peking."},
+    {"spk": "A", "hz": "你有什么工作经验？", "py": "nǐ yǒu shén me gōng zuò jīng yàn", "id": "Apa pengalaman kerja Anda?"},
+    {"spk": "B", "hz": "我在一家公司工作了三年，做市场营销。", "py": "wǒ zài yī jiā gōng sī gōng zuò le sān nián, zuò shì chǎng yíng xiāo", "id": "Saya bekerja di sebuah perusahaan selama tiga tahun, di bidang pemasaran."},
+    {"spk": "A", "hz": "你为什么想换工作？", "py": "nǐ wèi shén me xiǎng huàn gōng zuò", "id": "Kenapa Anda ingin ganti pekerjaan?"},
+    {"spk": "B", "hz": "我想找一个更有挑战性的机会。", "py": "wǒ xiǎng zhǎo yī gè gèng yǒu tiǎo zhàn xìng de jī huì", "id": "Saya ingin mencari kesempatan yang lebih menantang."},
+    {"spk": "A", "hz": "你的期望工资是多少？", "py": "nǐ de qī wàng gōng zī shì duō shao", "id": "Berapa ekspektasi gaji Anda?"},
+    {"spk": "B", "hz": "我希望是一万块左右。", "py": "wǒ xī wàng shì yī wàn kuài zuǒ yòu", "id": "Saya berharap sekitar sepuluh ribu yuan."},
+    {"spk": "A", "hz": "好的，我们会尽快通知你结果。", "py": "hǎo de, wǒ men huì jǐn kuài tōng zhī nǐ jié guǒ", "id": "Baik, kami akan segera memberi tahu hasilnya."},
+    {"spk": "B", "hz": "谢谢您给我这个机会。", "py": "xiè xie nín gěi wǒ zhè ge jī huì", "id": "Terima kasih atas kesempatan ini."}
+  ]},
+  {"judul": "Di Dokter", "baris": [
+    {"spk": "A", "hz": "你哪里不舒服？", "py": "nǐ nǎ lǐ bù shū fu", "id": "Bagian mana yang tidak enak badan?"},
+    {"spk": "B", "hz": "我头疼，还有点发烧。", "py": "wǒ tóu téng, hái yǒu diǎn fā shāo", "id": "Kepala saya sakit, dan sedikit demam."},
+    {"spk": "A", "hz": "发烧多久了？", "py": "fā shāo duō jiǔ le", "id": "Sudah berapa lama demam?"},
+    {"spk": "B", "hz": "两天了。", "py": "liǎng tiān le", "id": "Sudah dua hari."},
+    {"spk": "A", "hz": "还有别的症状吗？咳嗽吗？", "py": "hái yǒu bié de zhèng zhuàng ma? ké sou ma", "id": "Ada gejala lain? Batuk?"},
+    {"spk": "B", "hz": "有一点咳嗽，没有力气。", "py": "yǒu yī diǎn ké sou, méi yǒu lì qi", "id": "Ada sedikit batuk, tidak ada tenaga."},
+    {"spk": "A", "hz": "我给你开点药，回家多休息，多喝水。", "py": "wǒ gěi nǐ kāi diǎn yào, huí jiā duō xiū xi, duō hē shuǐ", "id": "Saya akan resepkan obat, di rumah banyak istirahat, banyak minum air."},
+    {"spk": "B", "hz": "谢谢医生。", "py": "xiè xie yī shēng", "id": "Terima kasih dokter."},
+    {"spk": "A", "hz": "不客气，如果三天还不好，再来医院。", "py": "bú kè qi, rú guǒ sān tiān hái bù hǎo, zài lái yī yuàn", "id": "Sama-sama, kalau tiga hari masih belum sembuh, datang lagi ke rumah sakit."}
+  ]},
+  {"judul": "Di Bank", "baris": [
+    {"spk": "A", "hz": "您好，请问需要什么帮助？", "py": "nín hǎo, qǐng wèn xū yào shén me bāng zhù", "id": "Halo, ada yang bisa dibantu?"},
+    {"spk": "B", "hz": "我想开一个银行账户。", "py": "wǒ xiǎng kāi yī gè yín háng zhàng hù", "id": "Saya ingin membuka rekening bank."},
+    {"spk": "A", "hz": "好的，请出示您的护照。", "py": "hǎo de, qǐng chū shì nín de hù zhào", "id": "Baik, silakan tunjukkan paspor Anda."},
+    {"spk": "B", "hz": "给您。", "py": "gěi nín", "id": "Ini untuk Anda."},
+    {"spk": "A", "hz": "您要办储蓄卡还是信用卡？", "py": "nín yào bàn chǔ xù kǎ hái shi xìn yòng kǎ", "id": "Anda mau kartu tabungan atau kartu kredit?"},
+    {"spk": "B", "hz": "储蓄卡就可以了。", "py": "chǔ xù kǎ jiù kě yǐ le", "id": "Kartu tabungan saja sudah cukup."},
+    {"spk": "A", "hz": "请填写这张表格，然后设置密码。", "py": "qǐng tián xiě zhè zhāng biǎo gé, rán hòu shè zhì mì mǎ", "id": "Silakan isi formulir ini, lalu atur kata sandi."},
+    {"spk": "B", "hz": "好的，填好了。", "py": "hǎo de, tián hǎo le", "id": "Baik, sudah selesai diisi."},
+    {"spk": "A", "hz": "大概十分钟就可以办好。", "py": "dà gài shí fēn zhōng jiù kě yǐ bàn hǎo", "id": "Kira-kira sepuluh menit bisa selesai."}
+  ]},
+  {"judul": "Mengurus Visa", "baris": [
+    {"spk": "A", "hz": "您好，请问您要办理什么业务？", "py": "nín hǎo, qǐng wèn nín yào bàn lǐ shén me yè wù", "id": "Halo, urusan apa yang ingin Anda lakukan?"},
+    {"spk": "B", "hz": "我想延长我的签证。", "py": "wǒ xiǎng yán cháng wǒ de qiān zhèng", "id": "Saya ingin memperpanjang visa saya."},
+    {"spk": "A", "hz": "您的签证什么时候到期？", "py": "nín de qiān zhèng shén me shí hou dào qī", "id": "Kapan visa Anda kadaluarsa?"},
+    {"spk": "B", "hz": "下个星期就到期了。", "py": "xià gè xīng qī jiù dào qī le", "id": "Minggu depan sudah kadaluarsa."},
+    {"spk": "A", "hz": "请提供护照和申请表。", "py": "qǐng tí gōng hù zhào hé shēn qǐng biǎo", "id": "Silakan berikan paspor dan formulir permohonan."},
+    {"spk": "B", "hz": "这是我的资料。", "py": "zhè shì wǒ de zī liào", "id": "Ini data saya."},
+    {"spk": "A", "hz": "需要交一百块手续费。", "py": "xū yào jiāo yī bǎi kuài shǒu xù fèi", "id": "Perlu membayar biaya administrasi seratus yuan."},
+    {"spk": "B", "hz": "好的，什么时候可以拿到？", "py": "hǎo de, shén me shí hou kě yǐ ná dào", "id": "Baik, kapan bisa diambil?"},
+    {"spk": "A", "hz": "三个工作日以后。", "py": "sān gè gōng zuò rì yǐ hòu", "id": "Setelah tiga hari kerja."}
+  ]},
+  {"judul": "Rencana Liburan", "baris": [
+    {"spk": "A", "hz": "暑假你打算去哪里旅行？", "py": "shǔ jià nǐ dǎ suàn qù nǎ lǐ lǚ xíng", "id": "Liburan musim panas kamu berencana pergi ke mana?"},
+    {"spk": "B", "hz": "我打算去云南，听说那里风景很美。", "py": "wǒ dǎ suàn qù yún nán, tīng shuō nà lǐ fēng jǐng hěn měi", "id": "Saya berencana ke Yunnan, katanya pemandangannya sangat indah."},
+    {"spk": "A", "hz": "你要去多久？", "py": "nǐ yào qù duō jiǔ", "id": "Kamu mau pergi berapa lama?"},
+    {"spk": "B", "hz": "大概一个星期。", "py": "dà gài yī gè xīng qī", "id": "Kira-kira satu minggu."},
+    {"spk": "A", "hz": "你订机票了吗？", "py": "nǐ dìng jī piào le ma", "id": "Kamu sudah pesan tiket pesawat?"},
+    {"spk": "B", "hz": "还没有，我打算这周订。", "py": "hái méi yǒu, wǒ dǎ suàn zhè zhōu dìng", "id": "Belum, saya berencana pesan minggu ini."},
+    {"spk": "A", "hz": "记得带好相机，多拍点照片。", "py": "jì de dài hǎo xiàng jī, duō pāi diǎn zhào piàn", "id": "Ingat bawa kamera, ambil banyak foto."},
+    {"spk": "B", "hz": "好的，我也想买一些纪念品送朋友。", "py": "hǎo de, wǒ yě xiǎng mǎi yī xiē jì niàn pǐn sòng péng you", "id": "Baik, saya juga ingin beli beberapa suvenir untuk teman."}
+  ]}
+]};
+
+/* ============ LEVEL 5 DATA ============ */
+const L5 = {
+"idioms": [
+  {"nama": "1. 马马虎虎 — Asal-asalan / lumayan", "formula": "mǎ mǎ hū hū", "hz": "他做事总是马马虎虎的", "py": "tā zuò shì zǒng shì mǎ mǎ hū hū de", "id": "Dia selalu mengerjakan sesuatu asal-asalan", "note": "Menggambarkan sikap tidak teliti atau kualitas biasa saja"},
+  {"nama": "2. 一举两得 — Sekali dayung, dua tiga pulau terlampaui", "formula": "yī jǔ liǎng dé", "hz": "学习中文又能交朋友，真是一举两得", "py": "xué xí zhōng wén yòu néng jiāo péng you, zhēn shi yī jǔ liǎng dé", "id": "Belajar Mandarin sambil berteman, benar-benar sekali dayung dua tiga pulau terlampaui", "note": "Satu tindakan menghasilkan dua manfaat sekaligus"},
+  {"nama": "3. 半途而废 — Berhenti di tengah jalan", "formula": "bàn tú ér fèi", "hz": "做事不能半途而废", "py": "zuò shì bù néng bàn tú ér fèi", "id": "Mengerjakan sesuatu tidak boleh berhenti di tengah jalan", "note": "Menggambarkan sikap menyerah sebelum selesai"},
+  {"nama": "4. 入乡随俗 — Di mana bumi dipijak, di situ langit dijunjung", "formula": "rù xiāng suí sú", "hz": "到了新地方要入乡随俗", "py": "dào le xīn dì fang yào rù xiāng suí sú", "id": "Sampai di tempat baru harus mengikuti adat setempat", "note": ""},
+  {"nama": "5. 画蛇添足 — Menambahkan yang tidak perlu", "formula": "huà shé tiān zú", "hz": "你这样改反而画蛇添足了", "py": "nǐ zhè yàng gǎi fǎn ér huà shé tiān zú le", "id": "Kamu mengubahnya seperti ini malah jadi berlebihan", "note": "Harfiah: menggambar ular lalu menambahkan kaki"},
+  {"nama": "6. 对牛弹琴 — Bagai membuang kata pada yang tak mengerti", "formula": "duì niú tán qín", "hz": "跟他说这些，简直是对牛弹琴", "py": "gēn tā shuō zhè xiē, jiǎn zhí shì duì niú tán qín", "id": "Bicara hal ini padanya, sungguh sia-sia", "note": "Harfiah: memainkan kecapi di depan kerbau"},
+  {"nama": "7. 塞翁失马 — Dalam kemalangan ada berkah tersembunyi", "formula": "sài wēng shī mǎ", "hz": "塞翁失马，焉知非福", "py": "sài wēng shī mǎ, yān zhī fēi fú", "id": "Dalam kemalangan mungkin tersembunyi berkah", "note": "Berasal dari kisah orang tua yang kehilangan kudanya"},
+  {"nama": "8. 井底之蛙 — Katak dalam tempurung", "formula": "jǐng dǐ zhī wā", "hz": "别做井底之蛙，要多出去看看世界", "py": "bié zuò jǐng dǐ zhī wā, yào duō chū qù kàn kan shì jiè", "id": "Jangan jadi katak dalam tempurung, harus lebih sering keluar melihat dunia", "note": ""},
+  {"nama": "9. 画龙点睛 — Sentuhan akhir penyempurna", "formula": "huà lóng diǎn jīng", "hz": "这句话真是画龙点睛", "py": "zhè jù huà zhēn shi huà lóng diǎn jīng", "id": "Kalimat ini benar-benar sentuhan penyempurna", "note": "Harfiah: melukis naga lalu menitikkan matanya"},
+  {"nama": "10. 亡羊补牢 — Belum terlambat memperbaiki kesalahan", "formula": "wáng yáng bǔ láo", "hz": "亡羊补牢，为时不晚", "py": "wáng yáng bǔ láo, wéi shí bù wǎn", "id": "Memperbaiki kandang setelah kambing hilang, belum terlambat", "note": ""},
+  {"nama": "11. 一心一意 — Sepenuh hati", "formula": "yī xīn yī yì", "hz": "他一心一意地学习中文", "py": "tā yī xīn yī yì de xué xí zhōng wén", "id": "Dia belajar bahasa Mandarin dengan sepenuh hati", "note": ""},
+  {"nama": "12. 三心二意 — Tidak fokus / plin-plan", "formula": "sān xīn èr yì", "hz": "做作业不要三心二意", "py": "zuò zuò yè bú yào sān xīn èr yì", "id": "Mengerjakan PR jangan plin-plan", "note": ""},
+  {"nama": "13. 熟能生巧 — Praktik membuat sempurna", "formula": "shú néng shēng qiǎo", "hz": "多练习，熟能生巧", "py": "duō liàn xí, shú néng shēng qiǎo", "id": "Banyak berlatih, praktik membuat sempurna", "note": ""},
+  {"nama": "14. 有志者事竟成 — Di mana ada kemauan di situ ada jalan", "formula": "yǒu zhì zhě shì jìng chéng", "hz": "别放弃，有志者事竟成", "py": "bié fàng qì, yǒu zhì zhě shì jìng chéng", "id": "Jangan menyerah, di mana ada kemauan di situ ada jalan", "note": ""},
+  {"nama": "15. 眼见为实 — Melihat adalah percaya", "formula": "yǎn jiàn wéi shí", "hz": "百闻不如一见，眼见为实", "py": "bǎi wén bù rú yī jiàn, yǎn jiàn wéi shí", "id": "Seratus kali dengar tak sebanding sekali lihat, melihat adalah percaya", "note": ""},
+  {"nama": "16. 未雨绸缪 — Sedia payung sebelum hujan", "formula": "wèi yǔ chóu móu", "hz": "我们应该未雨绸缪，提前做好准备", "py": "wǒ men yīng gāi wèi yǔ chóu móu, tí qián zuò hǎo zhǔn bèi", "id": "Kita harus sedia payung sebelum hujan, bersiap lebih awal", "note": ""},
+  {"nama": "17. 脚踏实地 — Kerja keras dan realistis", "formula": "jiǎo tà shí dì", "hz": "做人要脚踏实地", "py": "zuò rén yào jiǎo tà shí dì", "id": "Menjadi manusia harus kerja keras dan membumi", "note": "Harfiah: kaki menapak tanah"},
+  {"nama": "18. 好事多磨 — Hal baik butuh perjuangan", "formula": "hǎo shì duō mó", "hz": "别灰心，好事多磨", "py": "bié huī xīn, hǎo shì duō mó", "id": "Jangan putus asa, hal baik memang butuh perjuangan", "note": ""},
+  {"nama": "19. 千里之行，始于足下 — Perjalanan jauh dimulai dari satu langkah", "formula": "qiān lǐ zhī xíng, shǐ yú zú xià", "hz": "千里之行，始于足下，先从简单的开始吧", "py": "qiān lǐ zhī xíng, shǐ yú zú xià, xiān cóng jiǎn dān de kāi shǐ ba", "id": "Perjalanan seribu li dimulai dari satu langkah, mulailah dari yang sederhana", "note": ""},
+  {"nama": "20. 活到老，学到老 — Belajar sepanjang hayat", "formula": "huó dào lǎo, xué dào lǎo", "hz": "学习没有止境，活到老学到老", "py": "xué xí méi yǒu zhǐ jìng, huó dào lǎo xué dào lǎo", "id": "Belajar tidak ada batasnya, belajar sepanjang hayat", "note": ""}
+],
+"patterns": [
+  {"nama": "Bukan hanya...bahkan...", "formula": "不仅...甚至...", "hz": "他不仅会说中文，甚至能写文章", "py": "tā bù jǐn huì shuō zhōng wén, shèn zhì néng xiě wén zhāng", "id": "Dia tidak hanya bisa bicara Mandarin, bahkan bisa menulis artikel", "note": ""},
+  {"nama": "Daripada...lebih baik...", "formula": "与其...不如...", "hz": "与其等待，不如主动去做", "py": "yǔ qí děng dài, bù rú zhǔ dòng qù zuò", "id": "Daripada menunggu, lebih baik bertindak aktif", "note": ""},
+  {"nama": "Di satu sisi...di sisi lain...", "formula": "一方面...另一方面...", "hz": "他一方面想工作，另一方面想继续读书", "py": "tā yī fāng miàn xiǎng gōng zuò, lìng yī fāng miàn xiǎng jì xù dú shū", "id": "Di satu sisi dia ingin bekerja, di sisi lain ingin lanjut sekolah", "note": ""},
+  {"nama": "Meski...tetap saja...", "formula": "尽管...还是...", "hz": "尽管很累，他还是坚持完成了任务", "py": "jǐn guǎn hěn lèi, tā hái shi jiān chí wán chéng le rèn wu", "id": "Meski sangat lelah, dia tetap bertahan menyelesaikan tugas", "note": ""},
+  {"nama": "Kecuali...baru...", "formula": "除非...才...", "hz": "除非下大雨，我们才取消比赛", "py": "chú fēi xià dà yǔ, wǒ men cái qǔ xiāo bǐ sài", "id": "Kecuali hujan lebat, baru kami membatalkan pertandingan", "note": ""},
+  {"nama": "Tidak peduli...selalu...", "formula": "无论...都...", "hz": "无论多难，他都不放弃", "py": "wú lùn duō nán, tā dōu bú fàng qì", "id": "Tidak peduli seberapa sulit, dia tidak pernah menyerah", "note": ""},
+  {"nama": "Bukan...melainkan...", "formula": "不是...而是...", "hz": "这不是我的错，而是他的错", "py": "zhè bú shì wǒ de cuò, ér shì tā de cuò", "id": "Ini bukan salah saya, melainkan salahnya", "note": ""},
+  {"nama": "Semakin (formal)", "formula": "Subjek + 越发 + Kata sifat", "hz": "随着年龄增长，他越发成熟了", "py": "suí zhe nián líng zēng zhǎng, tā yuè fā chéng shú le", "id": "Seiring bertambahnya usia, dia semakin dewasa", "note": ""},
+  {"nama": "Bukan hanya itu, bahkan...", "formula": "不但如此，还...", "hz": "他考试得了满分，不但如此，还得了奖学金", "py": "tā kǎo shì dé le mǎn fēn, bú dàn rú cǐ, hái dé le jiǎng xué jīn", "id": "Dia dapat nilai sempurna di ujian, tidak hanya itu, dia juga dapat beasiswa", "note": ""},
+  {"nama": "Seandainya...maka...", "formula": "假如...那么...", "hz": "假如明天下雨，那么活动就取消", "py": "jiǎ rú míng tiān xià yǔ, nà me huó dòng jiù qǔ xiāo", "id": "Seandainya besok hujan, maka acaranya dibatalkan", "note": ""},
+  {"nama": "Sekalipun...juga...", "formula": "即使...也...", "hz": "即使失败了，我也不会后悔", "py": "jí shǐ shī bài le, wǒ yě bú huì hòu huǐ", "id": "Sekalipun gagal, saya juga tidak akan menyesal", "note": ""},
+  {"nama": "Bukan hanya karena...tapi juga karena...", "formula": "不只是因为...也是因为...", "hz": "我喜欢这份工作，不只是因为工资高，也是因为我喜欢挑战", "py": "wǒ xǐ huan zhè fèn gōng zuò, bù zhǐ shì yīn wèi gōng zī gāo, yě shì yīn wèi wǒ xǐ huan tiǎo zhàn", "id": "Saya suka pekerjaan ini, bukan hanya karena gajinya tinggi, tapi juga karena saya suka tantangan", "note": ""},
+  {"nama": "Secara bertahap", "formula": "Subjek + 逐渐 + Kata kerja/sifat", "hz": "这座城市逐渐发展起来了", "py": "zhè zuò chéng shì zhú jiàn fā zhǎn qǐ lái le", "id": "Kota ini secara bertahap berkembang", "note": ""},
+  {"nama": "Bagaimanapun juga", "formula": "不管怎样，...", "hz": "不管怎样，我们都要坚持下去", "py": "bù guǎn zěn yàng, wǒ men dōu yào jiān chí xià qù", "id": "Bagaimanapun juga, kita harus tetap bertahan", "note": ""}
+],
+"dialogs": [
+  {"judul": "Negosiasi Bisnis", "baris": [
+    {"spk": "A", "hz": "关于这次合作，你们的报价是多少？", "py": "guān yú zhè cì hé zuò, nǐ men de bào jià shì duō shao", "id": "Terkait kerja sama ini, berapa penawaran harga Anda?"},
+    {"spk": "B", "hz": "我们的报价是五十万元，包括所有服务费用。", "py": "wǒ men de bào jià shì wǔ shí wàn yuán, bāo kuò suǒ yǒu fú wù fèi yòng", "id": "Penawaran kami lima ratus ribu yuan, termasuk semua biaya layanan."},
+    {"spk": "A", "hz": "这个价格有点高，能不能再商量一下？", "py": "zhè ge jià gé yǒu diǎn gāo, néng bù néng zài shāng liang yī xià", "id": "Harga ini agak tinggi, bisakah kita bicarakan lagi?"},
+    {"spk": "B", "hz": "如果签长期合同，我们可以给百分之十的折扣。", "py": "rú guǒ qiān cháng qī hé tong, wǒ men kě yǐ gěi bǎi fēn zhī shí de zhé kòu", "id": "Kalau menandatangani kontrak jangka panjang, kami bisa beri diskon sepuluh persen."},
+    {"spk": "A", "hz": "听起来不错，我需要跟我的团队讨论一下。", "py": "tīng qǐ lái bú cuò, wǒ xū yào gēn wǒ de tuán duì tǎo lùn yī xià", "id": "Kedengarannya bagus, saya perlu mendiskusikan dengan tim saya."},
+    {"spk": "B", "hz": "没问题，期待与您的进一步合作。", "py": "méi wèn tí, qí dài yǔ nín de jìn yī bù hé zuò", "id": "Tidak masalah, menantikan kerja sama lebih lanjut dengan Anda."}
+  ]},
+  {"judul": "Diskusi Opini", "baris": [
+    {"spk": "A", "hz": "你怎么看最近的经济情况？", "py": "nǐ zěn me kàn zuì jìn de jīng jì qíng kuàng", "id": "Bagaimana pendapatmu tentang situasi ekonomi belakangan ini?"},
+    {"spk": "B", "hz": "我觉得虽然有挑战，但是总体在慢慢恢复。", "py": "wǒ jué de suī rán yǒu tiǎo zhàn, dàn shì zǒng tǐ zài màn màn huī fù", "id": "Menurut saya meski ada tantangan, tapi secara keseluruhan sedang pulih perlahan."},
+    {"spk": "A", "hz": "你认为年轻人应该怎么应对这种变化？", "py": "nǐ rèn wéi nián qīng rén yīng gāi zěn me yìng duì zhè zhǒng biàn huà", "id": "Menurutmu bagaimana anak muda seharusnya menghadapi perubahan ini?"},
+    {"spk": "B", "hz": "我觉得应该不断学习新技能，保持竞争力。", "py": "wǒ jué de yīng gāi bú duàn xué xí xīn jì néng, bǎo chí jìng zhēng lì", "id": "Saya rasa harus terus belajar keterampilan baru, menjaga daya saing."},
+    {"spk": "A", "hz": "说得有道理，我们都需要跟上时代的步伐。", "py": "shuō de yǒu dào lǐ, wǒ men dōu xū yào gēn shàng shí dài de bù fá", "id": "Masuk akal, kita semua perlu mengikuti langkah zaman."}
+  ]}
+],
+"reading": [
+  {"judul": "学中文的好处 (Manfaat Belajar Bahasa Mandarin)", "kalimat": [
+    {"hz": "学习中文可以帮助我们了解中国的文化和历史。", "py": "xué xí zhōng wén kě yǐ bāng zhù wǒ men liǎo jiě zhōng guó de wén huà hé lì shǐ", "id": "Belajar bahasa Mandarin bisa membantu kita memahami budaya dan sejarah Tiongkok."},
+    {"hz": "中文是世界上使用人数最多的语言之一。", "py": "zhōng wén shì shì jiè shàng shǐ yòng rén shù zuì duō de yǔ yán zhī yī", "id": "Bahasa Mandarin adalah salah satu bahasa dengan jumlah penutur terbanyak di dunia."},
+    {"hz": "掌握中文可以为工作带来更多机会。", "py": "zhǎng wò zhōng wén kě yǐ wèi gōng zuò dài lái gèng duō jī huì", "id": "Menguasai bahasa Mandarin bisa membawa lebih banyak kesempatan kerja."},
+    {"hz": "很多国际公司都需要会说中文的员工。", "py": "hěn duō guó jì gōng sī dōu xū yào huì shuō zhōng wén de yuán gōng", "id": "Banyak perusahaan internasional membutuhkan karyawan yang bisa berbahasa Mandarin."},
+    {"hz": "学习一门新语言也能锻炼大脑。", "py": "xué xí yī mén xīn yǔ yán yě néng duàn liàn dà nǎo", "id": "Belajar bahasa baru juga bisa melatih otak."},
+    {"hz": "通过学习汉字，我们可以更深入地理解中国哲学。", "py": "tōng guò xué xí hàn zì, wǒ men kě yǐ gèng shēn rù de lǐ jiě zhōng guó zhé xué", "id": "Melalui belajar aksara Han, kita bisa lebih mendalam memahami filsafat Tiongkok."},
+    {"hz": "学好中文还能让我们更容易交到中国朋友。", "py": "xué hǎo zhōng wén hái néng ràng wǒ men gèng róng yì jiāo dào zhōng guó péng you", "id": "Menguasai bahasa Mandarin juga membuat kita lebih mudah berteman dengan orang Tionghoa."},
+    {"hz": "当然，学习中文并不容易，需要耐心和坚持。", "py": "dāng rán, xué xí zhōng wén bìng bù róng yì, xū yào nài xīn hé jiān chí", "id": "Tentu saja, belajar bahasa Mandarin tidak mudah, membutuhkan kesabaran dan ketekunan."},
+    {"hz": "每天练习一点，慢慢就会看到进步。", "py": "měi tiān liàn xí yī diǎn, màn màn jiù huì kàn dào jìn bù", "id": "Berlatih sedikit setiap hari, perlahan akan terlihat kemajuannya."},
+    {"hz": "多听、多说、多读、多写是学好语言的关键。", "py": "duō tīng, duō shuō, duō dú, duō xiě shì xué hǎo yǔ yán de guān jiàn", "id": "Banyak mendengar, bicara, membaca, dan menulis adalah kunci menguasai bahasa."},
+    {"hz": "只要坚持下去，任何人都能学好中文。", "py": "zhǐ yào jiān chí xià qù, rèn hé rén dōu néng xué hǎo zhōng wén", "id": "Asalkan terus bertahan, siapa pun bisa menguasai bahasa Mandarin dengan baik."},
+    {"hz": "学习的过程虽然辛苦，但是收获会让一切都值得。", "py": "xué xí de guò chéng suī rán xīn kǔ, dàn shì shōu huò huì ràng yī qiè dōu zhí dé", "id": "Proses belajar meski melelahkan, tapi hasilnya akan membuat semuanya berharga."}
+  ]}
+]};
+
+/* ============ RENDER HELPERS (LEVEL 4 & 5) ============ */
+function renderPatternListGeneric(containerId, patterns){
+  const list = document.getElementById(containerId);
+  patterns.forEach((p,i)=>{
+    const el = document.createElement('div');
+    el.className = 'pattern';
+    el.innerHTML = `
+      <div class="pattern-head">
+        <div class="pattern-name">${i+1}. ${p.nama}</div>
+        <div class="pattern-formula">${p.formula}</div>
+      </div>
+      <div class="pattern-example">
+        <span class="hz">${p.hz}</span>
+        <span class="py">${p.py}</span>
+        <span class="id">"${p.id}"</span>
+        ${SPEAKER_SVG}
+      </div>
+      ${p.note ? `<div class="pattern-note"><b>Catatan:</b> ${p.note}</div>` : ''}
+    `;
+    el.querySelector('.pattern-example').addEventListener('click', function(){ speak(p.hz, this); });
+    list.appendChild(el);
+  });
+}
+
+function renderDialogListGeneric(containerId, dialogs){
+  const container = document.getElementById(containerId);
+  dialogs.forEach(d=>{
+    const card = document.createElement('div');
+    card.className = 'dialog-card';
+    card.innerHTML = `<div class="dialog-title">${d.judul}</div>`;
+    d.baris.forEach(l=>{
+      const line = document.createElement('div');
+      line.className = 'dialog-line';
+      line.dataset.spk = l.spk;
+      line.innerHTML = `
+        <div class="dialog-spk">${l.spk}</div>
+        <div class="dialog-content">
+          <div class="dialog-hz">${l.hz}</div>
+          <div class="dialog-py">${l.py}</div>
+          <div class="dialog-id">${l.id}</div>
+        </div>
+        ${SPEAKER_SVG}
+      `;
+      line.addEventListener('click', () => speak(l.hz, line));
+      card.appendChild(line);
+    });
+    container.appendChild(card);
+  });
+}
+
+function renderReadingListGeneric(containerId, readings){
+  const container = document.getElementById(containerId);
+  readings.forEach(r=>{
+    const card = document.createElement('div');
+    card.className = 'reading-card';
+    card.innerHTML = `
+      <div class="reading-title">${r.judul}</div>
+      <div class="reading-desc">Klik tiap kalimat untuk mendengar suaranya</div>
+    `;
+    r.kalimat.forEach(k=>{
+      const s = document.createElement('div');
+      s.className = 'reading-sentence';
+      s.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${k.hz}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${k.py}</div>
+        <div class="id">${k.id}</div>
+      `;
+      s.addEventListener('click', () => speak(k.hz, s));
+      card.appendChild(s);
+    });
+    container.appendChild(card);
+  });
+}
+
+function renderVocab4(){
+  const container = document.getElementById('vocab4');
+  L4.vocab.forEach(cat=>{
+    const sec = document.createElement('div');
+    sec.className = 'phrase-section';
+    sec.innerHTML = `<div class="phrase-cat-title">${cat.kategori}</div><div class="grid"></div>`;
+    const grid = sec.querySelector('.grid');
+    cat.items.forEach(it=>{
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${it.hz}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${it.py}</div>
+        <div class="id">${it.id}</div>
+      `;
+      card.addEventListener('click', () => speak(it.hz, card));
+      grid.appendChild(card);
+    });
+    container.appendChild(sec);
+  });
+}
+
+/* ============ RENDER CALLS: LEVEL 4 ============ */
+renderPatternListGeneric('patternList4', L4.patterns);
+renderVocab4();
+renderDialogListGeneric('dialogList4', L4.dialogs);
+
+/* ============ RENDER CALLS: LEVEL 5 ============ */
+renderPatternListGeneric('idiomList5', L5.idioms);
+renderPatternListGeneric('patternList5', L5.patterns);
+renderDialogListGeneric('dialogList5', L5.dialogs);
+renderReadingListGeneric('readingList5', L5.reading);
+
+</script>
+</body>
+</html>
