@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Belajar Bahasa Jepang · Level 1 & 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F2E8D6;
+    --ink: #26221C;
+    --ink-soft: #5B5348;
+    --seal: #A5372A;
+    --seal-dark: #7E2A20;
+    --jade: #4C7266;
+    --brass: #B08A3E;
+    --line: rgba(38,34,28,0.14);
+    --card-bg: #FBF6EA;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(165,55,42,0.06), transparent 60%),
+      radial-gradient(1000px 700px at 100% 0%, rgba(76,114,102,0.07), transparent 55%),
+      var(--paper);
+    background-attachment: fixed;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:40px 22px 80px;}
+
+  /* ===== Header ===== */
+  header{
+    position:relative;
+    text-align:center;
+    padding:38px 20px 34px;
+    margin-bottom:26px;
+    border-top:3px solid var(--ink);
+    border-bottom:3px solid var(--ink);
+  }
+  header::before, header::after{
+    content:"";
+    position:absolute; left:0; right:0; height:6px;
+    background: repeating-linear-gradient(90deg, var(--seal) 0 14px, transparent 14px 20px);
+    opacity:0.55;
+  }
+  header::before{top:-9px;}
+  header::after{bottom:-9px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:0.35em;
+    font-size:11px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Noto Serif JP', serif;
+    font-weight:900;
+    font-size:clamp(30px,5vw,50px);
+    margin:0 0 10px;
+  }
+  h1 .accent{color:var(--seal);}
+  .subtitle{
+    font-size:15px;
+    color:var(--ink-soft);
+    max-width:600px;
+    margin:0 auto;
+    line-height:1.6;
+  }
+  .stamp{
+    position:absolute;
+    top:18px; right:24px;
+    width:64px; height:64px;
+    border:2.5px solid var(--seal);
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(-6deg);
+    font-family:'Noto Serif JP', serif;
+    font-weight:700;
+    font-size:20px;
+    color:var(--seal);
+    background:rgba(165,55,42,0.05);
+  }
+
+  /* ===== Level switcher (top-level tabs) ===== */
+  .level-switch{
+    display:flex; justify-content:center; gap:10px;
+    margin-bottom:36px;
+  }
+  .level-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:11px 22px;
+    border-radius:24px;
+    border:1.6px solid var(--line);
+    background:var(--card-bg);
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:all .15s;
+    text-align:left;
+  }
+  .level-btn b{display:block; font-family:'Noto Serif JP',serif; font-size:15px; color:var(--ink); margin-bottom:2px;}
+  .level-btn:hover{border-color:var(--seal);}
+  .level-btn.active{
+    background:var(--ink); border-color:var(--ink); color:var(--paper);
+  }
+  .level-btn.active b{color:var(--paper);}
+
+  .level-view{display:none;}
+  .level-view.active{display:block;}
+
+  /* ===== Level 1: controls / tabs / cards ===== */
+  .controls{
+    display:flex; flex-wrap:wrap; gap:10px;
+    align-items:center; justify-content:space-between;
+    margin-bottom:22px;
+    position:sticky; top:0; z-index:20;
+    background:var(--paper);
+    padding:12px 0;
+  }
+  .search-box{flex:1 1 260px; position:relative;}
+  .search-box input{
+    width:100%;
+    padding:11px 14px 11px 38px;
+    border-radius:8px;
+    border:1.5px solid var(--line);
+    background:var(--card-bg);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s;
+  }
+  .search-box input:focus{border-color:var(--seal);}
+  .search-box svg{
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:15px; height:15px; opacity:0.5;
+  }
+  .count-badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    white-space:nowrap;
+    padding:0 4px;
+  }
+  .count-badge b{color:var(--seal); font-weight:600;}
+
+  .tabs{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-bottom:30px;
+    padding-bottom:18px;
+    border-bottom:1px dashed var(--line);
+  }
+  .tab{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    padding:7px 13px;
+    border-radius:20px;
+    border:1.3px solid var(--line);
+    background:var(--card-bg);
+    color:var(--ink-soft);
+    cursor:pointer;
+    user-select:none;
+    transition:all .15s;
+    white-space:nowrap;
+  }
+  .tab:hover{border-color:var(--seal); color:var(--seal);}
+  .tab.active{background:var(--ink); border-color:var(--ink); color:var(--paper);}
+  .tab .n{opacity:0.55; margin-left:4px;}
+
+  .section{margin-bottom:44px;}
+  .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:16px;}
+  .section-num{
+    font-family:'Noto Serif JP', serif; font-weight:700; font-size:15px;
+    color:var(--paper); background:var(--seal);
+    width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  #level2 .section-num{background:var(--jade);}
+  .section-title{font-family:'Noto Serif JP', serif; font-weight:700; font-size:20px;}
+  .rule{flex:1; height:1px; background:var(--line);}
+  .section-desc{
+    font-size:13.5px; color:var(--ink-soft); margin:0 0 20px 38px;
+    max-width:640px; line-height:1.6;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(148px,1fr));
+    gap:10px;
+  }
+  .card{
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-left:3px solid var(--jade);
+    border-radius:8px;
+    padding:14px 12px 12px;
+    transition:transform .12s, box-shadow .12s, border-color .12s;
+    cursor:pointer;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 22px -12px rgba(38,34,28,0.35);
+    border-left-color:var(--seal);
+  }
+  .card:active{transform:translateY(-1px) scale(0.98);}
+  .card.speaking{border-left-color:var(--seal); box-shadow:0 0 0 2px rgba(165,55,42,0.25);}
+  .card .top-row{display:flex; align-items:flex-start; justify-content:space-between; gap:6px;}
+  .card .hz{font-family:'Noto Serif JP', serif; font-weight:700; font-size:27px; line-height:1.1; margin-bottom:6px;}
+  .card .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin-bottom:8px;}
+  .card .id{font-size:12.5px; color:var(--ink-soft); line-height:1.4; padding-top:7px; border-top:1px dashed var(--line);}
+  .speaker-icon{flex-shrink:0; width:16px; height:16px; opacity:0.35; transition:opacity .15s, transform .15s;}
+  .card:hover .speaker-icon{opacity:0.7;}
+  .card.speaking .speaker-icon{opacity:1; color:var(--seal); transform:scale(1.15);}
+  .pcard .top .speaker-icon, .mcard .top-row .speaker-icon, .pattern-example .speaker-icon{margin-left:auto; opacity:0.4;}
+  .pcard:hover .speaker-icon, .mcard:hover .speaker-icon, .pattern-example:hover .speaker-icon{opacity:0.8;}
+  .pcard.speaking .speaker-icon, .mcard.speaking .speaker-icon, .pattern-example.speaking .speaker-icon{opacity:1; color:var(--seal); transform:scale(1.15);}
+
+  .empty{
+    text-align:center; padding:60px 20px; color:var(--ink-soft);
+    font-family:'JetBrains Mono', monospace; font-size:13px;
+  }
+
+  /* ===== Level 2 specific ===== */
+  .part-nav{
+    display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+    margin-bottom:40px;
+  }
+  .part-nav a{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    padding:8px 16px;
+    border-radius:20px;
+    border:1.3px solid var(--line);
+    background:var(--card-bg);
+    color:var(--ink-soft);
+    text-decoration:none;
+    transition:all .15s;
+  }
+  .part-nav a:hover{border-color:var(--seal); color:var(--seal);}
+
+  .pcard{
+    background:var(--card-bg); border:1px solid var(--line); border-left:3px solid var(--brass);
+    border-radius:8px; padding:14px 16px;
+    cursor:pointer; transition:box-shadow .12s, border-color .12s;
+  }
+  .pcard:hover{border-left-color:var(--seal);}
+  .pcard.speaking{border-left-color:var(--seal); box-shadow:0 0 0 2px rgba(165,55,42,0.25);}
+  .pcard .top{display:flex; align-items:baseline; gap:10px; margin-bottom:6px;}
+  .pcard .hz{font-family:'Noto Serif JP', serif; font-weight:700; font-size:22px;}
+  .pcard .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark);}
+  .pcard .fungsi{font-size:12.5px; color:var(--ink); margin-bottom:8px; line-height:1.4;}
+  .pcard .ex{font-size:12px; color:var(--ink-soft); padding-top:8px; border-top:1px dashed var(--line); line-height:1.6; cursor:pointer;}
+  .pcard .ex:hover{color:var(--seal-dark);}
+  .pcard .ex .exhz{font-family:'Noto Serif JP', serif; font-size:14px; color:var(--ink); display:block;}
+  .pcard .ex .exid{display:block; margin-top:2px; font-style:italic;}
+
+  .mgrid{display:grid; grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); gap:10px;}
+  .mcard{background:var(--card-bg); border:1px solid var(--line); border-left:3px solid var(--jade); border-radius:8px; padding:13px 14px; cursor:pointer; transition:box-shadow .12s, border-color .12s;}
+  .mcard:hover{border-left-color:var(--seal);}
+  .mcard.speaking{border-left-color:var(--seal); box-shadow:0 0 0 2px rgba(165,55,42,0.25);}
+  .mcard .hz{font-family:'Noto Serif JP', serif; font-weight:700; font-size:24px;}
+  .mcard .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin:3px 0 6px;}
+  .mcard .id{font-size:12.5px; color:var(--ink-soft); margin-bottom:6px;}
+  .mcard .contoh{font-family:'Noto Serif JP', serif; font-size:13px; color:var(--jade); padding-top:6px; border-top:1px dashed var(--line);}
+
+  .pattern-list{display:flex; flex-direction:column; gap:14px;}
+  .pattern{
+    background:var(--card-bg); border:1px solid var(--line); border-radius:10px;
+    padding:18px 20px; position:relative; overflow:hidden;
+  }
+  .pattern::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--seal);}
+  .pattern-head{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:10px;}
+  .pattern-name{font-family:'Noto Serif JP', serif; font-weight:700; font-size:16px;}
+  .pattern-formula{
+    font-family:'JetBrains Mono', monospace; font-size:12px;
+    background:rgba(165,55,42,0.08); color:var(--seal-dark);
+    padding:4px 10px; border-radius:6px;
+  }
+  .pattern-example{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;
+    padding:12px 14px; background:rgba(76,114,102,0.06); border-radius:8px; margin-bottom:8px;
+    cursor:pointer; transition:background .12s, box-shadow .12s;
+  }
+  .pattern-example:hover{background:rgba(165,55,42,0.08);}
+  .pattern-example.speaking{box-shadow:0 0 0 2px rgba(165,55,42,0.3); background:rgba(165,55,42,0.1);}
+  .pattern-example .hz{font-family:'Noto Serif JP', serif; font-weight:700; font-size:20px;}
+  .pattern-example .py{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--seal-dark);}
+  .pattern-example .id{font-size:13px; color:var(--ink-soft); font-style:italic;}
+  .pattern-note{font-size:12px; color:var(--ink-soft); padding-left:2px;}
+  .pattern-note b{color:var(--jade); font-weight:600;}
+
+  /* ===== Level 3 specific ===== */
+  #level3 .section-num{background:var(--brass);}
+  #level4 .section-num{background:var(--seal-dark);}
+  #level5 .section-num{background:var(--ink);}
+
+  .dialog-card{
+    background:var(--card-bg); border:1px solid var(--line); border-radius:10px;
+    padding:18px 20px; margin-bottom:18px; position:relative; overflow:hidden;
+  }
+  .dialog-card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--jade);}
+  .dialog-title{font-family:'Noto Serif JP', serif; font-weight:700; font-size:17px; margin-bottom:6px;}
+  .dialog-sub{font-size:12px; color:var(--ink-soft); margin-bottom:14px;}
+  .dialog-line{
+    display:flex; gap:12px; align-items:flex-start; padding:11px 4px;
+    border-bottom:1px dashed var(--line); cursor:pointer; transition:background .12s; border-radius:6px;
+  }
+  .dialog-line:last-child{border-bottom:none;}
+  .dialog-line:hover{background:rgba(165,55,42,0.05);}
+  .dialog-line.speaking{background:rgba(165,55,42,0.08);}
+  .dialog-spk{
+    flex-shrink:0; width:26px; height:26px; border-radius:50%;
+    background:var(--brass); color:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:600; margin-top:1px;
+  }
+  .dialog-line[data-spk="B"] .dialog-spk{background:var(--jade);}
+  .dialog-content{flex:1; min-width:0;}
+  .dialog-hz{font-family:'Noto Serif JP', serif; font-weight:700; font-size:17px; margin-bottom:3px;}
+  .dialog-py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin-bottom:3px;}
+  .dialog-id{font-size:12.5px; color:var(--ink-soft); font-style:italic;}
+  .dialog-line .speaker-icon{flex-shrink:0; opacity:0.35; align-self:center;}
+  .dialog-line:hover .speaker-icon{opacity:0.7;}
+  .dialog-line.speaking .speaker-icon{opacity:1; color:var(--seal); transform:scale(1.15);}
+
+  .phrase-section{margin-bottom:26px;}
+  .phrase-cat-title{
+    font-family:'Noto Serif JP', serif; font-weight:700; font-size:15.5px;
+    color:var(--jade); margin-bottom:10px; padding-left:2px;
+  }
+  .phrasecard{
+    background:var(--card-bg); border:1px solid var(--line); border-left:3px solid var(--brass);
+    border-radius:8px; padding:13px 14px; cursor:pointer; transition:box-shadow .12s, border-color .12s;
+  }
+  .phrasecard:hover{border-left-color:var(--seal);}
+  .phrasecard.speaking{border-left-color:var(--seal); box-shadow:0 0 0 2px rgba(165,55,42,0.25);}
+  .phrasecard .top-row{display:flex; align-items:flex-start; justify-content:space-between; gap:6px;}
+  .phrasecard .hz{font-family:'Noto Serif JP', serif; font-weight:700; font-size:20px;}
+  .phrasecard .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin:3px 0 6px;}
+  .phrasecard .id{font-size:12.5px; color:var(--ink-soft);}
+
+  .reading-card{
+    background:var(--card-bg); border:1px solid var(--line); border-radius:10px;
+    padding:22px 24px; margin-bottom:20px;
+  }
+  .reading-title{
+    font-family:'Noto Serif JP', serif; font-weight:700; font-size:19px;
+    margin-bottom:4px; text-align:center;
+  }
+  .reading-desc{font-size:12.5px; color:var(--ink-soft); text-align:center; margin-bottom:18px;}
+  .reading-sentence{
+    padding:11px 4px; border-bottom:1px dashed var(--line); cursor:pointer;
+    transition:background .12s; border-radius:6px;
+  }
+  .reading-sentence:last-child{border-bottom:none;}
+  .reading-sentence:hover{background:rgba(165,55,42,0.05);}
+  .reading-sentence.speaking{background:rgba(165,55,42,0.08);}
+  .reading-sentence .top-row{display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .reading-sentence .hz{font-family:'Noto Serif JP', serif; font-weight:700; font-size:17px;}
+  .reading-sentence .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin-top:4px;}
+  .reading-sentence .id{font-size:12.5px; color:var(--ink-soft); font-style:italic; margin-top:3px;}
+  .reading-sentence .speaker-icon{flex-shrink:0; opacity:0.35;}
+  .reading-sentence:hover .speaker-icon{opacity:0.7;}
+  .reading-sentence.speaking .speaker-icon{opacity:1; color:var(--seal); transform:scale(1.15);}
+
+  footer{
+    text-align:center; margin-top:20px; padding-top:22px;
+    border-top:3px solid var(--ink);
+    font-family:'JetBrains Mono', monospace; font-size:11px;
+    color:var(--ink-soft); letter-spacing:0.08em;
+  }
+
+  /* ===== Signature stamp ===== */
+  .signature-stamp{
+    position:fixed;
+    bottom:20px; right:20px;
+    width:64px; height:64px;
+    border:2.5px solid var(--seal);
+    border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(-6deg);
+    background:rgba(165,55,42,0.06);
+    box-shadow:0 6px 16px -8px rgba(38,34,28,0.4);
+    z-index:60;
+    opacity:0.85;
+    pointer-events:none;
+    user-select:none;
+  }
+  .signature-stamp span{
+    font-family:'Noto Serif JP', serif;
+    font-weight:700;
+    font-size:10.5px;
+    line-height:1.25;
+    color:var(--seal);
+    text-align:center;
+    letter-spacing:0.02em;
+    text-transform:lowercase;
+  }
+  @media (max-width:520px){
+    .signature-stamp{width:50px; height:50px; bottom:12px; right:12px;}
+    .signature-stamp span{font-size:8.5px;}
+  }
+
+  @media (max-width:520px){
+    .stamp{display:none;}
+    .grid{grid-template-columns:repeat(auto-fill, minmax(128px,1fr));}
+    .mgrid{grid-template-columns:repeat(2,1fr);}
+    .controls{position:static;}
+    .level-switch{flex-direction:column; align-items:stretch;}
+  }
+
+  /* ===== Furigana / hiragana reading ===== */
+  .yomi{
+    font-family:'Noto Serif JP', serif;
+    font-size:12.5px;
+    color:var(--jade);
+    margin:0 0 4px;
+    letter-spacing:0.02em;
+  }
+</style>
+
+</head>
+<body>
+
+<div class="signature-stamp"><span>fuad<br>arben</span></div>
+
+<div class="wrap">
+
+  <header>
+    <div class="stamp">日本語</div>
+    <div class="eyebrow">Belajar Bahasa Jepang · 日本語を学ぶ</div>
+    <h1>Panduan <span class="accent">Dasar</span><br>Bahasa Jepang</h1>
+    <p class="subtitle">Level 1: 300 kosakata inti. Level 2: partikel & pola dasar. Level 3: percakapan & bacaan. Level 4: tata bahasa & kosakata menengah. Level 5: idiom & diskusi mahir — semua lengkap dengan hiragana, romaji, dan suara.</p>
+  </header>
+
+  <div class="level-switch">
+    <div class="level-btn active" data-level="level1"><b>Level 1</b>300 Kosakata Dasar</div>
+    <div class="level-btn" data-level="level2"><b>Level 2</b>Tata Bahasa & Pola Kalimat</div>
+    <div class="level-btn" data-level="level3"><b>Level 3</b>Percakapan & Latihan Membaca</div>
+    <div class="level-btn" data-level="level4"><b>Level 4</b>Menengah: Tata Bahasa & Tematik</div>
+    <div class="level-btn" data-level="level5"><b>Level 5</b>Mahir: Idiom & Diskusi</div>
+  </div>
+
+  <!-- ============ LEVEL 1 VIEW ============ -->
+  <div class="level-view active" id="level1">
+    <div class="controls">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="search" type="text" placeholder="Cari kata (kanji, hiragana, romaji, atau bahasa Indonesia)...">
+      </div>
+      <div class="count-badge">Menampilkan <b id="countNum">300</b> / 300 kata</div>
+    </div>
+
+    <div class="tabs" id="tabs"></div>
+
+    <div id="sections"></div>
+
+    <div class="empty" id="emptyState" style="display:none;">Tidak ada kata yang cocok. Coba kata kunci lain.</div>
+  </div>
+
+  <!-- ============ LEVEL 2 VIEW ============ -->
+  <div class="level-view" id="level2">
+    <div class="part-nav">
+      <a href="#partikel">① Partikel & Kata Fungsi</a>
+      <a href="#satuan">② Kata Bantu Bilangan (助数詞)</a>
+      <a href="#pola">③ Pola Kalimat</a>
+    </div>
+
+    <div class="section" id="partikel">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-title">Partikel & Kata Fungsi Penting</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Partikel (助詞) tidak selalu punya arti sendiri, tapi menentukan struktur dan makna kalimat — wajib dikuasai sebelum merangkai kalimat lengkap.</p>
+      <div class="grid" id="particleGrid"></div>
+    </div>
+
+    <div class="section" id="satuan">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-title">Kata Bantu Bilangan (助数詞)</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Dalam bahasa Jepang, saat menghitung benda kita butuh "kata bantu bilangan" setelah angka — mirip "seekor kucing" atau "sebuah rumah" dalam Bahasa Indonesia.</p>
+      <div class="mgrid" id="measureGrid"></div>
+    </div>
+
+    <div class="section" id="pola">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-title">20 Pola Kalimat Dasar</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Pola-pola ini menjadi kerangka hampir semua kalimat sehari-hari. Kuasai polanya, lalu ganti kata bendanya dengan kosakata dari Level 1.</p>
+      <div class="pattern-list" id="patternList"></div>
+    </div>
+  </div>
+
+  <!-- ============ LEVEL 3 VIEW ============ -->
+  <div class="level-view" id="level3">
+    <div class="part-nav">
+      <a href="#dialog3">① Dialog Percakapan</a>
+      <a href="#ungkapan3">② Ungkapan Praktis</a>
+      <a href="#bacaan3">③ Latihan Membaca</a>
+    </div>
+
+    <div class="section" id="dialog3">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-title">Dialog Percakapan Sehari-hari</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Klik setiap baris dialog untuk mendengar pelafalannya. Perhatikan bagaimana kosakata Level 1 dan pola kalimat Level 2 dirangkai menjadi percakapan nyata.</p>
+      <div id="dialogList"></div>
+    </div>
+
+    <div class="section" id="ungkapan3">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-title">Ungkapan Praktis Sehari-hari</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Ungkapan siap pakai untuk situasi umum: di bandara, di hotel, di restoran, berbelanja, dan keadaan darurat. Klik untuk mendengar suaranya.</p>
+      <div id="phraseList"></div>
+    </div>
+
+    <div class="section" id="bacaan3">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-title">Latihan Membaca</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Baca dan dengarkan cerita pendek berikut, kalimat per kalimat, untuk melatih pemahaman teks yang lebih panjang.</p>
+      <div id="readingList"></div>
+    </div>
+  </div>
+
+  <!-- ============ LEVEL 4 VIEW ============ -->
+  <div class="level-view" id="level4">
+    <div class="part-nav">
+      <a href="#pola4">① Pola Kalimat Menengah</a>
+      <a href="#tematik4">② Kosakata Tematik</a>
+      <a href="#dialog4">③ Dialog Menengah</a>
+    </div>
+
+    <div class="section" id="pola4">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-title">15 Pola Kalimat Menengah</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Pola kalimat tingkat menengah: perbandingan, bentuk tata bahasa N3, dan penghubung kompleks. Klik contoh kalimat untuk mendengar suaranya.</p>
+      <div class="pattern-list" id="patternList4"></div>
+    </div>
+
+    <div class="section" id="tematik4">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-title">Kosakata Tematik Menengah</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">75 kosakata baru seputar pekerjaan, kesehatan, teknologi, emosi, dan perjalanan.</p>
+      <div id="vocab4"></div>
+    </div>
+
+    <div class="section" id="dialog4">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-title">Dialog Situasi Menengah</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Lima dialog situasi nyata: wawancara kerja, di dokter, di bank, mengurus visa, dan rencana liburan.</p>
+      <div id="dialogList4"></div>
+    </div>
+  </div>
+
+  <!-- ============ LEVEL 5 VIEW ============ -->
+  <div class="level-view" id="level5">
+    <div class="part-nav">
+      <a href="#idiom5">① Peribahasa & Idiom (四字熟語)</a>
+      <a href="#pola5">② Pola Kalimat Lanjutan</a>
+      <a href="#diskusi5">③ Diskusi & Bacaan Lanjutan</a>
+    </div>
+
+    <div class="section" id="idiom5">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-title">20 Peribahasa & Idiom (ことわざ・四字熟語)</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Idiom dan peribahasa yang sering dipakai penutur asli, lengkap dengan makna dan contoh kalimat.</p>
+      <div class="pattern-list" id="idiomList5"></div>
+    </div>
+
+    <div class="section" id="pola5">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-title">14 Pola Kalimat Lanjutan</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Pola kalimat formal dan kompleks yang umum dipakai dalam diskusi, tulisan, dan presentasi.</p>
+      <div class="pattern-list" id="patternList5"></div>
+    </div>
+
+    <div class="section" id="diskusi5">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-title">Diskusi & Bacaan Lanjutan</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Dialog negosiasi bisnis, diskusi opini, dan esai panjang tentang manfaat belajar bahasa Jepang.</p>
+      <div id="dialogList5"></div>
+      <div id="readingList5"></div>
+    </div>
+  </div>
+
+  <footer>一歩一歩 · SATU LANGKAH DEMI SATU LANGKAH</footer>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const SPEAKER_SVG = `<svg class="speaker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`;
+
+let jaVoice = null;
+function pickVoice(){
+  const voices = window.speechSynthesis.getVoices();
+  jaVoice = voices.find(v => v.lang === 'ja-JP') || voices.find(v => v.lang && v.lang.startsWith('ja')) || null;
+}
+if('speechSynthesis' in window){
+  pickVoice();
+  window.speechSynthesis.onvoiceschanged = pickVoice;
+}
+
+function speak(text, el){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  document.querySelectorAll('.speaking').forEach(x=>x.classList.remove('speaking'));
+  if(el) el.classList.add('speaking');
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'ja-JP';
+  if(jaVoice) utter.voice = jaVoice;
+  utter.rate = 0.85;
+  utter.onend = () => { if(el) el.classList.remove('speaking'); };
+  utter.onerror = () => { if(el) el.classList.remove('speaking'); };
+  window.speechSynthesis.speak(utter);
+}
+
+/* ============ LEVEL SWITCH ============ */
+document.querySelectorAll('.level-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.level-view').forEach(v=>v.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.level).classList.add('active');
+  });
+});
+
+/* ============ LEVEL 1 DATA & LOGIC ============ */
+const VOCAB = [{"cat": "Salam & Ungkapan", "jp": "こんにちは", "yomi": "こんにちは", "romaji": "konnichiwa", "id": "Halo / Selamat siang"}, {"cat": "Salam & Ungkapan", "jp": "さようなら", "yomi": "さようなら", "romaji": "sayounara", "id": "Sampai jumpa"}, {"cat": "Salam & Ungkapan", "jp": "ありがとう", "yomi": "ありがとう", "romaji": "arigatou", "id": "Terima kasih"}, {"cat": "Salam & Ungkapan", "jp": "どういたしまして", "yomi": "どういたしまして", "romaji": "dou itashimashite", "id": "Sama-sama"}, {"cat": "Salam & Ungkapan", "jp": "すみません", "yomi": "すみません", "romaji": "sumimasen", "id": "Maaf / Permisi"}, {"cat": "Salam & Ungkapan", "jp": "大丈夫です", "yomi": "だいじょうぶです", "romaji": "daijoubu desu", "id": "Tidak apa-apa"}, {"cat": "Salam & Ungkapan", "jp": "どうぞ", "yomi": "どうぞ", "romaji": "douzo", "id": "Silakan"}, {"cat": "Salam & Ungkapan", "jp": "はい", "yomi": "はい", "romaji": "hai", "id": "Ya"}, {"cat": "Salam & Ungkapan", "jp": "いいえ", "yomi": "いいえ", "romaji": "iie", "id": "Bukan / Tidak"}, {"cat": "Salam & Ungkapan", "jp": "おはようございます", "yomi": "おはようございます", "romaji": "ohayou gozaimasu", "id": "Selamat pagi"}, {"cat": "Salam & Ungkapan", "jp": "こんばんは", "yomi": "こんばんは", "romaji": "konbanwa", "id": "Selamat malam"}, {"cat": "Salam & Ungkapan", "jp": "おやすみなさい", "yomi": "おやすみなさい", "romaji": "oyasuminasai", "id": "Selamat tidur"}, {"cat": "Salam & Ungkapan", "jp": "ようこそ", "yomi": "ようこそ", "romaji": "youkoso", "id": "Selamat datang"}, {"cat": "Salam & Ungkapan", "jp": "いいですよ", "yomi": "いいですよ", "romaji": "ii desu yo", "id": "Baiklah / Oke"}, {"cat": "Salam & Ungkapan", "jp": "どうですか", "yomi": "どうですか", "romaji": "dou desu ka", "id": "Bagaimana"}, {"cat": "Angka", "jp": "一", "yomi": "いち", "romaji": "ichi", "id": "Satu"}, {"cat": "Angka", "jp": "二", "yomi": "に", "romaji": "ni", "id": "Dua"}, {"cat": "Angka", "jp": "三", "yomi": "さん", "romaji": "san", "id": "Tiga"}, {"cat": "Angka", "jp": "四", "yomi": "よん", "romaji": "yon", "id": "Empat"}, {"cat": "Angka", "jp": "五", "yomi": "ご", "romaji": "go", "id": "Lima"}, {"cat": "Angka", "jp": "六", "yomi": "ろく", "romaji": "roku", "id": "Enam"}, {"cat": "Angka", "jp": "七", "yomi": "なな", "romaji": "nana", "id": "Tujuh"}, {"cat": "Angka", "jp": "八", "yomi": "はち", "romaji": "hachi", "id": "Delapan"}, {"cat": "Angka", "jp": "九", "yomi": "きゅう", "romaji": "kyuu", "id": "Sembilan"}, {"cat": "Angka", "jp": "十", "yomi": "じゅう", "romaji": "juu", "id": "Sepuluh"}, {"cat": "Angka", "jp": "百", "yomi": "ひゃく", "romaji": "hyaku", "id": "Seratus"}, {"cat": "Angka", "jp": "千", "yomi": "せん", "romaji": "sen", "id": "Seribu"}, {"cat": "Angka", "jp": "万", "yomi": "まん", "romaji": "man", "id": "Sepuluh ribu"}, {"cat": "Angka", "jp": "零", "yomi": "れい", "romaji": "rei", "id": "Nol"}, {"cat": "Angka", "jp": "一番目", "yomi": "いちばんめ", "romaji": "ichibanme", "id": "Pertama"}, {"cat": "Angka", "jp": "二つ", "yomi": "ふたつ", "romaji": "futatsu", "id": "Dua (untuk benda)"}, {"cat": "Angka", "jp": "いくつ", "yomi": "いくつ", "romaji": "ikutsu", "id": "Berapa (jumlah benda)"}, {"cat": "Angka", "jp": "いくら", "yomi": "いくら", "romaji": "ikura", "id": "Berapa (harga)"}, {"cat": "Angka", "jp": "半分", "yomi": "はんぶん", "romaji": "hanbun", "id": "Setengah"}, {"cat": "Angka", "jp": "一対", "yomi": "いっつい", "romaji": "ittsui", "id": "Sepasang"}, {"cat": "Keluarga", "jp": "家族", "yomi": "かぞく", "romaji": "kazoku", "id": "Keluarga"}, {"cat": "Keluarga", "jp": "お父さん", "yomi": "おとうさん", "romaji": "otousan", "id": "Ayah"}, {"cat": "Keluarga", "jp": "お母さん", "yomi": "おかあさん", "romaji": "okaasan", "id": "Ibu"}, {"cat": "Keluarga", "jp": "息子", "yomi": "むすこ", "romaji": "musuko", "id": "Anak laki-laki"}, {"cat": "Keluarga", "jp": "娘", "yomi": "むすめ", "romaji": "musume", "id": "Anak perempuan"}, {"cat": "Keluarga", "jp": "お兄さん", "yomi": "おにいさん", "romaji": "oniisan", "id": "Kakak laki-laki"}, {"cat": "Keluarga", "jp": "お姉さん", "yomi": "おねえさん", "romaji": "oneesan", "id": "Kakak perempuan"}, {"cat": "Keluarga", "jp": "弟", "yomi": "おとうと", "romaji": "otouto", "id": "Adik laki-laki"}, {"cat": "Keluarga", "jp": "妹", "yomi": "いもうと", "romaji": "imouto", "id": "Adik perempuan"}, {"cat": "Keluarga", "jp": "おじいさん", "yomi": "おじいさん", "romaji": "ojiisan", "id": "Kakek"}, {"cat": "Keluarga", "jp": "おばあさん", "yomi": "おばあさん", "romaji": "obaasan", "id": "Nenek"}, {"cat": "Keluarga", "jp": "夫", "yomi": "おっと", "romaji": "otto", "id": "Suami"}, {"cat": "Keluarga", "jp": "妻", "yomi": "つま", "romaji": "tsuma", "id": "Istri"}, {"cat": "Keluarga", "jp": "友達", "yomi": "ともだち", "romaji": "tomodachi", "id": "Teman"}, {"cat": "Keluarga", "jp": "子供", "yomi": "こども", "romaji": "kodomo", "id": "Anak"}, {"cat": "Keluarga", "jp": "おじさん", "yomi": "おじさん", "romaji": "ojisan", "id": "Paman"}, {"cat": "Keluarga", "jp": "おばさん", "yomi": "おばさん", "romaji": "obasan", "id": "Bibi"}, {"cat": "Keluarga", "jp": "〜さん", "yomi": "さん", "romaji": "san", "id": "Sapaan Tuan/Nyonya"}, {"cat": "Kata Ganti", "jp": "私", "yomi": "わたし", "romaji": "watashi", "id": "Saya"}, {"cat": "Kata Ganti", "jp": "あなた", "yomi": "あなた", "romaji": "anata", "id": "Kamu"}, {"cat": "Kata Ganti", "jp": "彼", "yomi": "かれ", "romaji": "kare", "id": "Dia (laki-laki)"}, {"cat": "Kata Ganti", "jp": "彼女", "yomi": "かのじょ", "romaji": "kanojo", "id": "Dia (perempuan)"}, {"cat": "Kata Ganti", "jp": "私たち", "yomi": "わたしたち", "romaji": "watashitachi", "id": "Kami / Kita"}, {"cat": "Kata Ganti", "jp": "あなたたち", "yomi": "あなたたち", "romaji": "anatatachi", "id": "Kalian"}, {"cat": "Kata Ganti", "jp": "彼ら", "yomi": "かれら", "romaji": "karera", "id": "Mereka"}, {"cat": "Kata Ganti", "jp": "これ", "yomi": "これ", "romaji": "kore", "id": "Ini"}, {"cat": "Kata Ganti", "jp": "それ / あれ", "yomi": "それ／あれ", "romaji": "sore / are", "id": "Itu"}, {"cat": "Kata Ganti", "jp": "誰", "yomi": "だれ", "romaji": "dare", "id": "Siapa"}, {"cat": "Warna", "jp": "色", "yomi": "いろ", "romaji": "iro", "id": "Warna"}, {"cat": "Warna", "jp": "赤", "yomi": "あか", "romaji": "aka", "id": "Merah"}, {"cat": "Warna", "jp": "黄色", "yomi": "きいろ", "romaji": "kiiro", "id": "Kuning"}, {"cat": "Warna", "jp": "青", "yomi": "あお", "romaji": "ao", "id": "Biru"}, {"cat": "Warna", "jp": "緑", "yomi": "みどり", "romaji": "midori", "id": "Hijau"}, {"cat": "Warna", "jp": "白", "yomi": "しろ", "romaji": "shiro", "id": "Putih"}, {"cat": "Warna", "jp": "黒", "yomi": "くろ", "romaji": "kuro", "id": "Hitam"}, {"cat": "Warna", "jp": "紫", "yomi": "むらさき", "romaji": "murasaki", "id": "Ungu"}, {"cat": "Warna", "jp": "オレンジ色", "yomi": "オレンジいろ", "romaji": "orenji iro", "id": "Oranye"}, {"cat": "Warna", "jp": "ピンク", "yomi": "ピンク", "romaji": "pinku", "id": "Merah muda"}, {"cat": "Warna", "jp": "灰色", "yomi": "はいいろ", "romaji": "haiiro", "id": "Abu-abu"}, {"cat": "Warna", "jp": "茶色", "yomi": "ちゃいろ", "romaji": "chairo", "id": "Cokelat"}, {"cat": "Waktu", "jp": "時間", "yomi": "じかん", "romaji": "jikan", "id": "Waktu"}, {"cat": "Waktu", "jp": "今", "yomi": "いま", "romaji": "ima", "id": "Sekarang"}, {"cat": "Waktu", "jp": "今日", "yomi": "きょう", "romaji": "kyou", "id": "Hari ini"}, {"cat": "Waktu", "jp": "明日", "yomi": "あした", "romaji": "ashita", "id": "Besok"}, {"cat": "Waktu", "jp": "昨日", "yomi": "きのう", "romaji": "kinou", "id": "Kemarin"}, {"cat": "Waktu", "jp": "朝", "yomi": "あさ", "romaji": "asa", "id": "Pagi"}, {"cat": "Waktu", "jp": "昼", "yomi": "ひる", "romaji": "hiru", "id": "Siang"}, {"cat": "Waktu", "jp": "午後", "yomi": "ごご", "romaji": "gogo", "id": "Sore"}, {"cat": "Waktu", "jp": "夜", "yomi": "よる", "romaji": "yoru", "id": "Malam"}, {"cat": "Waktu", "jp": "〜時間", "yomi": "じかん", "romaji": "jikan", "id": "Jam (durasi)"}, {"cat": "Waktu", "jp": "〜分", "yomi": "ふん", "romaji": "fun", "id": "Menit"}, {"cat": "Waktu", "jp": "〜時", "yomi": "じ", "romaji": "ji", "id": "Pukul / Jam"}, {"cat": "Waktu", "jp": "年", "yomi": "とし", "romaji": "toshi", "id": "Tahun"}, {"cat": "Waktu", "jp": "月", "yomi": "つき", "romaji": "tsuki", "id": "Bulan"}, {"cat": "Waktu", "jp": "週", "yomi": "しゅう", "romaji": "shuu", "id": "Minggu (satuan)"}, {"cat": "Hari & Musim", "jp": "月曜日", "yomi": "げつようび", "romaji": "getsuyoubi", "id": "Senin"}, {"cat": "Hari & Musim", "jp": "火曜日", "yomi": "かようび", "romaji": "kayoubi", "id": "Selasa"}, {"cat": "Hari & Musim", "jp": "水曜日", "yomi": "すいようび", "romaji": "suiyoubi", "id": "Rabu"}, {"cat": "Hari & Musim", "jp": "木曜日", "yomi": "もくようび", "romaji": "mokuyoubi", "id": "Kamis"}, {"cat": "Hari & Musim", "jp": "金曜日", "yomi": "きんようび", "romaji": "kinyoubi", "id": "Jumat"}, {"cat": "Hari & Musim", "jp": "土曜日", "yomi": "どようび", "romaji": "doyoubi", "id": "Sabtu"}, {"cat": "Hari & Musim", "jp": "日曜日", "yomi": "にちようび", "romaji": "nichiyoubi", "id": "Minggu"}, {"cat": "Hari & Musim", "jp": "一月", "yomi": "いちがつ", "romaji": "ichigatsu", "id": "Januari"}, {"cat": "Hari & Musim", "jp": "二月", "yomi": "にがつ", "romaji": "nigatsu", "id": "Februari"}, {"cat": "Hari & Musim", "jp": "三月", "yomi": "さんがつ", "romaji": "sangatsu", "id": "Maret"}, {"cat": "Hari & Musim", "jp": "四月", "yomi": "しがつ", "romaji": "shigatsu", "id": "April"}, {"cat": "Hari & Musim", "jp": "五月", "yomi": "ごがつ", "romaji": "gogatsu", "id": "Mei"}, {"cat": "Hari & Musim", "jp": "六月", "yomi": "ろくがつ", "romaji": "rokugatsu", "id": "Juni"}, {"cat": "Hari & Musim", "jp": "七月", "yomi": "しちがつ", "romaji": "shichigatsu", "id": "Juli"}, {"cat": "Hari & Musim", "jp": "八月", "yomi": "はちがつ", "romaji": "hachigatsu", "id": "Agustus"}, {"cat": "Hari & Musim", "jp": "春", "yomi": "はる", "romaji": "haru", "id": "Musim semi"}, {"cat": "Hari & Musim", "jp": "夏", "yomi": "なつ", "romaji": "natsu", "id": "Musim panas"}, {"cat": "Hari & Musim", "jp": "秋", "yomi": "あき", "romaji": "aki", "id": "Musim gugur"}, {"cat": "Hari & Musim", "jp": "冬", "yomi": "ふゆ", "romaji": "fuyu", "id": "Musim dingin"}, {"cat": "Makanan & Minuman", "jp": "食べる", "yomi": "たべる", "romaji": "taberu", "id": "Makan"}, {"cat": "Makanan & Minuman", "jp": "飲む", "yomi": "のむ", "romaji": "nomu", "id": "Minum"}, {"cat": "Makanan & Minuman", "jp": "ご飯", "yomi": "ごはん", "romaji": "gohan", "id": "Nasi"}, {"cat": "Makanan & Minuman", "jp": "麺", "yomi": "めん", "romaji": "men", "id": "Mi"}, {"cat": "Makanan & Minuman", "jp": "パン", "yomi": "パン", "romaji": "pan", "id": "Roti"}, {"cat": "Makanan & Minuman", "jp": "卵", "yomi": "たまご", "romaji": "tamago", "id": "Telur"}, {"cat": "Makanan & Minuman", "jp": "牛肉", "yomi": "ぎゅうにく", "romaji": "gyuuniku", "id": "Daging sapi"}, {"cat": "Makanan & Minuman", "jp": "豚肉", "yomi": "ぶたにく", "romaji": "butaniku", "id": "Daging babi"}, {"cat": "Makanan & Minuman", "jp": "鶏肉", "yomi": "とりにく", "romaji": "toriniku", "id": "Daging ayam"}, {"cat": "Makanan & Minuman", "jp": "魚", "yomi": "さかな", "romaji": "sakana", "id": "Ikan"}, {"cat": "Makanan & Minuman", "jp": "野菜", "yomi": "やさい", "romaji": "yasai", "id": "Sayur"}, {"cat": "Makanan & Minuman", "jp": "果物", "yomi": "くだもの", "romaji": "kudamono", "id": "Buah"}, {"cat": "Makanan & Minuman", "jp": "りんご", "yomi": "りんご", "romaji": "ringo", "id": "Apel"}, {"cat": "Makanan & Minuman", "jp": "バナナ", "yomi": "バナナ", "romaji": "banana", "id": "Pisang"}, {"cat": "Makanan & Minuman", "jp": "みかん", "yomi": "みかん", "romaji": "mikan", "id": "Jeruk"}, {"cat": "Makanan & Minuman", "jp": "すいか", "yomi": "すいか", "romaji": "suika", "id": "Semangka"}, {"cat": "Makanan & Minuman", "jp": "水", "yomi": "みず", "romaji": "mizu", "id": "Air"}, {"cat": "Makanan & Minuman", "jp": "お茶", "yomi": "おちゃ", "romaji": "ocha", "id": "Teh"}, {"cat": "Makanan & Minuman", "jp": "コーヒー", "yomi": "コーヒー", "romaji": "koohii", "id": "Kopi"}, {"cat": "Makanan & Minuman", "jp": "牛乳", "yomi": "ぎゅうにゅう", "romaji": "gyuunyuu", "id": "Susu"}, {"cat": "Makanan & Minuman", "jp": "砂糖", "yomi": "さとう", "romaji": "satou", "id": "Gula"}, {"cat": "Makanan & Minuman", "jp": "塩", "yomi": "しお", "romaji": "shio", "id": "Garam"}, {"cat": "Makanan & Minuman", "jp": "スープ", "yomi": "スープ", "romaji": "suupu", "id": "Sup"}, {"cat": "Makanan & Minuman", "jp": "料理", "yomi": "りょうり", "romaji": "ryouri", "id": "Masakan"}, {"cat": "Makanan & Minuman", "jp": "朝ご飯", "yomi": "あさごはん", "romaji": "asagohan", "id": "Sarapan"}, {"cat": "Makanan & Minuman", "jp": "昼ご飯", "yomi": "ひるごはん", "romaji": "hirugohan", "id": "Makan siang"}, {"cat": "Makanan & Minuman", "jp": "晩ご飯", "yomi": "ばんごはん", "romaji": "bangohan", "id": "Makan malam"}, {"cat": "Makanan & Minuman", "jp": "お腹が空いた", "yomi": "おなかがすいた", "romaji": "onaka ga suita", "id": "Lapar"}, {"cat": "Makanan & Minuman", "jp": "喉が渇いた", "yomi": "のどがかわいた", "romaji": "nodo ga kawaita", "id": "Haus"}, {"cat": "Makanan & Minuman", "jp": "おいしい", "yomi": "おいしい", "romaji": "oishii", "id": "Enak"}, {"cat": "Anggota Tubuh", "jp": "頭", "yomi": "あたま", "romaji": "atama", "id": "Kepala"}, {"cat": "Anggota Tubuh", "jp": "顔", "yomi": "かお", "romaji": "kao", "id": "Wajah"}, {"cat": "Anggota Tubuh", "jp": "目", "yomi": "め", "romaji": "me", "id": "Mata"}, {"cat": "Anggota Tubuh", "jp": "鼻", "yomi": "はな", "romaji": "hana", "id": "Hidung"}, {"cat": "Anggota Tubuh", "jp": "口", "yomi": "くち", "romaji": "kuchi", "id": "Mulut"}, {"cat": "Anggota Tubuh", "jp": "耳", "yomi": "みみ", "romaji": "mimi", "id": "Telinga"}, {"cat": "Anggota Tubuh", "jp": "髪", "yomi": "かみ", "romaji": "kami", "id": "Rambut"}, {"cat": "Anggota Tubuh", "jp": "手", "yomi": "て", "romaji": "te", "id": "Tangan"}, {"cat": "Anggota Tubuh", "jp": "足", "yomi": "あし", "romaji": "ashi", "id": "Kaki"}, {"cat": "Anggota Tubuh", "jp": "お腹", "yomi": "おなか", "romaji": "onaka", "id": "Perut"}, {"cat": "Anggota Tubuh", "jp": "心", "yomi": "こころ", "romaji": "kokoro", "id": "Hati"}, {"cat": "Anggota Tubuh", "jp": "体", "yomi": "からだ", "romaji": "karada", "id": "Tubuh"}, {"cat": "Anggota Tubuh", "jp": "歯", "yomi": "は", "romaji": "ha", "id": "Gigi"}, {"cat": "Anggota Tubuh", "jp": "背中", "yomi": "せなか", "romaji": "senaka", "id": "Punggung"}, {"cat": "Anggota Tubuh", "jp": "指", "yomi": "ゆび", "romaji": "yubi", "id": "Jari tangan"}, {"cat": "Anggota Tubuh", "jp": "肩", "yomi": "かた", "romaji": "kata", "id": "Bahu"}, {"cat": "Anggota Tubuh", "jp": "肌", "yomi": "はだ", "romaji": "hada", "id": "Kulit"}, {"cat": "Tempat", "jp": "学校", "yomi": "がっこう", "romaji": "gakkou", "id": "Sekolah"}, {"cat": "Tempat", "jp": "病院", "yomi": "びょういん", "romaji": "byouin", "id": "Rumah sakit"}, {"cat": "Tempat", "jp": "店", "yomi": "みせ", "romaji": "mise", "id": "Toko"}, {"cat": "Tempat", "jp": "レストラン", "yomi": "レストラン", "romaji": "resutoran", "id": "Restoran"}, {"cat": "Tempat", "jp": "銀行", "yomi": "ぎんこう", "romaji": "ginkou", "id": "Bank"}, {"cat": "Tempat", "jp": "公園", "yomi": "こうえん", "romaji": "kouen", "id": "Taman"}, {"cat": "Tempat", "jp": "空港", "yomi": "くうこう", "romaji": "kuukou", "id": "Bandara"}, {"cat": "Tempat", "jp": "駅", "yomi": "えき", "romaji": "eki", "id": "Stasiun"}, {"cat": "Tempat", "jp": "市場", "yomi": "いちば", "romaji": "ichiba", "id": "Pasar"}, {"cat": "Tempat", "jp": "図書館", "yomi": "としょかん", "romaji": "toshokan", "id": "Perpustakaan"}, {"cat": "Tempat", "jp": "ホテル", "yomi": "ホテル", "romaji": "hoteru", "id": "Hotel"}, {"cat": "Tempat", "jp": "台所", "yomi": "だいどころ", "romaji": "daidokoro", "id": "Dapur"}, {"cat": "Tempat", "jp": "寝室", "yomi": "しんしつ", "romaji": "shinshitsu", "id": "Kamar tidur"}, {"cat": "Tempat", "jp": "お手洗い", "yomi": "おてあらい", "romaji": "otearai", "id": "Kamar mandi"}, {"cat": "Tempat", "jp": "事務所", "yomi": "じむしょ", "romaji": "jimusho", "id": "Kantor"}, {"cat": "Tempat", "jp": "町", "yomi": "まち", "romaji": "machi", "id": "Kota"}, {"cat": "Tempat", "jp": "国", "yomi": "くに", "romaji": "kuni", "id": "Negara"}, {"cat": "Tempat", "jp": "道", "yomi": "みち", "romaji": "michi", "id": "Jalan"}, {"cat": "Tempat", "jp": "ドア", "yomi": "ドア", "romaji": "doa", "id": "Pintu"}, {"cat": "Tempat", "jp": "教室", "yomi": "きょうしつ", "romaji": "kyoushitsu", "id": "Ruang kelas"}, {"cat": "Kata Kerja", "jp": "です", "yomi": "です", "romaji": "desu", "id": "Adalah"}, {"cat": "Kata Kerja", "jp": "ある／いる", "yomi": "ある／いる", "romaji": "aru / iru", "id": "Ada / Punya"}, {"cat": "Kata Kerja", "jp": "行く", "yomi": "いく", "romaji": "iku", "id": "Pergi"}, {"cat": "Kata Kerja", "jp": "来る", "yomi": "くる", "romaji": "kuru", "id": "Datang"}, {"cat": "Kata Kerja", "jp": "見る", "yomi": "みる", "romaji": "miru", "id": "Melihat"}, {"cat": "Kata Kerja", "jp": "聞く", "yomi": "きく", "romaji": "kiku", "id": "Mendengar"}, {"cat": "Kata Kerja", "jp": "話す", "yomi": "はなす", "romaji": "hanasu", "id": "Berbicara"}, {"cat": "Kata Kerja", "jp": "読む", "yomi": "よむ", "romaji": "yomu", "id": "Membaca"}, {"cat": "Kata Kerja", "jp": "書く", "yomi": "かく", "romaji": "kaku", "id": "Menulis"}, {"cat": "Kata Kerja", "jp": "勉強する", "yomi": "べんきょうする", "romaji": "benkyou suru", "id": "Belajar"}, {"cat": "Kata Kerja", "jp": "働く", "yomi": "はたらく", "romaji": "hataraku", "id": "Bekerja"}, {"cat": "Kata Kerja", "jp": "寝る", "yomi": "ねる", "romaji": "neru", "id": "Tidur"}, {"cat": "Kata Kerja", "jp": "起きる", "yomi": "おきる", "romaji": "okiru", "id": "Bangun tidur"}, {"cat": "Kata Kerja", "jp": "歩く", "yomi": "あるく", "romaji": "aruku", "id": "Berjalan"}, {"cat": "Kata Kerja", "jp": "走る", "yomi": "はしる", "romaji": "hashiru", "id": "Berlari"}, {"cat": "Kata Kerja", "jp": "座る", "yomi": "すわる", "romaji": "suwaru", "id": "Duduk"}, {"cat": "Kata Kerja", "jp": "立つ", "yomi": "たつ", "romaji": "tatsu", "id": "Berdiri"}, {"cat": "Kata Kerja", "jp": "買う", "yomi": "かう", "romaji": "kau", "id": "Membeli"}, {"cat": "Kata Kerja", "jp": "売る", "yomi": "うる", "romaji": "uru", "id": "Menjual"}, {"cat": "Kata Kerja", "jp": "あげる", "yomi": "あげる", "romaji": "ageru", "id": "Memberi"}, {"cat": "Kata Kerja", "jp": "する", "yomi": "する", "romaji": "suru", "id": "Melakukan"}, {"cat": "Kata Kerja", "jp": "遊ぶ", "yomi": "あそぶ", "romaji": "asobu", "id": "Bermain"}, {"cat": "Kata Kerja", "jp": "笑う", "yomi": "わらう", "romaji": "warau", "id": "Tertawa"}, {"cat": "Kata Kerja", "jp": "泣く", "yomi": "なく", "romaji": "naku", "id": "Menangis"}, {"cat": "Kata Kerja", "jp": "愛する", "yomi": "あいする", "romaji": "ai suru", "id": "Mencintai"}, {"cat": "Kata Kerja", "jp": "好きです", "yomi": "すきです", "romaji": "suki desu", "id": "Menyukai"}, {"cat": "Kata Kerja", "jp": "思う", "yomi": "おもう", "romaji": "omou", "id": "Berpikir / Ingin"}, {"cat": "Kata Kerja", "jp": "知る", "yomi": "しる", "romaji": "shiru", "id": "Tahu"}, {"cat": "Kata Kerja", "jp": "会う", "yomi": "あう", "romaji": "au", "id": "Bertemu / Mengenal"}, {"cat": "Kata Kerja", "jp": "開ける", "yomi": "あける", "romaji": "akeru", "id": "Membuka"}, {"cat": "Kata Sifat", "jp": "大きい", "yomi": "おおきい", "romaji": "ookii", "id": "Besar"}, {"cat": "Kata Sifat", "jp": "小さい", "yomi": "ちいさい", "romaji": "chiisai", "id": "Kecil"}, {"cat": "Kata Sifat", "jp": "多い", "yomi": "おおい", "romaji": "ooi", "id": "Banyak"}, {"cat": "Kata Sifat", "jp": "少ない", "yomi": "すくない", "romaji": "sukunai", "id": "Sedikit"}, {"cat": "Kata Sifat", "jp": "良い", "yomi": "いい", "romaji": "ii", "id": "Baik"}, {"cat": "Kata Sifat", "jp": "悪い", "yomi": "わるい", "romaji": "warui", "id": "Buruk"}, {"cat": "Kata Sifat", "jp": "新しい", "yomi": "あたらしい", "romaji": "atarashii", "id": "Baru"}, {"cat": "Kata Sifat", "jp": "古い", "yomi": "ふるい", "romaji": "furui", "id": "Lama / Usang"}, {"cat": "Kata Sifat", "jp": "高い", "yomi": "たかい", "romaji": "takai", "id": "Tinggi / Mahal"}, {"cat": "Kata Sifat", "jp": "低い", "yomi": "ひくい", "romaji": "hikui", "id": "Rendah / Pendek"}, {"cat": "Kata Sifat", "jp": "長い", "yomi": "ながい", "romaji": "nagai", "id": "Panjang"}, {"cat": "Kata Sifat", "jp": "短い", "yomi": "みじかい", "romaji": "mijikai", "id": "Pendek (ukuran)"}, {"cat": "Kata Sifat", "jp": "速い", "yomi": "はやい", "romaji": "hayai", "id": "Cepat"}, {"cat": "Kata Sifat", "jp": "遅い", "yomi": "おそい", "romaji": "osoi", "id": "Lambat"}, {"cat": "Kata Sifat", "jp": "暑い", "yomi": "あつい", "romaji": "atsui", "id": "Panas"}, {"cat": "Kata Sifat", "jp": "寒い", "yomi": "さむい", "romaji": "samui", "id": "Dingin"}, {"cat": "Kata Sifat", "jp": "きれい", "yomi": "きれい", "romaji": "kirei", "id": "Cantik / Indah"}, {"cat": "Kata Sifat", "jp": "かわいい", "yomi": "かわいい", "romaji": "kawaii", "id": "Lucu / Imut"}, {"cat": "Kata Sifat", "jp": "太い", "yomi": "ふとい", "romaji": "futoi", "id": "Gemuk (benda)"}, {"cat": "Kata Sifat", "jp": "痩せている", "yomi": "やせている", "romaji": "yaseteiru", "id": "Kurus"}, {"cat": "Kata Sifat", "jp": "安い", "yomi": "やすい", "romaji": "yasui", "id": "Murah"}, {"cat": "Hewan", "jp": "動物", "yomi": "どうぶつ", "romaji": "doubutsu", "id": "Hewan"}, {"cat": "Hewan", "jp": "犬", "yomi": "いぬ", "romaji": "inu", "id": "Anjing"}, {"cat": "Hewan", "jp": "猫", "yomi": "ねこ", "romaji": "neko", "id": "Kucing"}, {"cat": "Hewan", "jp": "鳥", "yomi": "とり", "romaji": "tori", "id": "Burung"}, {"cat": "Hewan", "jp": "魚", "yomi": "さかな", "romaji": "sakana", "id": "Ikan"}, {"cat": "Hewan", "jp": "馬", "yomi": "うま", "romaji": "uma", "id": "Kuda"}, {"cat": "Hewan", "jp": "牛", "yomi": "うし", "romaji": "ushi", "id": "Sapi"}, {"cat": "Hewan", "jp": "羊", "yomi": "ひつじ", "romaji": "hitsuji", "id": "Domba"}, {"cat": "Hewan", "jp": "豚", "yomi": "ぶた", "romaji": "buta", "id": "Babi"}, {"cat": "Hewan", "jp": "鶏", "yomi": "にわとり", "romaji": "niwatori", "id": "Ayam"}, {"cat": "Hewan", "jp": "うさぎ", "yomi": "うさぎ", "romaji": "usagi", "id": "Kelinci"}, {"cat": "Hewan", "jp": "虎", "yomi": "とら", "romaji": "tora", "id": "Harimau"}, {"cat": "Hewan", "jp": "ライオン", "yomi": "ライオン", "romaji": "raion", "id": "Singa"}, {"cat": "Hewan", "jp": "象", "yomi": "ぞう", "romaji": "zou", "id": "Gajah"}, {"cat": "Hewan", "jp": "パンダ", "yomi": "パンダ", "romaji": "panda", "id": "Panda"}, {"cat": "Hewan", "jp": "猿", "yomi": "さる", "romaji": "saru", "id": "Monyet"}, {"cat": "Hewan", "jp": "蛇", "yomi": "へび", "romaji": "hebi", "id": "Ular"}, {"cat": "Hewan", "jp": "ねずみ", "yomi": "ねずみ", "romaji": "nezumi", "id": "Tikus"}, {"cat": "Hewan", "jp": "蝶", "yomi": "ちょう", "romaji": "chou", "id": "Kupu-kupu"}, {"cat": "Hewan", "jp": "虫", "yomi": "むし", "romaji": "mushi", "id": "Serangga"}, {"cat": "Alam & Cuaca", "jp": "天気", "yomi": "てんき", "romaji": "tenki", "id": "Cuaca"}, {"cat": "Alam & Cuaca", "jp": "太陽", "yomi": "たいよう", "romaji": "taiyou", "id": "Matahari"}, {"cat": "Alam & Cuaca", "jp": "月", "yomi": "つき", "romaji": "tsuki", "id": "Bulan (langit)"}, {"cat": "Alam & Cuaca", "jp": "星", "yomi": "ほし", "romaji": "hoshi", "id": "Bintang"}, {"cat": "Alam & Cuaca", "jp": "空", "yomi": "そら", "romaji": "sora", "id": "Langit"}, {"cat": "Alam & Cuaca", "jp": "雲", "yomi": "くも", "romaji": "kumo", "id": "Awan"}, {"cat": "Alam & Cuaca", "jp": "雨", "yomi": "あめ", "romaji": "ame", "id": "Hujan"}, {"cat": "Alam & Cuaca", "jp": "雪", "yomi": "ゆき", "romaji": "yuki", "id": "Salju"}, {"cat": "Alam & Cuaca", "jp": "風", "yomi": "かぜ", "romaji": "kaze", "id": "Angin"}, {"cat": "Alam & Cuaca", "jp": "山", "yomi": "やま", "romaji": "yama", "id": "Gunung"}, {"cat": "Alam & Cuaca", "jp": "川", "yomi": "かわ", "romaji": "kawa", "id": "Sungai"}, {"cat": "Alam & Cuaca", "jp": "海", "yomi": "うみ", "romaji": "umi", "id": "Laut"}, {"cat": "Alam & Cuaca", "jp": "木", "yomi": "き", "romaji": "ki", "id": "Pohon"}, {"cat": "Alam & Cuaca", "jp": "花", "yomi": "はな", "romaji": "hana", "id": "Bunga"}, {"cat": "Alam & Cuaca", "jp": "草", "yomi": "くさ", "romaji": "kusa", "id": "Rumput"}, {"cat": "Pakaian", "jp": "服", "yomi": "ふく", "romaji": "fuku", "id": "Baju"}, {"cat": "Pakaian", "jp": "ズボン", "yomi": "ズボン", "romaji": "zubon", "id": "Celana"}, {"cat": "Pakaian", "jp": "スカート", "yomi": "スカート", "romaji": "sukaato", "id": "Rok"}, {"cat": "Pakaian", "jp": "靴", "yomi": "くつ", "romaji": "kutsu", "id": "Sepatu"}, {"cat": "Pakaian", "jp": "靴下", "yomi": "くつした", "romaji": "kutsushita", "id": "Kaus kaki"}, {"cat": "Pakaian", "jp": "帽子", "yomi": "ぼうし", "romaji": "boushi", "id": "Topi"}, {"cat": "Pakaian", "jp": "眼鏡", "yomi": "めがね", "romaji": "megane", "id": "Kacamata"}, {"cat": "Pakaian", "jp": "時計", "yomi": "とけい", "romaji": "tokei", "id": "Jam tangan"}, {"cat": "Pakaian", "jp": "かばん", "yomi": "かばん", "romaji": "kaban", "id": "Tas"}, {"cat": "Pakaian", "jp": "上着", "yomi": "うわぎ", "romaji": "uwagi", "id": "Jaket"}, {"cat": "Transportasi", "jp": "車", "yomi": "くるま", "romaji": "kuruma", "id": "Mobil / Kendaraan"}, {"cat": "Transportasi", "jp": "自動車", "yomi": "じどうしゃ", "romaji": "jidousha", "id": "Mobil"}, {"cat": "Transportasi", "jp": "バス", "yomi": "バス", "romaji": "basu", "id": "Bus"}, {"cat": "Transportasi", "jp": "タクシー", "yomi": "タクシー", "romaji": "takushii", "id": "Taksi"}, {"cat": "Transportasi", "jp": "電車", "yomi": "でんしゃ", "romaji": "densha", "id": "Kereta api"}, {"cat": "Transportasi", "jp": "飛行機", "yomi": "ひこうき", "romaji": "hikouki", "id": "Pesawat"}, {"cat": "Transportasi", "jp": "自転車", "yomi": "じてんしゃ", "romaji": "jitensha", "id": "Sepeda"}, {"cat": "Transportasi", "jp": "船", "yomi": "ふね", "romaji": "fune", "id": "Kapal"}, {"cat": "Transportasi", "jp": "地下鉄", "yomi": "ちかてつ", "romaji": "chikatetsu", "id": "Kereta bawah tanah"}, {"cat": "Transportasi", "jp": "バイク", "yomi": "バイク", "romaji": "baiku", "id": "Sepeda motor"}, {"cat": "Sekolah & Pekerjaan", "jp": "先生", "yomi": "せんせい", "romaji": "sensei", "id": "Guru"}, {"cat": "Sekolah & Pekerjaan", "jp": "学生", "yomi": "がくせい", "romaji": "gakusei", "id": "Murid"}, {"cat": "Sekolah & Pekerjaan", "jp": "本", "yomi": "ほん", "romaji": "hon", "id": "Buku"}, {"cat": "Sekolah & Pekerjaan", "jp": "ペン", "yomi": "ペン", "romaji": "pen", "id": "Pena"}, {"cat": "Sekolah & Pekerjaan", "jp": "紙", "yomi": "かみ", "romaji": "kami", "id": "Kertas"}, {"cat": "Sekolah & Pekerjaan", "jp": "机", "yomi": "つくえ", "romaji": "tsukue", "id": "Meja"}, {"cat": "Sekolah & Pekerjaan", "jp": "椅子", "yomi": "いす", "romaji": "isu", "id": "Kursi"}, {"cat": "Sekolah & Pekerjaan", "jp": "黒板", "yomi": "こくばん", "romaji": "kokuban", "id": "Papan tulis"}, {"cat": "Sekolah & Pekerjaan", "jp": "試験", "yomi": "しけん", "romaji": "shiken", "id": "Ujian"}, {"cat": "Sekolah & Pekerjaan", "jp": "問題", "yomi": "もんだい", "romaji": "mondai", "id": "Pertanyaan / Masalah"}, {"cat": "Sekolah & Pekerjaan", "jp": "医者", "yomi": "いしゃ", "romaji": "isha", "id": "Dokter"}, {"cat": "Sekolah & Pekerjaan", "jp": "看護師", "yomi": "かんごし", "romaji": "kangoshi", "id": "Perawat"}, {"cat": "Sekolah & Pekerjaan", "jp": "警察官", "yomi": "けいさつかん", "romaji": "keisatsukan", "id": "Polisi"}, {"cat": "Sekolah & Pekerjaan", "jp": "運転手", "yomi": "うんてんしゅ", "romaji": "untenshu", "id": "Sopir"}, {"cat": "Sekolah & Pekerjaan", "jp": "会社", "yomi": "かいしゃ", "romaji": "kaisha", "id": "Perusahaan"}];
+
+const catOrder = [...new Set(VOCAB.map(d => d.cat))];
+let activeCat = 'ALL';
+
+function buildTabs(){
+  const tabs = document.getElementById('tabs');
+  const allTab = document.createElement('div');
+  allTab.className = 'tab active';
+  allTab.dataset.cat = 'ALL';
+  allTab.innerHTML = `Semua <span class="n">${VOCAB.length}</span>`;
+  tabs.appendChild(allTab);
+  catOrder.forEach(cat=>{
+    const n = VOCAB.filter(d=>d.cat===cat).length;
+    const el = document.createElement('div');
+    el.className = 'tab';
+    el.dataset.cat = cat;
+    el.innerHTML = `${cat} <span class="n">${n}</span>`;
+    tabs.appendChild(el);
+  });
+  tabs.addEventListener('click', e=>{
+    const t = e.target.closest('.tab');
+    if(!t) return;
+    tabs.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    activeCat = t.dataset.cat;
+    renderVocab();
+  });
+}
+
+function renderVocab(){
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const container = document.getElementById('sections');
+  container.innerHTML = '';
+  let total = 0;
+
+  catOrder.forEach((cat, idx)=>{
+    if(activeCat !== 'ALL' && activeCat !== cat) return;
+    let items = VOCAB.filter(d=>d.cat===cat);
+    if(q){
+      items = items.filter(d =>
+        d.jp.includes(q) ||
+        d.yomi.includes(q) ||
+        d.romaji.toLowerCase().includes(q) ||
+        d.id.toLowerCase().includes(q)
+      );
+    }
+    if(items.length === 0) return;
+    total += items.length;
+
+    const section = document.createElement('div');
+    section.className = 'section';
+    section.innerHTML = `
+      <div class="section-head">
+        <div class="section-num">${idx+1}</div>
+        <div class="section-title">${cat}</div>
+        <div class="rule"></div>
+      </div>
+      <div class="grid"></div>
+    `;
+    const grid = section.querySelector('.grid');
+    items.forEach(d=>{
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${d.jp}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="yomi">${d.yomi}</div>
+        <div class="py">${d.romaji}</div>
+        <div class="id">${d.id}</div>
+      `;
+      card.addEventListener('click', () => speak(d.jp, card));
+      grid.appendChild(card);
+    });
+    container.appendChild(section);
+  });
+
+  document.getElementById('countNum').textContent = total;
+  document.getElementById('emptyState').style.display = total === 0 ? 'block' : 'none';
+}
+
+document.getElementById('search').addEventListener('input', renderVocab);
+buildTabs();
+renderVocab();
+
+/* ============ LEVEL 2 DATA & LOGIC ============ */
+const L2 = {"particles": [{"jp": "は", "yomi": "は", "romaji": "wa", "fungsi": "Penanda topik kalimat", "ch": "私は学生です", "cy": "わたしはがくせいです", "cp": "watashi wa gakusei desu", "ci": "Saya adalah murid"}, {"jp": "が", "yomi": "が", "romaji": "ga", "fungsi": "Penanda subjek (fokus/baru)", "ch": "猫がいます", "cy": "ねこがいます", "cp": "neko ga imasu", "ci": "Ada seekor kucing"}, {"jp": "を", "yomi": "を", "romaji": "o", "fungsi": "Penanda objek langsung", "ch": "パンを食べます", "cy": "パンをたべます", "cp": "pan o tabemasu", "ci": "Makan roti"}, {"jp": "に", "yomi": "に", "romaji": "ni", "fungsi": "Penanda waktu/tujuan/lokasi keberadaan", "ch": "七時に起きます", "cy": "しちじにおきます", "cp": "shichiji ni okimasu", "ci": "Bangun jam tujuh"}, {"jp": "で", "yomi": "で", "romaji": "de", "fungsi": "Penanda tempat kegiatan / alat", "ch": "学校で勉強します", "cy": "がっこうでべんきょうします", "cp": "gakkou de benkyou shimasu", "ci": "Belajar di sekolah"}, {"jp": "と", "yomi": "と", "romaji": "to", "fungsi": "Penghubung 'dan' / 'bersama'", "ch": "友達と話します", "cy": "ともだちとはなします", "cp": "tomodachi to hanashimasu", "ci": "Berbicara dengan teman"}, {"jp": "も", "yomi": "も", "romaji": "mo", "fungsi": "Berarti 'juga'", "ch": "私も学生です", "cy": "わたしもがくせいです", "cp": "watashi mo gakusei desu", "ci": "Saya juga murid"}, {"jp": "の", "yomi": "の", "romaji": "no", "fungsi": "Penanda kepemilikan", "ch": "私の本です", "cy": "わたしのほんです", "cp": "watashi no hon desu", "ci": "Ini buku saya"}, {"jp": "から", "yomi": "から", "romaji": "kara", "fungsi": "Berarti 'dari' / 'karena'", "ch": "九時から働きます", "cy": "くじからはたらきます", "cp": "kuji kara hatarakimasu", "ci": "Bekerja mulai jam sembilan"}, {"jp": "まで", "yomi": "まで", "romaji": "made", "fungsi": "Berarti 'sampai'", "ch": "五時まで勉強します", "cy": "ごじまでべんきょうします", "cp": "goji made benkyou shimasu", "ci": "Belajar sampai jam lima"}, {"jp": "か", "yomi": "か", "romaji": "ka", "fungsi": "Penanda kalimat tanya", "ch": "これは何ですか", "cy": "これはなんですか", "cp": "kore wa nan desu ka", "ci": "Ini apa?"}, {"jp": "ね", "yomi": "ね", "romaji": "ne", "fungsi": "Partikel akhir, minta persetujuan", "ch": "いい天気ですね", "cy": "いいてんきですね", "cp": "ii tenki desu ne", "ci": "Cuacanya bagus ya"}, {"jp": "よ", "yomi": "よ", "romaji": "yo", "fungsi": "Partikel akhir, menegaskan info baru", "ch": "美味しいですよ", "cy": "おいしいですよ", "cp": "oishii desu yo", "ci": "Ini enak, lho"}, {"jp": "けど", "yomi": "けど", "romaji": "kedo", "fungsi": "Berarti 'tetapi'", "ch": "高いけど買います", "cy": "たかいけどかいます", "cp": "takai kedo kaimasu", "ci": "Mahal, tapi saya beli"}, {"jp": "し", "yomi": "し", "romaji": "shi", "fungsi": "Menyusun beberapa alasan", "ch": "安いし、便利です", "cy": "やすいし、べんりです", "cp": "yasui shi, benri desu", "ci": "Murah, dan juga praktis"}], "measure": [{"jp": "個", "yomi": "こ", "romaji": "ko", "id": "untuk benda bulat/kecil", "contoh": "りんご三個"}, {"jp": "人", "yomi": "にん", "romaji": "nin", "id": "untuk orang", "contoh": "学生二人"}, {"jp": "本", "yomi": "ほん", "romaji": "hon", "id": "untuk benda panjang", "contoh": "ペン一本"}, {"jp": "匹", "yomi": "ひき", "romaji": "hiki", "id": "untuk hewan kecil", "contoh": "猫二匹"}, {"jp": "枚", "yomi": "まい", "romaji": "mai", "id": "untuk benda tipis/datar", "contoh": "紙三枚"}, {"jp": "台", "yomi": "だい", "romaji": "dai", "id": "untuk mesin/kendaraan", "contoh": "車一台"}, {"jp": "冊", "yomi": "さつ", "romaji": "satsu", "id": "untuk buku", "contoh": "本二冊"}, {"jp": "杯", "yomi": "はい", "romaji": "hai", "id": "untuk gelas/mangkuk", "contoh": "お茶一杯"}, {"jp": "回", "yomi": "かい", "romaji": "kai", "id": "untuk kali/frekuensi", "contoh": "三回"}, {"jp": "歳", "yomi": "さい", "romaji": "sai", "id": "untuk usia", "contoh": "二十歳"}, {"jp": "軒", "yomi": "けん", "romaji": "ken", "id": "untuk rumah/toko", "contoh": "店一軒"}, {"jp": "つ", "yomi": "つ", "romaji": "tsu", "id": "penghitung umum (asli Jepang)", "contoh": "りんご一つ"}], "patterns": [{"nama": "A adalah B", "formula": "N1 + は + N2 + です", "jp": "私は先生です", "romaji": "watashi wa sensei desu", "id": "Saya adalah guru", "note": ""}, {"nama": "Menyatakan keberadaan (benda mati)", "formula": "Tempat + に + N + が + あります", "jp": "机の上に本があります", "romaji": "tsukue no ue ni hon ga arimasu", "id": "Ada buku di atas meja", "note": "あります untuk benda mati"}, {"nama": "Menyatakan keberadaan (makhluk hidup)", "formula": "Tempat + に + N + が + います", "jp": "公園に犬がいます", "romaji": "kouen ni inu ga imasu", "id": "Ada anjing di taman", "note": "います untuk orang/hewan"}, {"nama": "Kata sifat -i", "formula": "N + は + Kata sifat-i + です", "jp": "この花は美しいです", "romaji": "kono hana wa utsukushii desu", "id": "Bunga ini indah", "note": ""}, {"nama": "Kata sifat -na", "formula": "N + は + Kata sifat-na + です", "jp": "彼は親切です", "romaji": "kare wa shinsetsu desu", "id": "Dia baik hati", "note": "'な' muncul sebelum kata benda"}, {"nama": "Ingin melakukan (〜たい)", "formula": "Kata kerja(masu) + たいです", "jp": "日本へ行きたいです", "romaji": "nihon e ikitai desu", "id": "Saya ingin pergi ke Jepang", "note": ""}, {"nama": "Bisa melakukan (〜られる/できる)", "formula": "Kata kerja kamus + ことができます", "jp": "漢字を書くことができます", "romaji": "kanji o kaku koto ga dekimasu", "id": "Saya bisa menulis kanji", "note": ""}, {"nama": "Sedang melakukan (〜ている)", "formula": "Kata kerja(te) + います", "jp": "今、勉強しています", "romaji": "ima, benkyou shite imasu", "id": "Sekarang saya sedang belajar", "note": ""}, {"nama": "Bentuk lampau", "formula": "Kata kerja(masu) → ました", "jp": "昨日、映画を見ました", "romaji": "kinou, eiga o mimashita", "id": "Kemarin saya menonton film", "note": ""}, {"nama": "Tolong lakukan (〜てください)", "formula": "Kata kerja(te) + ください", "jp": "ゆっくり話してください", "romaji": "yukkuri hanashite kudasai", "id": "Tolong bicara pelan-pelan", "note": ""}, {"nama": "Perbandingan", "formula": "N1は N2より Kata sifat", "jp": "飛行機は電車より速いです", "romaji": "hikouki wa densha yori hayai desu", "id": "Pesawat lebih cepat daripada kereta", "note": ""}, {"nama": "Karena...maka...", "formula": "Alasan + から、Akibat", "jp": "寒いから、コートを着ます", "romaji": "samui kara, kooto o kimasu", "id": "Karena dingin, saya pakai mantel", "note": ""}, {"nama": "Kalau (〜たら)", "formula": "Kata kerja(ta) + ら、Akibat", "jp": "雨が降ったら、行きません", "romaji": "ame ga futtara, ikimasen", "id": "Kalau hujan turun, saya tidak pergi", "note": ""}, {"nama": "Ayo (〜ましょう)", "formula": "Kata kerja(masu) → ましょう", "jp": "一緒に食べましょう", "romaji": "issho ni tabemashou", "id": "Ayo makan bersama", "note": ""}, {"nama": "Harus (〜なければなりません)", "formula": "Kata kerja(nai) + ければなりません", "jp": "宿題をしなければなりません", "romaji": "shukudai o shinakereba narimasen", "id": "Saya harus mengerjakan PR", "note": ""}, {"nama": "Pernah melakukan (〜たことがある)", "formula": "Kata kerja(ta) + ことがあります", "jp": "日本へ行ったことがあります", "romaji": "nihon e itta koto ga arimasu", "id": "Saya pernah pergi ke Jepang", "note": ""}, {"nama": "Memberi & menerima", "formula": "N を あげます／もらいます", "jp": "友達にプレゼントをあげます", "romaji": "tomodachi ni purezento o agemasu", "id": "Saya memberi hadiah kepada teman", "note": ""}, {"nama": "Setelah melakukan (〜てから)", "formula": "Kata kerja(te) + から", "jp": "手を洗ってから食べます", "romaji": "te o aratte kara tabemasu", "id": "Setelah cuci tangan, baru makan", "note": ""}, {"nama": "Menurut saya (〜と思います)", "formula": "Kalimat + と思います", "jp": "明日は晴れると思います", "romaji": "ashita wa hareru to omoimasu", "id": "Saya rasa besok akan cerah", "note": ""}, {"nama": "Sambil melakukan (〜ながら)", "formula": "Kata kerja(masu-stem) + ながら", "jp": "音楽を聞きながら勉強します", "romaji": "ongaku o kikinagara benkyou shimasu", "id": "Belajar sambil mendengarkan musik", "note": ""}]};
+
+function renderParticles(){
+  const grid = document.getElementById('particleGrid');
+  L2.particles.forEach(p=>{
+    const el = document.createElement('div');
+    el.className = 'pcard';
+    el.innerHTML = `
+      <div class="top">
+        <div class="hz">${p.jp}</div>
+        <div class="py">${p.romaji}</div>
+        ${SPEAKER_SVG}
+      </div>
+      <div class="fungsi">${p.fungsi}</div>
+      <div class="ex" data-ex="1">
+        <span class="exhz">${p.ch}</span>
+        <span>${p.cp}</span>
+        <span class="exid">"${p.ci}"</span>
+      </div>
+    `;
+    el.addEventListener('click', (e) => {
+      const exEl = e.target.closest('.ex');
+      if(exEl){ speak(p.ch, exEl); }
+      else { speak(p.jp, el); }
+    });
+    grid.appendChild(el);
+  });
+}
+
+function renderMeasure(){
+  const grid = document.getElementById('measureGrid');
+  L2.measure.forEach(m=>{
+    const el = document.createElement('div');
+    el.className = 'mcard';
+    el.innerHTML = `
+      <div class="top-row">
+        <div class="hz">${m.jp}</div>
+        ${SPEAKER_SVG}
+      </div>
+      <div class="yomi">${m.yomi}</div>
+      <div class="py">${m.romaji}</div>
+      <div class="id">${m.id}</div>
+      <div class="contoh">${m.contoh}</div>
+    `;
+    el.addEventListener('click', () => speak(m.jp, el));
+    grid.appendChild(el);
+  });
+}
+
+function renderPatterns(){
+  const list = document.getElementById('patternList');
+  L2.patterns.forEach((p,i)=>{
+    const el = document.createElement('div');
+    el.className = 'pattern';
+    el.innerHTML = `
+      <div class="pattern-head">
+        <div class="pattern-name">${i+1}. ${p.nama}</div>
+        <div class="pattern-formula">${p.formula}</div>
+      </div>
+      <div class="pattern-example">
+        <span class="hz">${p.jp}</span>
+        <span class="py">${p.romaji}</span>
+        <span class="id">"${p.id}"</span>
+        ${SPEAKER_SVG}
+      </div>
+      ${p.note ? `<div class="pattern-note"><b>Catatan:</b> ${p.note}</div>` : ''}
+    `;
+    el.querySelector('.pattern-example').addEventListener('click', function(){ speak(p.jp, this); });
+    list.appendChild(el);
+  });
+}
+
+renderParticles();
+renderMeasure();
+renderPatterns();
+
+/* ============ LEVEL 3 DATA ============ */
+const L3 = {"dialogs": [{"judul": "Perkenalan Diri", "baris": [{"spk": "A", "jp": "こんにちは！お名前は何ですか？", "romaji": "konnichiwa! onamae wa nan desu ka", "id": "Halo! Siapa namamu?"}, {"spk": "B", "jp": "こんにちは、田中と申します。あなたは？", "romaji": "konnichiwa, tanaka to moushimasu. anata wa?", "id": "Halo, nama saya Tanaka. Kalau kamu?"}, {"spk": "A", "jp": "私はリナです。よろしくお願いします。", "romaji": "watashi wa rina desu. yoroshiku onegaishimasu", "id": "Saya Rina. Senang berkenalan denganmu."}, {"spk": "B", "jp": "こちらこそ、よろしくお願いします。どちらの国の方ですか？", "romaji": "kochira koso, yoroshiku onegaishimasu. dochira no kuni no kata desu ka", "id": "Sama-sama, senang berkenalan. Kamu dari negara mana?"}, {"spk": "A", "jp": "インドネシア人です。あなたは？", "romaji": "indoneshia jin desu. anata wa?", "id": "Saya orang Indonesia. Kamu?"}, {"spk": "B", "jp": "私は日本人です。東京から来ました。", "romaji": "watashi wa nihonjin desu. toukyou kara kimashita", "id": "Saya orang Jepang, dari Tokyo."}]}, {"judul": "Di Restoran", "baris": [{"spk": "A", "jp": "いらっしゃいませ！何名様ですか？", "romaji": "irasshaimase! nanmeisama desu ka", "id": "Selamat datang! Berapa orang?"}, {"spk": "B", "jp": "二人です。", "romaji": "futari desu", "id": "Dua orang."}, {"spk": "A", "jp": "こちらへどうぞ。メニューです。", "romaji": "kochira e douzo. menyuu desu", "id": "Silakan lewat sini. Ini menunya."}, {"spk": "B", "jp": "ありがとうございます。ご飯と卵スープをお願いします。", "romaji": "arigatou gozaimasu. gohan to tamago suupu o onegaishimasu", "id": "Terima kasih. Saya mau nasi dan sup telur."}, {"spk": "A", "jp": "かしこまりました。他にご注文は？", "romaji": "kashikomarimashita. hoka ni gochuumon wa?", "id": "Baik. Ada pesanan lain?"}, {"spk": "B", "jp": "いいえ、それだけで大丈夫です。", "romaji": "iie, sore dake de daijoubu desu", "id": "Tidak, itu saja."}, {"spk": "A", "jp": "少々お待ちください。", "romaji": "shoushou omachi kudasai", "id": "Mohon tunggu sebentar."}]}, {"judul": "Berbelanja di Toko", "baris": [{"spk": "A", "jp": "いらっしゃいませ、何をお探しですか？", "romaji": "irasshaimase, nani o osagashi desu ka", "id": "Selamat datang, sedang mencari apa?"}, {"spk": "B", "jp": "服を買いたいです。", "romaji": "fuku o kaitai desu", "id": "Saya ingin membeli baju."}, {"spk": "A", "jp": "こちらはいかがですか？とてもきれいですよ。", "romaji": "kochira wa ikaga desu ka? totemo kirei desu yo", "id": "Yang ini bagaimana? Sangat cantik lho."}, {"spk": "B", "jp": "いくらですか？", "romaji": "ikura desu ka", "id": "Berapa harganya?"}, {"spk": "A", "jp": "三千円です。", "romaji": "sanzen en desu", "id": "Tiga ribu yen."}, {"spk": "B", "jp": "ちょっと高いですね。安くなりませんか？", "romaji": "chotto takai desu ne. yasuku narimasen ka", "id": "Agak mahal ya. Bisa lebih murah?"}, {"spk": "A", "jp": "それでは、二千五百円でいかがですか？", "romaji": "soredewa, nisen gohyaku en de ikaga desu ka", "id": "Kalau begitu, dua ribu lima ratus yen bagaimana?"}, {"spk": "B", "jp": "いいですよ、それを買います。", "romaji": "ii desu yo, sore o kaimasu", "id": "Baik, saya beli itu."}]}, {"judul": "Menanyakan Arah", "baris": [{"spk": "A", "jp": "すみません、駅はどこですか？", "romaji": "sumimasen, eki wa doko desu ka", "id": "Permisi, di mana stasiunnya?"}, {"spk": "B", "jp": "まっすぐ行って、それから右に曲がってください。", "romaji": "massugu itte, sorekara migi ni magatte kudasai", "id": "Jalan lurus, lalu belok kanan."}, {"spk": "A", "jp": "遠いですか？", "romaji": "tooi desu ka", "id": "Jauh tidak?"}, {"spk": "B", "jp": "遠くないです。歩いて十分くらいです。", "romaji": "tookunai desu. aruite juppun kurai desu", "id": "Tidak jauh, jalan kaki sekitar sepuluh menit."}, {"spk": "A", "jp": "ありがとうございます。", "romaji": "arigatou gozaimasu", "id": "Terima kasih atas bantuannya."}, {"spk": "B", "jp": "どういたしまして、良い旅を。", "romaji": "dou itashimashite, yoi tabi o", "id": "Sama-sama, semoga perjalanannya menyenangkan."}]}], "phrases": [{"kategori": "Di Bandara", "items": [{"jp": "パスポート", "romaji": "pasupooto", "id": "Paspor"}, {"jp": "搭乗券", "romaji": "toujouken", "id": "Boarding pass"}, {"jp": "荷物", "romaji": "nimotsu", "id": "Bagasi"}, {"jp": "チェックインをお願いします", "romaji": "chekkuin o onegaishimasu", "id": "Saya mau check-in"}, {"jp": "何番ゲートですか", "romaji": "nanban geeto desu ka", "id": "Gerbang berapa?"}, {"jp": "飛行機が遅れています", "romaji": "hikouki ga okurete imasu", "id": "Pesawatnya tertunda"}]}, {"kategori": "Di Hotel", "items": [{"jp": "部屋を予約したいです", "romaji": "heya o yoyaku shitai desu", "id": "Saya mau memesan kamar"}, {"jp": "空いている部屋はありますか", "romaji": "aiteiru heya wa arimasu ka", "id": "Ada kamar kosong?"}, {"jp": "一泊いくらですか", "romaji": "ippaku ikura desu ka", "id": "Berapa harga semalam?"}, {"jp": "カードで払えますか", "romaji": "kaado de haraemasu ka", "id": "Bisa bayar dengan kartu?"}, {"jp": "チェックアウトは何時ですか", "romaji": "chekkuauto wa nanji desu ka", "id": "Jam berapa check-out?"}, {"jp": "鍵をください", "romaji": "kagi o kudasai", "id": "Tolong berikan kuncinya"}]}, {"kategori": "Di Restoran", "items": [{"jp": "店員さん", "romaji": "tenin san", "id": "Pelayan"}, {"jp": "お会計をお願いします", "romaji": "okaikei o onegaishimasu", "id": "Minta bon / bayar"}, {"jp": "持ち帰りできますか", "romaji": "mochikaeri dekimasu ka", "id": "Bisa dibungkus?"}, {"jp": "辛いものは食べられません", "romaji": "karai mono wa taberaremasen", "id": "Saya tidak makan pedas"}, {"jp": "ベジタリアン料理はありますか", "romaji": "bejitarian ryouri wa arimasu ka", "id": "Ada masakan vegetarian?"}, {"jp": "とても美味しいです", "romaji": "totemo oishii desu", "id": "Sangat enak"}]}, {"kategori": "Berbelanja", "items": [{"jp": "割引", "romaji": "waribiki", "id": "Diskon"}, {"jp": "試着する", "romaji": "shichaku suru", "id": "Mencoba (pakaian)"}, {"jp": "他のものに変えます", "romaji": "hoka no mono ni kaemasu", "id": "Ganti yang lain"}, {"jp": "レシート", "romaji": "reshiito", "id": "Kwitansi"}, {"jp": "現金", "romaji": "genkin", "id": "Uang tunai"}, {"jp": "お釣り", "romaji": "otsuri", "id": "Uang kembalian"}]}, {"kategori": "Keadaan Darurat", "items": [{"jp": "助けて！", "romaji": "tasukete!", "id": "Tolong!"}, {"jp": "助けが必要です", "romaji": "tasuke ga hitsuyou desu", "id": "Saya butuh bantuan"}, {"jp": "警察を呼んでください", "romaji": "keisatsu o yonde kudasai", "id": "Tolong panggil polisi"}, {"jp": "病気になりました", "romaji": "byouki ni narimashita", "id": "Saya sakit"}, {"jp": "救急車を呼んでください", "romaji": "kyuukyuusha o yonde kudasai", "id": "Tolong panggil ambulans"}, {"jp": "道に迷いました", "romaji": "michi ni mayoimashita", "id": "Saya tersesat"}]}], "reading": [{"judul": "私の一日 (Hari Saya)", "kalimat": [{"jp": "私は毎朝七時に起きます。", "romaji": "watashi wa maiasa shichiji ni okimasu", "id": "Saya bangun jam tujuh setiap pagi."}, {"jp": "起きてから、まず顔を洗って歯を磨きます。", "romaji": "okite kara, mazu kao o aratte ha o migakimasu", "id": "Setelah bangun, saya cuci muka dan gosok gigi dulu."}, {"jp": "それから朝ご飯を食べて、牛乳を一杯飲みます。", "romaji": "sorekara asagohan o tabete, gyuunyuu o ippai nomimasu", "id": "Kemudian saya sarapan dan minum segelas susu."}, {"jp": "八時にバスに乗って学校へ行きます。", "romaji": "hachiji ni basu ni notte gakkou e ikimasu", "id": "Jam delapan, saya naik bus ke sekolah."}, {"jp": "午後三時に授業が終わって、家に帰ります。", "romaji": "gogo sanji ni jugyou ga owatte, ie ni kaerimasu", "id": "Jam tiga sore, pelajaran selesai dan saya pulang."}, {"jp": "夜は宿題をしてから、テレビを見ます。", "romaji": "yoru wa shukudai o shite kara, terebi o mimasu", "id": "Malam hari, saya kerjakan PR lalu menonton TV."}, {"jp": "十時半にベッドに入って寝ます。", "romaji": "juuji han ni beddo ni haitte nemasu", "id": "Jam setengah sebelas, saya masuk ranjang untuk tidur."}]}]};
+
+function renderDialogs(){
+  const container = document.getElementById('dialogList');
+  L3.dialogs.forEach(d=>{
+    const card = document.createElement('div');
+    card.className = 'dialog-card';
+    card.innerHTML = `<div class="dialog-title">${d.judul}</div>`;
+    d.baris.forEach(l=>{
+      const line = document.createElement('div');
+      line.className = 'dialog-line';
+      line.dataset.spk = l.spk;
+      line.innerHTML = `
+        <div class="dialog-spk">${l.spk}</div>
+        <div class="dialog-content">
+          <div class="dialog-hz">${l.jp}</div>
+          <div class="dialog-py">${l.romaji}</div>
+          <div class="dialog-id">${l.id}</div>
+        </div>
+        ${SPEAKER_SVG}
+      `;
+      line.addEventListener('click', () => speak(l.jp, line));
+      card.appendChild(line);
+    });
+    container.appendChild(card);
+  });
+}
+
+function renderPhrases(){
+  const container = document.getElementById('phraseList');
+  L3.phrases.forEach(cat=>{
+    const sec = document.createElement('div');
+    sec.className = 'phrase-section';
+    sec.innerHTML = `<div class="phrase-cat-title">${cat.kategori}</div><div class="mgrid"></div>`;
+    const grid = sec.querySelector('.mgrid');
+    cat.items.forEach(it=>{
+      const card = document.createElement('div');
+      card.className = 'phrasecard';
+      card.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${it.jp}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${it.romaji}</div>
+        <div class="id">${it.id}</div>
+      `;
+      card.addEventListener('click', () => speak(it.jp, card));
+      grid.appendChild(card);
+    });
+    container.appendChild(sec);
+  });
+}
+
+function renderReading(){
+  const container = document.getElementById('readingList');
+  L3.reading.forEach(r=>{
+    const card = document.createElement('div');
+    card.className = 'reading-card';
+    card.innerHTML = `
+      <div class="reading-title">${r.judul}</div>
+      <div class="reading-desc">Klik tiap kalimat untuk mendengar suaranya</div>
+    `;
+    r.kalimat.forEach(k=>{
+      const s = document.createElement('div');
+      s.className = 'reading-sentence';
+      s.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${k.jp}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${k.romaji}</div>
+        <div class="id">${k.id}</div>
+      `;
+      s.addEventListener('click', () => speak(k.jp, s));
+      card.appendChild(s);
+    });
+    container.appendChild(card);
+  });
+}
+
+renderDialogs();
+renderPhrases();
+renderReading();
+
+/* ============ LEVEL 4 DATA ============ */
+const L4 = {"patterns": [{"nama": "Semakin lama semakin", "formula": "〜ば〜ほど", "jp": "考えれば考えるほど分からなくなります", "romaji": "kangaereba kangaeru hodo wakaranaku narimasu", "id": "Semakin dipikirkan, semakin tidak mengerti", "note": "〜ば〜ほど = semakin...semakin..."}, {"nama": "Begitu...langsung...", "formula": "〜たとたんに", "jp": "家に着いたとたんに雨が降り出した", "romaji": "ie ni tsuita totan ni ame ga furidashita", "id": "Begitu sampai rumah, hujan langsung turun", "note": ""}, {"nama": "Tidak hanya...tapi juga...", "formula": "〜だけでなく〜も", "jp": "彼は頭がいいだけでなく、努力家です", "romaji": "kare wa atama ga ii dake de naku, doryokuka desu", "id": "Dia tidak hanya pintar, tapi juga pekerja keras", "note": ""}, {"nama": "Selain...juga...", "formula": "〜のほかに〜も", "jp": "英語のほかにフランス語も話せます", "romaji": "eigo no hoka ni furansugo mo hanasemasu", "id": "Selain bahasa Inggris, saya juga bisa bahasa Prancis", "note": ""}, {"nama": "Kalau...maka...", "formula": "もし〜たら", "jp": "もし暇だったら、うちに遊びに来てください", "romaji": "moshi hima dattara, uchi ni asobi ni kite kudasai", "id": "Kalau senggang, silakan main ke rumah", "note": ""}, {"nama": "Asalkan...maka...", "formula": "〜さえ〜ば", "jp": "努力さえすれば、成功できます", "romaji": "doryoku sae sureba, seikou dekimasu", "id": "Asalkan berusaha, pasti bisa sukses", "note": ""}, {"nama": "Pelengkap hasil (selesai)", "formula": "Kata kerja(te) + しまう", "jp": "この本はもう読んでしまいました", "romaji": "kono hon wa mou yonde shimaimashita", "id": "Buku ini sudah selesai saya baca", "note": "〜てしまう = tuntas/selesai melakukan"}, {"nama": "Menyatakan kemampuan", "formula": "Kata kerja kamus + ことができる", "jp": "この漢字は読むことができます", "romaji": "kono kanji wa yomu koto ga dekimasu", "id": "Kanji ini bisa saya baca", "note": ""}, {"nama": "Terpaksa / tanpa sengaja", "formula": "Kata kerja(te) + しまう (penyesalan)", "jp": "電車の中で寝てしまいました", "romaji": "densha no naka de nete shimaimashita", "id": "Saya tidak sengaja tertidur di kereta", "note": ""}, {"nama": "Coba melakukan", "formula": "Kata kerja(te) + みる", "jp": "この料理を食べてみてください", "romaji": "kono ryouri o tabete mite kudasai", "id": "Cobalah makan masakan ini", "note": ""}, {"nama": "Sudah menjadi (perubahan)", "formula": "Kata sifat/Kata benda + になる", "jp": "日本語が上手になりました", "romaji": "nihongo ga jouzu ni narimashita", "id": "Bahasa Jepang saya sudah menjadi lebih mahir", "note": ""}, {"nama": "Terlihat / kelihatannya", "formula": "Kata sifat(stem) + そうです", "jp": "この店は美味しそうです", "romaji": "kono mise wa oishisou desu", "id": "Toko ini kelihatannya enak", "note": ""}, {"nama": "Direncanakan / berniat", "formula": "Kata kerja kamus + つもりです", "jp": "来年、日本へ留学するつもりです", "romaji": "rainen, nihon e ryuugaku suru tsumori desu", "id": "Tahun depan saya berniat kuliah di Jepang", "note": ""}, {"nama": "Diharuskan (pasif kewajiban)", "formula": "〜なければいけない", "jp": "毎日漢字を練習しなければいけません", "romaji": "mainichi kanji o renshuu shinakereba ikemasen", "id": "Saya harus latihan kanji setiap hari", "note": ""}, {"nama": "Meskipun begitu", "formula": "〜のに", "jp": "一生懸命勉強したのに、試験に落ちました", "romaji": "isshoukenmei benkyou shita noni, shiken ni ochimashita", "id": "Meski sudah belajar keras, tetap gagal ujian", "note": ""}], "vocab": [{"kategori": "Pekerjaan", "items": [{"jp": "面接", "yomi": "めんせつ", "romaji": "mensetsu", "id": "Wawancara"}, {"jp": "履歴書", "yomi": "りれきしょ", "romaji": "rirekisho", "id": "CV / Riwayat hidup"}, {"jp": "給料", "yomi": "きゅうりょう", "romaji": "kyuuryou", "id": "Gaji"}, {"jp": "残業", "yomi": "ざんぎょう", "romaji": "zangyou", "id": "Lembur"}, {"jp": "上司", "yomi": "じょうし", "romaji": "joushi", "id": "Atasan"}, {"jp": "部下", "yomi": "ぶか", "romaji": "buka", "id": "Bawahan"}, {"jp": "同僚", "yomi": "どうりょう", "romaji": "douryou", "id": "Rekan kerja"}, {"jp": "契約", "yomi": "けいやく", "romaji": "keiyaku", "id": "Kontrak"}, {"jp": "昇進", "yomi": "しょうしん", "romaji": "shoushin", "id": "Promosi jabatan"}, {"jp": "退職", "yomi": "たいしょく", "romaji": "taishoku", "id": "Pensiun / berhenti kerja"}, {"jp": "会議", "yomi": "かいぎ", "romaji": "kaigi", "id": "Rapat"}, {"jp": "出張", "yomi": "しゅっちょう", "romaji": "shucchou", "id": "Perjalanan dinas"}, {"jp": "締め切り", "yomi": "しめきり", "romaji": "shimekiri", "id": "Batas waktu"}, {"jp": "求人", "yomi": "きゅうじん", "romaji": "kyuujin", "id": "Lowongan kerja"}, {"jp": "経験", "yomi": "けいけん", "romaji": "keiken", "id": "Pengalaman"}]}, {"kategori": "Kesehatan", "items": [{"jp": "熱", "yomi": "ねつ", "romaji": "netsu", "id": "Demam"}, {"jp": "風邪", "yomi": "かぜ", "romaji": "kaze", "id": "Flu / masuk angin"}, {"jp": "頭痛", "yomi": "ずつう", "romaji": "zutsuu", "id": "Sakit kepala"}, {"jp": "薬", "yomi": "くすり", "romaji": "kusuri", "id": "Obat"}, {"jp": "注射", "yomi": "ちゅうしゃ", "romaji": "chuusha", "id": "Suntikan"}, {"jp": "検査", "yomi": "けんさ", "romaji": "kensa", "id": "Pemeriksaan"}, {"jp": "入院", "yomi": "にゅういん", "romaji": "nyuuin", "id": "Rawat inap"}, {"jp": "手術", "yomi": "しゅじゅつ", "romaji": "shujutsu", "id": "Operasi"}, {"jp": "体温", "yomi": "たいおん", "romaji": "taion", "id": "Suhu tubuh"}, {"jp": "アレルギー", "yomi": "アレルギー", "romaji": "arerugii", "id": "Alergi"}, {"jp": "怪我", "yomi": "けが", "romaji": "kega", "id": "Luka / cedera"}, {"jp": "健康", "yomi": "けんこう", "romaji": "kenkou", "id": "Kesehatan"}, {"jp": "保険", "yomi": "ほけん", "romaji": "hoken", "id": "Asuransi"}, {"jp": "疲れる", "yomi": "つかれる", "romaji": "tsukareru", "id": "Lelah"}, {"jp": "回復する", "yomi": "かいふくする", "romaji": "kaifuku suru", "id": "Pulih"}]}, {"kategori": "Teknologi", "items": [{"jp": "携帯電話", "yomi": "けいたいでんわ", "romaji": "keitai denwa", "id": "Ponsel"}, {"jp": "充電する", "yomi": "じゅうでんする", "romaji": "juuden suru", "id": "Mengisi daya"}, {"jp": "インターネット", "yomi": "インターネット", "romaji": "intaanetto", "id": "Internet"}, {"jp": "アプリ", "yomi": "アプリ", "romaji": "apuri", "id": "Aplikasi"}, {"jp": "画面", "yomi": "がめん", "romaji": "gamen", "id": "Layar"}, {"jp": "設定", "yomi": "せってい", "romaji": "settei", "id": "Pengaturan"}, {"jp": "パスワード", "yomi": "パスワード", "romaji": "pasuwaado", "id": "Kata sandi"}, {"jp": "更新する", "yomi": "こうしんする", "romaji": "koushin suru", "id": "Memperbarui"}, {"jp": "故障する", "yomi": "こしょうする", "romaji": "koshou suru", "id": "Rusak (mesin)"}, {"jp": "検索する", "yomi": "けんさくする", "romaji": "kensaku suru", "id": "Mencari (di internet)"}, {"jp": "データ", "yomi": "データ", "romaji": "deeta", "id": "Data"}, {"jp": "人工知能", "yomi": "じんこうちのう", "romaji": "jinkou chinou", "id": "Kecerdasan buatan"}, {"jp": "クラウド", "yomi": "クラウド", "romaji": "kuraudo", "id": "Cloud / awan digital"}, {"jp": "接続する", "yomi": "せつぞくする", "romaji": "setsuzoku suru", "id": "Menyambungkan"}, {"jp": "画像", "yomi": "がぞう", "romaji": "gazou", "id": "Gambar / foto digital"}]}, {"kategori": "Emosi", "items": [{"jp": "嬉しい", "yomi": "うれしい", "romaji": "ureshii", "id": "Senang"}, {"jp": "悲しい", "yomi": "かなしい", "romaji": "kanashii", "id": "Sedih"}, {"jp": "怒る", "yomi": "おこる", "romaji": "okoru", "id": "Marah"}, {"jp": "驚く", "yomi": "おどろく", "romaji": "odoroku", "id": "Terkejut"}, {"jp": "心配する", "yomi": "しんぱいする", "romaji": "shinpai suru", "id": "Khawatir"}, {"jp": "緊張する", "yomi": "きんちょうする", "romaji": "kinchou suru", "id": "Gugup / tegang"}, {"jp": "寂しい", "yomi": "さびしい", "romaji": "sabishii", "id": "Kesepian"}, {"jp": "安心する", "yomi": "あんしんする", "romaji": "anshin suru", "id": "Merasa lega"}, {"jp": "恥ずかしい", "yomi": "はずかしい", "romaji": "hazukashii", "id": "Malu"}, {"jp": "羨ましい", "yomi": "うらやましい", "romaji": "urayamashii", "id": "Iri"}, {"jp": "感動する", "yomi": "かんどうする", "romaji": "kandou suru", "id": "Terharu / tersentuh"}, {"jp": "退屈する", "yomi": "たいくつする", "romaji": "taikutsu suru", "id": "Bosan"}, {"jp": "満足する", "yomi": "まんぞくする", "romaji": "manzoku suru", "id": "Puas"}, {"jp": "後悔する", "yomi": "こうかいする", "romaji": "koukai suru", "id": "Menyesal"}, {"jp": "誇りに思う", "yomi": "ほこりにおもう", "romaji": "hokori ni omou", "id": "Bangga"}]}, {"kategori": "Perjalanan", "items": [{"jp": "旅行", "yomi": "りょこう", "romaji": "ryokou", "id": "Perjalanan / wisata"}, {"jp": "予約する", "yomi": "よやくする", "romaji": "yoyaku suru", "id": "Memesan"}, {"jp": "観光地", "yomi": "かんこうち", "romaji": "kankouchi", "id": "Tempat wisata"}, {"jp": "荷物", "yomi": "にもつ", "romaji": "nimotsu", "id": "Barang bawaan"}, {"jp": "地図", "yomi": "ちず", "romaji": "chizu", "id": "Peta"}, {"jp": "両替する", "yomi": "りょうがえする", "romaji": "ryougae suru", "id": "Menukar uang"}, {"jp": "入国審査", "yomi": "にゅうこくしんさ", "romaji": "nyuukoku shinsa", "id": "Pemeriksaan imigrasi"}, {"jp": "ビザ", "yomi": "ビザ", "romaji": "biza", "id": "Visa"}, {"jp": "お土産", "yomi": "おみやげ", "romaji": "omiyage", "id": "Oleh-oleh"}, {"jp": "宿泊する", "yomi": "しゅくはくする", "romaji": "shukuhaku suru", "id": "Menginap"}, {"jp": "景色", "yomi": "けしき", "romaji": "keshiki", "id": "Pemandangan"}, {"jp": "目的地", "yomi": "もくてきち", "romaji": "mokutekichi", "id": "Tempat tujuan"}, {"jp": "時差", "yomi": "じさ", "romaji": "jisa", "id": "Perbedaan waktu"}, {"jp": "迷子になる", "yomi": "まいごになる", "romaji": "maigo ni naru", "id": "Tersesat"}, {"jp": "案内する", "yomi": "あんないする", "romaji": "annai suru", "id": "Memandu"}]}], "dialogs": [{"judul": "Wawancara Kerja", "baris": [{"spk": "A", "jp": "自己紹介をお願いします。", "romaji": "jiko shoukai o onegaishimasu", "id": "Tolong perkenalkan diri Anda."}, {"spk": "B", "jp": "はい、田中と申します。三年間営業の仕事をしてきました。", "romaji": "hai, tanaka to moushimasu. sannenkan eigyou no shigoto o shite kimashita", "id": "Baik, nama saya Tanaka. Saya sudah tiga tahun bekerja di bidang penjualan."}, {"spk": "A", "jp": "なぜこの会社で働きたいのですか？", "romaji": "naze kono kaisha de hatarakitai no desu ka", "id": "Kenapa Anda ingin bekerja di perusahaan ini?"}, {"spk": "B", "jp": "御社の製品にとても興味がありますし、成長したいと思っています。", "romaji": "onsha no seihin ni totemo kyoumi ga arimasu shi, seichou shitai to omotte imasu", "id": "Saya sangat tertarik dengan produk perusahaan ini, dan ingin berkembang."}, {"spk": "A", "jp": "分かりました。結果は来週お知らせします。", "romaji": "wakarimashita. kekka wa raishuu oshirase shimasu", "id": "Baik, hasilnya akan kami beritahukan minggu depan."}]}, {"judul": "Di Dokter", "baris": [{"spk": "A", "jp": "どうしましたか？", "romaji": "dou shimashita ka", "id": "Ada keluhan apa?"}, {"spk": "B", "jp": "昨日から熱があって、頭も痛いです。", "romaji": "kinou kara netsu ga atte, atama mo itai desu", "id": "Sejak kemarin saya demam, dan kepala juga sakit."}, {"spk": "A", "jp": "分かりました。体温を測りましょう。", "romaji": "wakarimashita. taion o hakarimashou", "id": "Baik, mari kita ukur suhu tubuh."}, {"spk": "B", "jp": "はい、お願いします。", "romaji": "hai, onegaishimasu", "id": "Baik, silakan."}, {"spk": "A", "jp": "風邪ですね。薬を出しますので、ゆっくり休んでください。", "romaji": "kaze desu ne. kusuri o dashimasu node, yukkuri yasunde kudasai", "id": "Ini flu biasa. Saya akan berikan obat, istirahatlah dengan baik."}]}, {"judul": "Di Bank", "baris": [{"spk": "A", "jp": "口座を開きたいのですが。", "romaji": "kouza o hirakitai no desu ga", "id": "Saya ingin membuka rekening."}, {"spk": "B", "jp": "パスポートと在留カードをお持ちですか？", "romaji": "pasupooto to zairyuu kaado o omochi desu ka", "id": "Apakah Anda membawa paspor dan kartu izin tinggal?"}, {"spk": "A", "jp": "はい、こちらです。", "romaji": "hai, kochira desu", "id": "Ya, ini dia."}, {"spk": "B", "jp": "ありがとうございます。こちらの書類にご記入ください。", "romaji": "arigatou gozaimasu. kochira no shorui ni gokinyuu kudasai", "id": "Terima kasih. Silakan isi formulir ini."}, {"spk": "A", "jp": "分かりました。カードはいつできますか？", "romaji": "wakarimashita. kaado wa itsu dekimasu ka", "id": "Baik. Kapan kartunya jadi?"}, {"spk": "B", "jp": "一週間後に郵送でお届けします。", "romaji": "isshuukan go ni yuusou de otodoke shimasu", "id": "Akan kami kirim melalui pos dalam satu minggu."}]}, {"judul": "Mengurus Visa", "baris": [{"spk": "A", "jp": "ビザの申請をしたいのですが、何が必要ですか？", "romaji": "biza no shinsei o shitai no desu ga, nani ga hitsuyou desu ka", "id": "Saya ingin mengajukan visa, apa saja yang diperlukan?"}, {"spk": "B", "jp": "パスポート、写真、そして申請書が必要です。", "romaji": "pasupooto, shashin, soshite shinseisho ga hitsuyou desu", "id": "Diperlukan paspor, foto, dan formulir permohonan."}, {"spk": "A", "jp": "審査にはどのくらい時間がかかりますか？", "romaji": "shinsa niwa dono kurai jikan ga kakarimasu ka", "id": "Berapa lama proses pemeriksaannya?"}, {"spk": "B", "jp": "普通は二週間くらいです。", "romaji": "futsuu wa nishuukan kurai desu", "id": "Biasanya sekitar dua minggu."}, {"spk": "A", "jp": "分かりました。今日申請してもいいですか？", "romaji": "wakarimashita. kyou shinsei shitemo ii desu ka", "id": "Baik. Bolehkah saya mengajukan hari ini?"}]}, {"judul": "Rencana Liburan", "baris": [{"spk": "A", "jp": "夏休みにどこか行く予定はありますか？", "romaji": "natsuyasumi ni dokoka iku yotei wa arimasu ka", "id": "Ada rencana pergi ke mana saat liburan musim panas?"}, {"spk": "B", "jp": "はい、京都へ旅行するつもりです。", "romaji": "hai, kyouto e ryokou suru tsumori desu", "id": "Ya, saya berencana wisata ke Kyoto."}, {"spk": "A", "jp": "いいですね！何日間行きますか？", "romaji": "ii desu ne! nannichikan ikimasu ka", "id": "Bagus! Berapa hari perginya?"}, {"spk": "B", "jp": "四日間です。お寺やお祭りを見に行きたいです。", "romaji": "yokkakan desu. otera ya omatsuri o mi ni ikitai desu", "id": "Empat hari. Saya ingin melihat kuil dan festival."}, {"spk": "A", "jp": "楽しそうですね。気をつけて行ってきてください。", "romaji": "tanoshisou desu ne. ki o tsukete itte kite kudasai", "id": "Kedengarannya menyenangkan. Hati-hati ya."}]}]};
+
+/* ============ LEVEL 5 DATA ============ */
+const L5 = {"idioms": [{"nama": "Usaha yang membuahkan hasil", "formula": "一石二鳥", "jp": "一石二鳥", "romaji": "isseki nichou", "id": "Satu langkah, dua keuntungan (sekali dayung, dua tiga pulau terlampaui)", "note": "Harfiah: satu batu, dua burung"}, {"nama": "Cinta pandangan pertama", "formula": "一目惚れ", "jp": "彼女に一目惚れしました", "romaji": "kanojo ni hitomebore shimashita", "id": "Saya jatuh cinta pandangan pertama padanya", "note": ""}, {"nama": "Berjuang keras", "formula": "一生懸命", "jp": "一生懸命勉強します", "romaji": "isshoukenmei benkyou shimasu", "id": "Belajar dengan sungguh-sungguh", "note": "Melakukan sesuatu dengan sekuat tenaga"}, {"nama": "Belajar dari kesalahan sendiri", "formula": "七転び八起き", "jp": "七転び八起きの精神です", "romaji": "nanakorobi yaoki no seishin desu", "id": "Semangat jatuh tujuh kali, bangkit delapan kali", "note": "Pantang menyerah"}, {"nama": "Waktu emas / sekali seumur hidup", "formula": "一期一会", "jp": "一期一会を大切にします", "romaji": "ichigo ichie o taisetsu ni shimasu", "id": "Menghargai setiap pertemuan sebagai yang tak terulang", "note": ""}, {"nama": "Berubah pikiran total", "formula": "心機一転", "jp": "心機一転、新しい仕事を始めます", "romaji": "shinki itten, atarashii shigoto o hajimemasu", "id": "Dengan semangat baru, memulai pekerjaan baru", "note": ""}, {"nama": "Situasi krisis", "formula": "絶体絶命", "jp": "絶体絶命のピンチです", "romaji": "zettai zetsumei no pinchi desu", "id": "Situasi genting yang tak ada jalan keluar", "note": ""}, {"nama": "Tenang dalam keadaan darurat", "formula": "冷静沈着", "jp": "彼はいつも冷静沈着です", "romaji": "kare wa itsumo reisei chinchaku desu", "id": "Dia selalu tenang dan tidak panik", "note": ""}, {"nama": "Berubah drastis", "formula": "日進月歩", "jp": "技術は日進月歩で進化しています", "romaji": "gijutsu wa nisshin geppo de shinka shite imasu", "id": "Teknologi berkembang pesat setiap hari", "note": ""}, {"nama": "Mencapai tujuan dengan sabar", "formula": "石の上にも三年", "jp": "石の上にも三年、頑張り続けます", "romaji": "ishi no ue nimo sannen, ganbari tsuzukemasu", "id": "Bersabarlah seperti batu yang diduduki tiga tahun, tetap berjuang", "note": "Kesabaran membuahkan hasil"}, {"nama": "Tidak ada gunanya menyesal", "formula": "覆水盆に返らず", "jp": "覆水盆に返らずと言います", "romaji": "fukusui bon ni kaerazu to iimasu", "id": "Nasi sudah menjadi bubur", "note": "Air yang tumpah tak bisa kembali ke wadah"}, {"nama": "Menyerupai orang tua", "formula": "蛙の子は蛙", "jp": "蛙の子は蛙ですね", "romaji": "kaeru no ko wa kaeru desu ne", "id": "Buah jatuh tidak jauh dari pohonnya", "note": "Harfiah: anak katak adalah katak"}, {"nama": "Terlambat menyesal", "formula": "後悔先に立たず", "jp": "後悔先に立たずですから、今頑張ります", "romaji": "koukai saki ni tatazu desu kara, ima ganbarimasu", "id": "Penyesalan selalu datang belakangan, jadi saya berusaha sekarang", "note": ""}, {"nama": "Kebiasaan sulit hilang", "formula": "三つ子の魂百まで", "jp": "三つ子の魂百までと言うでしょう", "romaji": "mitsugo no tamashii hyaku made to iu deshou", "id": "Sifat sejak kecil terbawa sampai tua", "note": ""}, {"nama": "Bekerja sama untuk hasil besar", "formula": "二人三脚", "jp": "二人三脚でプロジェクトを進めます", "romaji": "ninin sankyaku de purojekuto o susumemasu", "id": "Melanjutkan proyek dengan kerja sama erat", "note": "Harfiah: lomba lari tiga kaki berdua"}, {"nama": "Melihat gambaran besar", "formula": "大所高所", "jp": "大所高所から判断してください", "romaji": "taisho kousho kara handan shite kudasai", "id": "Tolong nilai dari sudut pandang yang luas", "note": ""}, {"nama": "Bersungguh-sungguh sampai akhir", "formula": "有終の美", "jp": "有終の美を飾りたいです", "romaji": "yuushuu no bi o kazaritai desu", "id": "Ingin mengakhiri dengan hasil yang indah", "note": ""}, {"nama": "Berhati-hati berlebihan", "formula": "石橋を叩いて渡る", "jp": "彼はいつも石橋を叩いて渡ります", "romaji": "kare wa itsumo ishibashi o tataite watarimasu", "id": "Dia selalu sangat berhati-hati sebelum bertindak", "note": "Harfiah: mengetuk jembatan batu sebelum menyeberang"}, {"nama": "Terlalu banyak yang mengatur", "formula": "船頭多くして船山に上る", "jp": "船頭多くして船山に上るという状態です", "romaji": "sendou ooku shite fune yama ni noboru to iu joutai desu", "id": "Terlalu banyak pemimpin membuat rencana kacau", "note": ""}, {"nama": "Kesempatan yang sangat langka", "formula": "千載一遇", "jp": "これは千載一遇のチャンスです", "romaji": "kore wa senzai ichiguu no chansu desu", "id": "Ini adalah kesempatan langka seumur hidup", "note": ""}], "patterns": [{"nama": "Semakin (formal)", "formula": "ますます + Kata sifat/kerja", "jp": "年を取るにつれて、ますます賢くなります", "romaji": "toshi o toru ni tsurete, masumasu kashikoku narimasu", "id": "Seiring bertambahnya usia, semakin bijaksana", "note": ""}, {"nama": "Bukan hanya itu, bahkan...", "formula": "それだけでなく、さらに〜", "jp": "満点を取っただけでなく、さらに奨学金ももらいました", "romaji": "manten o totta dake de naku, sara ni shougakukin mo moraimashita", "id": "Tidak hanya dapat nilai sempurna, bahkan dapat beasiswa juga", "note": ""}, {"nama": "Seandainya...maka...", "formula": "もし〜としたら", "jp": "もし明日雨だとしたら、イベントは中止です", "romaji": "moshi ashita ame da to shitara, ibento wa chuushi desu", "id": "Seandainya besok hujan, acaranya dibatalkan", "note": ""}, {"nama": "Sekalipun...juga...", "formula": "たとえ〜ても", "jp": "たとえ失敗しても、後悔しません", "romaji": "tatoe shippai shitemo, koukai shimasen", "id": "Sekalipun gagal, saya tidak akan menyesal", "note": ""}, {"nama": "Bukan hanya karena...tapi juga karena...", "formula": "〜だけでなく、〜からでもある", "jp": "給料が高いからだけでなく、挑戦が好きだからでもあります", "romaji": "kyuuryou ga takai kara dake de naku, chousen ga suki dakara demo arimasu", "id": "Bukan hanya karena gajinya tinggi, tapi juga karena saya suka tantangan", "note": ""}, {"nama": "Secara bertahap", "formula": "徐々に", "jp": "この町は徐々に発展しています", "romaji": "kono machi wa jojoni hatten shite imasu", "id": "Kota ini secara bertahap berkembang", "note": ""}, {"nama": "Bagaimanapun juga", "formula": "どうであれ", "jp": "どうであれ、私たちは頑張り続けます", "romaji": "dou de are, watashitachi wa ganbari tsuzukemasu", "id": "Bagaimanapun juga, kita harus tetap berjuang", "note": ""}, {"nama": "Meski...tetap saja...", "formula": "〜にもかかわらず", "jp": "疲れているにもかかわらず、彼は仕事を続けました", "romaji": "tsukarete iru nimo kakawarazu, kare wa shigoto o tsuzukemashita", "id": "Meski lelah, dia tetap melanjutkan pekerjaannya", "note": ""}, {"nama": "Kecuali...baru...", "formula": "〜ない限り〜ない", "jp": "大雨が降らない限り、試合は中止しません", "romaji": "ooame ga furanai kagiri, shiai wa chuushi shimasen", "id": "Kecuali hujan lebat, pertandingan tidak akan dibatalkan", "note": ""}, {"nama": "Tidak peduli...selalu...", "formula": "〜にかかわらず", "jp": "難しさにかかわらず、彼は諦めません", "romaji": "muzukashisa ni kakawarazu, kare wa akiramemasen", "id": "Tidak peduli seberapa sulit, dia tidak pernah menyerah", "note": ""}, {"nama": "Bukan...melainkan...", "formula": "〜ではなく〜だ", "jp": "これは私のせいではなく、彼のせいです", "romaji": "kore wa watashi no sei dewa naku, kare no sei desu", "id": "Ini bukan salah saya, melainkan salahnya", "note": ""}, {"nama": "Karena begitu...", "formula": "〜あまり", "jp": "嬉しさのあまり、泣いてしまいました", "romaji": "ureshisa no amari, naite shimaimashita", "id": "Karena sangat senang, saya sampai menangis", "note": ""}, {"nama": "Sejauh yang saya tahu", "formula": "〜限り", "jp": "私が知る限り、彼はまだ来ていません", "romaji": "watashi ga shiru kagiri, kare wa mada kite imasen", "id": "Sejauh yang saya tahu, dia belum datang", "note": ""}, {"nama": "Bukan berarti...", "formula": "〜わけではない", "jp": "嫌いなわけではありませんが、時間がありません", "romaji": "kirai na wake dewa arimasen ga, jikan ga arimasen", "id": "Bukan berarti saya tidak suka, tapi saya tidak ada waktu", "note": ""}], "dialogs": [{"judul": "Negosiasi Bisnis", "baris": [{"spk": "A", "jp": "今回の提携について、御社の見積もりはいくらですか？", "romaji": "konkai no teikei ni tsuite, onsha no mitsumori wa ikura desu ka", "id": "Terkait kerja sama ini, berapa penawaran harga dari perusahaan Anda?"}, {"spk": "B", "jp": "見積もりは五百万円で、すべてのサービス料金を含みます。", "romaji": "mitsumori wa gohyakuman en de, subete no saabisu ryoukin o fukumimasu", "id": "Penawaran kami lima juta yen, sudah termasuk semua biaya layanan."}, {"spk": "A", "jp": "この価格は少し高いですね。もう少しご相談できますか？", "romaji": "kono kakaku wa sukoshi takai desu ne. mou sukoshi gosoudan dekimasu ka", "id": "Harga ini agak tinggi. Bisakah kita bicarakan lagi?"}, {"spk": "B", "jp": "長期契約を結んでいただければ、十パーセント割引できます。", "romaji": "choukikeiyaku o musunde itadakereba, juppaasento waribiki dekimasu", "id": "Kalau menandatangani kontrak jangka panjang, kami bisa beri diskon sepuluh persen."}, {"spk": "A", "jp": "それは良さそうですね。チームと相談する必要があります。", "romaji": "sore wa yosasou desu ne. chiimu to soudan suru hitsuyou ga arimasu", "id": "Kedengarannya bagus, saya perlu mendiskusikan dengan tim saya."}, {"spk": "B", "jp": "問題ありません。今後ともよろしくお願いいたします。", "romaji": "mondai arimasen. kongo tomo yoroshiku onegai itashimasu", "id": "Tidak masalah, kami menantikan kerja sama lebih lanjut."}]}, {"judul": "Diskusi Opini", "baris": [{"spk": "A", "jp": "最近の経済状況についてどう思いますか？", "romaji": "saikin no keizai joukyou ni tsuite dou omoimasu ka", "id": "Bagaimana pendapatmu tentang situasi ekonomi belakangan ini?"}, {"spk": "B", "jp": "課題はありますが、全体的には少しずつ回復していると思います。", "romaji": "kadai wa arimasu ga, zentaiteki niwa sukoshizutsu kaifuku shite iru to omoimasu", "id": "Menurut saya meski ada tantangan, secara keseluruhan sedang pulih perlahan."}, {"spk": "A", "jp": "若い人はこの変化にどう対応すべきだと思いますか？", "romaji": "wakai hito wa kono henka ni dou taiou subeki da to omoimasu ka", "id": "Menurutmu bagaimana anak muda seharusnya menghadapi perubahan ini?"}, {"spk": "B", "jp": "新しいスキルを学び続けて、競争力を保つべきだと思います。", "romaji": "atarashii sukiru o manabi tsuzukete, kyousouryoku o tamotsu beki da to omoimasu", "id": "Saya rasa harus terus belajar keterampilan baru, menjaga daya saing."}, {"spk": "A", "jp": "おっしゃる通りですね。私たちも時代の流れについていく必要があります。", "romaji": "ossharu toori desu ne. watashitachi mo jidai no nagare ni tsuite iku hitsuyou ga arimasu", "id": "Betul sekali, kita semua perlu mengikuti perkembangan zaman."}]}], "reading": [{"judul": "日本語を学ぶ利点 (Manfaat Belajar Bahasa Jepang)", "kalimat": [{"jp": "日本語を学ぶことは、日本の文化と歴史を理解するのに役立ちます。", "romaji": "nihongo o manabu koto wa, nihon no bunka to rekishi o rikai suru noni yakudachimasu", "id": "Belajar bahasa Jepang membantu kita memahami budaya dan sejarah Jepang."}, {"jp": "日本語は世界中で多くの人に学ばれている言語の一つです。", "romaji": "nihongo wa sekaijuu de ooku no hito ni manaba rete iru gengo no hitotsu desu", "id": "Bahasa Jepang adalah salah satu bahasa yang banyak dipelajari di dunia."}, {"jp": "日本語を習得すると、仕事の機会がもっと増えます。", "romaji": "nihongo o shuutoku suru to, shigoto no kikai ga motto fuemasu", "id": "Menguasai bahasa Jepang bisa membawa lebih banyak kesempatan kerja."}, {"jp": "多くの国際企業は日本語ができる社員を必要としています。", "romaji": "ooku no kokusai kigyou wa nihongo ga dekiru shain o hitsuyou to shite imasu", "id": "Banyak perusahaan internasional membutuhkan karyawan yang bisa berbahasa Jepang."}, {"jp": "新しい言語を学ぶことは、脳のトレーニングにもなります。", "romaji": "atarashii gengo o manabu koto wa, nou no toreeningu nimo narimasu", "id": "Belajar bahasa baru juga bisa melatih otak."}, {"jp": "漢字を学ぶことで、日本の考え方をより深く理解できます。", "romaji": "kanji o manabu koto de, nihon no kangaekata o yori fukaku rikai dekimasu", "id": "Melalui belajar kanji, kita bisa lebih mendalam memahami cara berpikir orang Jepang."}, {"jp": "日本語が上手になると、日本人の友達も作りやすくなります。", "romaji": "nihongo ga jouzu ni naru to, nihonjin no tomodachi mo tsukuriyasuku narimasu", "id": "Menguasai bahasa Jepang juga membuat kita lebih mudah berteman dengan orang Jepang."}, {"jp": "もちろん、日本語の勉強は簡単ではなく、忍耐と継続が必要です。", "romaji": "mochiron, nihongo no benkyou wa kantan dewa naku, nintai to keizoku ga hitsuyou desu", "id": "Tentu saja, belajar bahasa Jepang tidak mudah, membutuhkan kesabaran dan ketekunan."}, {"jp": "毎日少しずつ練習すれば、少しずつ進歩が見えてきます。", "romaji": "mainichi sukoshizutsu renshuu sureba, sukoshizutsu shinpo ga miete kimasu", "id": "Berlatih sedikit setiap hari, perlahan akan terlihat kemajuannya."}, {"jp": "よく聞き、よく話し、よく読み、よく書くことが言語上達の鍵です。", "romaji": "yoku kiki, yoku hanashi, yoku yomi, yoku kaku koto ga gengo joutatsu no kagi desu", "id": "Banyak mendengar, bicara, membaca, dan menulis adalah kunci menguasai bahasa."}, {"jp": "続けていけば、誰でも日本語が上手になれます。", "romaji": "tsuzukete ikeba, dare demo nihongo ga jouzu ni naremasu", "id": "Asalkan terus bertahan, siapa pun bisa menguasai bahasa Jepang dengan baik."}, {"jp": "学習の過程は大変ですが、その成果はすべてを価値あるものにしてくれます。", "romaji": "gakushuu no katei wa taihen desu ga, sono seika wa subete o kachi aru mono ni shite kuremasu", "id": "Proses belajar memang melelahkan, tapi hasilnya akan membuat semuanya berharga."}]}]};
+
+/* ============ RENDER HELPERS (LEVEL 4 & 5) ============ */
+function renderPatternListGeneric(containerId, patterns){
+  const list = document.getElementById(containerId);
+  patterns.forEach((p,i)=>{
+    const el = document.createElement('div');
+    el.className = 'pattern';
+    el.innerHTML = `
+      <div class="pattern-head">
+        <div class="pattern-name">${i+1}. ${p.nama}</div>
+        <div class="pattern-formula">${p.formula}</div>
+      </div>
+      <div class="pattern-example">
+        <span class="hz">${p.jp}</span>
+        <span class="py">${p.romaji}</span>
+        <span class="id">"${p.id}"</span>
+        ${SPEAKER_SVG}
+      </div>
+      ${p.note ? `<div class="pattern-note"><b>Catatan:</b> ${p.note}</div>` : ''}
+    `;
+    el.querySelector('.pattern-example').addEventListener('click', function(){ speak(p.jp, this); });
+    list.appendChild(el);
+  });
+}
+
+function renderDialogListGeneric(containerId, dialogs){
+  const container = document.getElementById(containerId);
+  dialogs.forEach(d=>{
+    const card = document.createElement('div');
+    card.className = 'dialog-card';
+    card.innerHTML = `<div class="dialog-title">${d.judul}</div>`;
+    d.baris.forEach(l=>{
+      const line = document.createElement('div');
+      line.className = 'dialog-line';
+      line.dataset.spk = l.spk;
+      line.innerHTML = `
+        <div class="dialog-spk">${l.spk}</div>
+        <div class="dialog-content">
+          <div class="dialog-hz">${l.jp}</div>
+          <div class="dialog-py">${l.romaji}</div>
+          <div class="dialog-id">${l.id}</div>
+        </div>
+        ${SPEAKER_SVG}
+      `;
+      line.addEventListener('click', () => speak(l.jp, line));
+      card.appendChild(line);
+    });
+    container.appendChild(card);
+  });
+}
+
+function renderReadingListGeneric(containerId, readings){
+  const container = document.getElementById(containerId);
+  readings.forEach(r=>{
+    const card = document.createElement('div');
+    card.className = 'reading-card';
+    card.innerHTML = `
+      <div class="reading-title">${r.judul}</div>
+      <div class="reading-desc">Klik tiap kalimat untuk mendengar suaranya</div>
+    `;
+    r.kalimat.forEach(k=>{
+      const s = document.createElement('div');
+      s.className = 'reading-sentence';
+      s.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${k.jp}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${k.romaji}</div>
+        <div class="id">${k.id}</div>
+      `;
+      s.addEventListener('click', () => speak(k.jp, s));
+      card.appendChild(s);
+    });
+    container.appendChild(card);
+  });
+}
+
+function renderVocab4(){
+  const container = document.getElementById('vocab4');
+  L4.vocab.forEach(cat=>{
+    const sec = document.createElement('div');
+    sec.className = 'phrase-section';
+    sec.innerHTML = `<div class="phrase-cat-title">${cat.kategori}</div><div class="grid"></div>`;
+    const grid = sec.querySelector('.grid');
+    cat.items.forEach(it=>{
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${it.jp}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="yomi">${it.yomi}</div>
+        <div class="py">${it.romaji}</div>
+        <div class="id">${it.id}</div>
+      `;
+      card.addEventListener('click', () => speak(it.jp, card));
+      grid.appendChild(card);
+    });
+    container.appendChild(sec);
+  });
+}
+
+/* ============ RENDER CALLS: LEVEL 4 ============ */
+renderPatternListGeneric('patternList4', L4.patterns);
+renderVocab4();
+renderDialogListGeneric('dialogList4', L4.dialogs);
+
+/* ============ RENDER CALLS: LEVEL 5 ============ */
+renderPatternListGeneric('idiomList5', L5.idioms);
+renderPatternListGeneric('patternList5', L5.patterns);
+renderDialogListGeneric('dialogList5', L5.dialogs);
+renderReadingListGeneric('readingList5', L5.reading);
+
+</script>
+</body>
+</html>
