@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Belajar Bahasa Korea · Level 1 & 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F2E8D6;
+    --ink: #26221C;
+    --ink-soft: #5B5348;
+    --seal: #A5372A;
+    --seal-dark: #7E2A20;
+    --jade: #4C7266;
+    --brass: #B08A3E;
+    --line: rgba(38,34,28,0.14);
+    --card-bg: #FBF6EA;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(165,55,42,0.06), transparent 60%),
+      radial-gradient(1000px 700px at 100% 0%, rgba(76,114,102,0.07), transparent 55%),
+      var(--paper);
+    background-attachment: fixed;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:40px 22px 80px;}
+
+  /* ===== Header ===== */
+  header{
+    position:relative;
+    text-align:center;
+    padding:38px 20px 34px;
+    margin-bottom:26px;
+    border-top:3px solid var(--ink);
+    border-bottom:3px solid var(--ink);
+  }
+  header::before, header::after{
+    content:"";
+    position:absolute; left:0; right:0; height:6px;
+    background: repeating-linear-gradient(90deg, var(--seal) 0 14px, transparent 14px 20px);
+    opacity:0.55;
+  }
+  header::before{top:-9px;}
+  header::after{bottom:-9px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:0.35em;
+    font-size:11px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Noto Serif KR', serif;
+    font-weight:900;
+    font-size:clamp(30px,5vw,50px);
+    margin:0 0 10px;
+  }
+  h1 .accent{color:var(--seal);}
+  .subtitle{
+    font-size:15px;
+    color:var(--ink-soft);
+    max-width:600px;
+    margin:0 auto;
+    line-height:1.6;
+  }
+  .stamp{
+    position:absolute;
+    top:18px; right:24px;
+    width:64px; height:64px;
+    border:2.5px solid var(--seal);
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(-6deg);
+    font-family:'Noto Serif KR', serif;
+    font-weight:700;
+    font-size:20px;
+    color:var(--seal);
+    background:rgba(165,55,42,0.05);
+  }
+
+  /* ===== Level switcher (top-level tabs) ===== */
+  .level-switch{
+    display:flex; justify-content:center; gap:10px;
+    margin-bottom:36px;
+  }
+  .level-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:11px 22px;
+    border-radius:24px;
+    border:1.6px solid var(--line);
+    background:var(--card-bg);
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:all .15s;
+    text-align:left;
+  }
+  .level-btn b{display:block; font-family:'Noto Serif KR',serif; font-size:15px; color:var(--ink); margin-bottom:2px;}
+  .level-btn:hover{border-color:var(--seal);}
+  .level-btn.active{
+    background:var(--ink); border-color:var(--ink); color:var(--paper);
+  }
+  .level-btn.active b{color:var(--paper);}
+
+  .level-view{display:none;}
+  .level-view.active{display:block;}
+
+  /* ===== Level 1: controls / tabs / cards ===== */
+  .controls{
+    display:flex; flex-wrap:wrap; gap:10px;
+    align-items:center; justify-content:space-between;
+    margin-bottom:22px;
+    position:sticky; top:0; z-index:20;
+    background:var(--paper);
+    padding:12px 0;
+  }
+  .search-box{flex:1 1 260px; position:relative;}
+  .search-box input{
+    width:100%;
+    padding:11px 14px 11px 38px;
+    border-radius:8px;
+    border:1.5px solid var(--line);
+    background:var(--card-bg);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s;
+  }
+  .search-box input:focus{border-color:var(--seal);}
+  .search-box svg{
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:15px; height:15px; opacity:0.5;
+  }
+  .count-badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    white-space:nowrap;
+    padding:0 4px;
+  }
+  .count-badge b{color:var(--seal); font-weight:600;}
+
+  .tabs{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-bottom:30px;
+    padding-bottom:18px;
+    border-bottom:1px dashed var(--line);
+  }
+  .tab{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    padding:7px 13px;
+    border-radius:20px;
+    border:1.3px solid var(--line);
+    background:var(--card-bg);
+    color:var(--ink-soft);
+    cursor:pointer;
+    user-select:none;
+    transition:all .15s;
+    white-space:nowrap;
+  }
+  .tab:hover{border-color:var(--seal); color:var(--seal);}
+  .tab.active{background:var(--ink); border-color:var(--ink); color:var(--paper);}
+  .tab .n{opacity:0.55; margin-left:4px;}
+
+  .section{margin-bottom:44px;}
+  .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:16px;}
+  .section-num{
+    font-family:'Noto Serif KR', serif; font-weight:700; font-size:15px;
+    color:var(--paper); background:var(--seal);
+    width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  #level2 .section-num{background:var(--jade);}
+  .section-title{font-family:'Noto Serif KR', serif; font-weight:700; font-size:20px;}
+  .rule{flex:1; height:1px; background:var(--line);}
+  .section-desc{
+    font-size:13.5px; color:var(--ink-soft); margin:0 0 20px 38px;
+    max-width:640px; line-height:1.6;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(148px,1fr));
+    gap:10px;
+  }
+  .card{
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-left:3px solid var(--jade);
+    border-radius:8px;
+    padding:14px 12px 12px;
+    transition:transform .12s, box-shadow .12s, border-color .12s;
+    cursor:pointer;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 22px -12px rgba(38,34,28,0.35);
+    border-left-color:var(--seal);
+  }
+  .card:active{transform:translateY(-1px) scale(0.98);}
+  .card.speaking{border-left-color:var(--seal); box-shadow:0 0 0 2px rgba(165,55,42,0.25);}
+  .card .top-row{display:flex; align-items:flex-start; justify-content:space-between; gap:6px;}
+  .card .hz{font-family:'Noto Serif KR', serif; font-weight:700; font-size:27px; line-height:1.1; margin-bottom:6px;}
+  .card .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin-bottom:8px;}
+  .card .id{font-size:12.5px; color:var(--ink-soft); line-height:1.4; padding-top:7px; border-top:1px dashed var(--line);}
+  .speaker-icon{flex-shrink:0; width:16px; height:16px; opacity:0.35; transition:opacity .15s, transform .15s;}
+  .card:hover .speaker-icon{opacity:0.7;}
+  .card.speaking .speaker-icon{opacity:1; color:var(--seal); transform:scale(1.15);}
+  .pcard .top .speaker-icon, .mcard .top-row .speaker-icon, .pattern-example .speaker-icon{margin-left:auto; opacity:0.4;}
+  .pcard:hover .speaker-icon, .mcard:hover .speaker-icon, .pattern-example:hover .speaker-icon{opacity:0.8;}
+  .pcard.speaking .speaker-icon, .mcard.speaking .speaker-icon, .pattern-example.speaking .speaker-icon{opacity:1; color:var(--seal); transform:scale(1.15);}
+
+  .empty{
+    text-align:center; padding:60px 20px; color:var(--ink-soft);
+    font-family:'JetBrains Mono', monospace; font-size:13px;
+  }
+
+  /* ===== Level 2 specific ===== */
+  .part-nav{
+    display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+    margin-bottom:40px;
+  }
+  .part-nav a{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    padding:8px 16px;
+    border-radius:20px;
+    border:1.3px solid var(--line);
+    background:var(--card-bg);
+    color:var(--ink-soft);
+    text-decoration:none;
+    transition:all .15s;
+  }
+  .part-nav a:hover{border-color:var(--seal); color:var(--seal);}
+
+  .pcard{
+    background:var(--card-bg); border:1px solid var(--line); border-left:3px solid var(--brass);
+    border-radius:8px; padding:14px 16px;
+    cursor:pointer; transition:box-shadow .12s, border-color .12s;
+  }
+  .pcard:hover{border-left-color:var(--seal);}
+  .pcard.speaking{border-left-color:var(--seal); box-shadow:0 0 0 2px rgba(165,55,42,0.25);}
+  .pcard .top{display:flex; align-items:baseline; gap:10px; margin-bottom:6px;}
+  .pcard .hz{font-family:'Noto Serif KR', serif; font-weight:700; font-size:22px;}
+  .pcard .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark);}
+  .pcard .fungsi{font-size:12.5px; color:var(--ink); margin-bottom:8px; line-height:1.4;}
+  .pcard .ex{font-size:12px; color:var(--ink-soft); padding-top:8px; border-top:1px dashed var(--line); line-height:1.6; cursor:pointer;}
+  .pcard .ex:hover{color:var(--seal-dark);}
+  .pcard .ex .exhz{font-family:'Noto Serif KR', serif; font-size:14px; color:var(--ink); display:block;}
+  .pcard .ex .exid{display:block; margin-top:2px; font-style:italic;}
+
+  .mgrid{display:grid; grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); gap:10px;}
+  .mcard{background:var(--card-bg); border:1px solid var(--line); border-left:3px solid var(--jade); border-radius:8px; padding:13px 14px; cursor:pointer; transition:box-shadow .12s, border-color .12s;}
+  .mcard:hover{border-left-color:var(--seal);}
+  .mcard.speaking{border-left-color:var(--seal); box-shadow:0 0 0 2px rgba(165,55,42,0.25);}
+  .mcard .hz{font-family:'Noto Serif KR', serif; font-weight:700; font-size:24px;}
+  .mcard .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin:3px 0 6px;}
+  .mcard .id{font-size:12.5px; color:var(--ink-soft); margin-bottom:6px;}
+  .mcard .contoh{font-family:'Noto Serif KR', serif; font-size:13px; color:var(--jade); padding-top:6px; border-top:1px dashed var(--line);}
+
+  .pattern-list{display:flex; flex-direction:column; gap:14px;}
+  .pattern{
+    background:var(--card-bg); border:1px solid var(--line); border-radius:10px;
+    padding:18px 20px; position:relative; overflow:hidden;
+  }
+  .pattern::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--seal);}
+  .pattern-head{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:10px;}
+  .pattern-name{font-family:'Noto Serif KR', serif; font-weight:700; font-size:16px;}
+  .pattern-formula{
+    font-family:'JetBrains Mono', monospace; font-size:12px;
+    background:rgba(165,55,42,0.08); color:var(--seal-dark);
+    padding:4px 10px; border-radius:6px;
+  }
+  .pattern-example{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;
+    padding:12px 14px; background:rgba(76,114,102,0.06); border-radius:8px; margin-bottom:8px;
+    cursor:pointer; transition:background .12s, box-shadow .12s;
+  }
+  .pattern-example:hover{background:rgba(165,55,42,0.08);}
+  .pattern-example.speaking{box-shadow:0 0 0 2px rgba(165,55,42,0.3); background:rgba(165,55,42,0.1);}
+  .pattern-example .hz{font-family:'Noto Serif KR', serif; font-weight:700; font-size:20px;}
+  .pattern-example .py{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--seal-dark);}
+  .pattern-example .id{font-size:13px; color:var(--ink-soft); font-style:italic;}
+  .pattern-note{font-size:12px; color:var(--ink-soft); padding-left:2px;}
+  .pattern-note b{color:var(--jade); font-weight:600;}
+
+  /* ===== Level 3 specific ===== */
+  #level3 .section-num{background:var(--brass);}
+  #level4 .section-num{background:var(--seal-dark);}
+  #level5 .section-num{background:var(--ink);}
+
+  .dialog-card{
+    background:var(--card-bg); border:1px solid var(--line); border-radius:10px;
+    padding:18px 20px; margin-bottom:18px; position:relative; overflow:hidden;
+  }
+  .dialog-card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--jade);}
+  .dialog-title{font-family:'Noto Serif KR', serif; font-weight:700; font-size:17px; margin-bottom:6px;}
+  .dialog-sub{font-size:12px; color:var(--ink-soft); margin-bottom:14px;}
+  .dialog-line{
+    display:flex; gap:12px; align-items:flex-start; padding:11px 4px;
+    border-bottom:1px dashed var(--line); cursor:pointer; transition:background .12s; border-radius:6px;
+  }
+  .dialog-line:last-child{border-bottom:none;}
+  .dialog-line:hover{background:rgba(165,55,42,0.05);}
+  .dialog-line.speaking{background:rgba(165,55,42,0.08);}
+  .dialog-spk{
+    flex-shrink:0; width:26px; height:26px; border-radius:50%;
+    background:var(--brass); color:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:600; margin-top:1px;
+  }
+  .dialog-line[data-spk="B"] .dialog-spk{background:var(--jade);}
+  .dialog-content{flex:1; min-width:0;}
+  .dialog-hz{font-family:'Noto Serif KR', serif; font-weight:700; font-size:17px; margin-bottom:3px;}
+  .dialog-py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin-bottom:3px;}
+  .dialog-id{font-size:12.5px; color:var(--ink-soft); font-style:italic;}
+  .dialog-line .speaker-icon{flex-shrink:0; opacity:0.35; align-self:center;}
+  .dialog-line:hover .speaker-icon{opacity:0.7;}
+  .dialog-line.speaking .speaker-icon{opacity:1; color:var(--seal); transform:scale(1.15);}
+
+  .phrase-section{margin-bottom:26px;}
+  .phrase-cat-title{
+    font-family:'Noto Serif KR', serif; font-weight:700; font-size:15.5px;
+    color:var(--jade); margin-bottom:10px; padding-left:2px;
+  }
+  .phrasecard{
+    background:var(--card-bg); border:1px solid var(--line); border-left:3px solid var(--brass);
+    border-radius:8px; padding:13px 14px; cursor:pointer; transition:box-shadow .12s, border-color .12s;
+  }
+  .phrasecard:hover{border-left-color:var(--seal);}
+  .phrasecard.speaking{border-left-color:var(--seal); box-shadow:0 0 0 2px rgba(165,55,42,0.25);}
+  .phrasecard .top-row{display:flex; align-items:flex-start; justify-content:space-between; gap:6px;}
+  .phrasecard .hz{font-family:'Noto Serif KR', serif; font-weight:700; font-size:20px;}
+  .phrasecard .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin:3px 0 6px;}
+  .phrasecard .id{font-size:12.5px; color:var(--ink-soft);}
+
+  .reading-card{
+    background:var(--card-bg); border:1px solid var(--line); border-radius:10px;
+    padding:22px 24px; margin-bottom:20px;
+  }
+  .reading-title{
+    font-family:'Noto Serif KR', serif; font-weight:700; font-size:19px;
+    margin-bottom:4px; text-align:center;
+  }
+  .reading-desc{font-size:12.5px; color:var(--ink-soft); text-align:center; margin-bottom:18px;}
+  .reading-sentence{
+    padding:11px 4px; border-bottom:1px dashed var(--line); cursor:pointer;
+    transition:background .12s; border-radius:6px;
+  }
+  .reading-sentence:last-child{border-bottom:none;}
+  .reading-sentence:hover{background:rgba(165,55,42,0.05);}
+  .reading-sentence.speaking{background:rgba(165,55,42,0.08);}
+  .reading-sentence .top-row{display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .reading-sentence .hz{font-family:'Noto Serif KR', serif; font-weight:700; font-size:17px;}
+  .reading-sentence .py{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--seal-dark); margin-top:4px;}
+  .reading-sentence .id{font-size:12.5px; color:var(--ink-soft); font-style:italic; margin-top:3px;}
+  .reading-sentence .speaker-icon{flex-shrink:0; opacity:0.35;}
+  .reading-sentence:hover .speaker-icon{opacity:0.7;}
+  .reading-sentence.speaking .speaker-icon{opacity:1; color:var(--seal); transform:scale(1.15);}
+
+  footer{
+    text-align:center; margin-top:20px; padding-top:22px;
+    border-top:3px solid var(--ink);
+    font-family:'JetBrains Mono', monospace; font-size:11px;
+    color:var(--ink-soft); letter-spacing:0.08em;
+  }
+
+  /* ===== Signature stamp ===== */
+  .signature-stamp{
+    position:fixed;
+    bottom:20px; right:20px;
+    width:64px; height:64px;
+    border:2.5px solid var(--seal);
+    border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(-6deg);
+    background:rgba(165,55,42,0.06);
+    box-shadow:0 6px 16px -8px rgba(38,34,28,0.4);
+    z-index:60;
+    opacity:0.85;
+    pointer-events:none;
+    user-select:none;
+  }
+  .signature-stamp span{
+    font-family:'Noto Serif KR', serif;
+    font-weight:700;
+    font-size:10.5px;
+    line-height:1.25;
+    color:var(--seal);
+    text-align:center;
+    letter-spacing:0.02em;
+    text-transform:lowercase;
+  }
+  @media (max-width:520px){
+    .signature-stamp{width:50px; height:50px; bottom:12px; right:12px;}
+    .signature-stamp span{font-size:8.5px;}
+  }
+
+  @media (max-width:520px){
+    .stamp{display:none;}
+    .grid{grid-template-columns:repeat(auto-fill, minmax(128px,1fr));}
+    .mgrid{grid-template-columns:repeat(2,1fr);}
+    .controls{position:static;}
+    .level-switch{flex-direction:column; align-items:stretch;}
+  }
+</style>
+
+</head>
+<body>
+
+<div class="signature-stamp"><span>fuad<br>arben</span></div>
+
+<div class="wrap">
+
+  <header>
+    <div class="stamp">한국어</div>
+    <div class="eyebrow">Belajar Bahasa Korea · 한국어를 배우다</div>
+    <h1>Panduan <span class="accent">Dasar</span><br>Bahasa Korea</h1>
+    <p class="subtitle">Level 1: 300 kosakata inti. Level 2: partikel & pola dasar. Level 3: percakapan & bacaan. Level 4: tata bahasa & kosakata menengah. Level 5: idiom & diskusi mahir — semua lengkap dengan Hangeul, romanisasi, dan suara.</p>
+  </header>
+
+  <div class="level-switch">
+    <div class="level-btn active" data-level="level1"><b>Level 1</b>300 Kosakata Dasar</div>
+    <div class="level-btn" data-level="level2"><b>Level 2</b>Tata Bahasa & Pola Kalimat</div>
+    <div class="level-btn" data-level="level3"><b>Level 3</b>Percakapan & Latihan Membaca</div>
+    <div class="level-btn" data-level="level4"><b>Level 4</b>Menengah: Tata Bahasa & Tematik</div>
+    <div class="level-btn" data-level="level5"><b>Level 5</b>Mahir: Idiom & Diskusi</div>
+  </div>
+
+  <!-- ============ LEVEL 1 VIEW ============ -->
+  <div class="level-view active" id="level1">
+    <div class="controls">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="search" type="text" placeholder="Cari kata (Hangeul, romanisasi, atau bahasa Indonesia)...">
+      </div>
+      <div class="count-badge">Menampilkan <b id="countNum">300</b> / 300 kata</div>
+    </div>
+
+    <div class="tabs" id="tabs"></div>
+
+    <div id="sections"></div>
+
+    <div class="empty" id="emptyState" style="display:none;">Tidak ada kata yang cocok. Coba kata kunci lain.</div>
+  </div>
+
+  <!-- ============ LEVEL 2 VIEW ============ -->
+  <div class="level-view" id="level2">
+    <div class="part-nav">
+      <a href="#partikel">① Partikel & Kata Fungsi</a>
+      <a href="#satuan">② Kata Bantu Bilangan</a>
+      <a href="#pola">③ Pola Kalimat</a>
+    </div>
+
+    <div class="section" id="partikel">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-title">Partikel & Kata Fungsi Penting</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Partikel (조사) menempel di akhir kata benda dan menentukan peran kata itu dalam kalimat — wajib dikuasai sebelum merangkai kalimat lengkap.</p>
+      <div class="grid" id="particleGrid"></div>
+    </div>
+
+    <div class="section" id="satuan">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-title">Kata Bantu Bilangan</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Dalam bahasa Korea, saat menghitung benda kita butuh "kata bantu bilangan" setelah angka — mirip "seekor kucing" atau "sebuah rumah" dalam Bahasa Indonesia.</p>
+      <div class="mgrid" id="measureGrid"></div>
+    </div>
+
+    <div class="section" id="pola">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-title">20 Pola Kalimat Dasar</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Pola-pola ini menjadi kerangka hampir semua kalimat sehari-hari. Kuasai polanya, lalu ganti kata bendanya dengan kosakata dari Level 1.</p>
+      <div class="pattern-list" id="patternList"></div>
+    </div>
+  </div>
+
+  <!-- ============ LEVEL 3 VIEW ============ -->
+  <div class="level-view" id="level3">
+    <div class="part-nav">
+      <a href="#dialog3">① Dialog Percakapan</a>
+      <a href="#ungkapan3">② Ungkapan Praktis</a>
+      <a href="#bacaan3">③ Latihan Membaca</a>
+    </div>
+
+    <div class="section" id="dialog3">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-title">Dialog Percakapan Sehari-hari</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Klik setiap baris dialog untuk mendengar pelafalannya. Perhatikan bagaimana kosakata Level 1 dan pola kalimat Level 2 dirangkai menjadi percakapan nyata.</p>
+      <div id="dialogList"></div>
+    </div>
+
+    <div class="section" id="ungkapan3">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-title">Ungkapan Praktis Sehari-hari</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Ungkapan siap pakai untuk situasi umum: di bandara, di hotel, di restoran, berbelanja, dan keadaan darurat. Klik untuk mendengar suaranya.</p>
+      <div id="phraseList"></div>
+    </div>
+
+    <div class="section" id="bacaan3">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-title">Latihan Membaca</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Baca dan dengarkan cerita pendek berikut, kalimat per kalimat, untuk melatih pemahaman teks yang lebih panjang.</p>
+      <div id="readingList"></div>
+    </div>
+  </div>
+
+  <!-- ============ LEVEL 4 VIEW ============ -->
+  <div class="level-view" id="level4">
+    <div class="part-nav">
+      <a href="#pola4">① Pola Kalimat Menengah</a>
+      <a href="#tematik4">② Kosakata Tematik</a>
+      <a href="#dialog4">③ Dialog Menengah</a>
+    </div>
+
+    <div class="section" id="pola4">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-title">15 Pola Kalimat Menengah</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Pola kalimat tingkat menengah: perbandingan, bentuk tata bahasa TOPIK II, dan penghubung kompleks. Klik contoh kalimat untuk mendengar suaranya.</p>
+      <div class="pattern-list" id="patternList4"></div>
+    </div>
+
+    <div class="section" id="tematik4">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-title">Kosakata Tematik Menengah</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">75 kosakata baru seputar pekerjaan, kesehatan, teknologi, emosi, dan perjalanan.</p>
+      <div id="vocab4"></div>
+    </div>
+
+    <div class="section" id="dialog4">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-title">Dialog Situasi Menengah</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Lima dialog situasi nyata: wawancara kerja, di dokter, di bank, mengurus visa, dan rencana liburan.</p>
+      <div id="dialogList4"></div>
+    </div>
+  </div>
+
+  <!-- ============ LEVEL 5 VIEW ============ -->
+  <div class="level-view" id="level5">
+    <div class="part-nav">
+      <a href="#idiom5">① Peribahasa & Idiom</a>
+      <a href="#pola5">② Pola Kalimat Lanjutan</a>
+      <a href="#diskusi5">③ Diskusi & Bacaan Lanjutan</a>
+    </div>
+
+    <div class="section" id="idiom5">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-title">20 Peribahasa & Idiom (사자성어・속담)</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Idiom dan peribahasa yang sering dipakai penutur asli, lengkap dengan makna dan contoh kalimat.</p>
+      <div class="pattern-list" id="idiomList5"></div>
+    </div>
+
+    <div class="section" id="pola5">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-title">14 Pola Kalimat Lanjutan</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Pola kalimat formal dan kompleks yang umum dipakai dalam diskusi, tulisan, dan presentasi.</p>
+      <div class="pattern-list" id="patternList5"></div>
+    </div>
+
+    <div class="section" id="diskusi5">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-title">Diskusi & Bacaan Lanjutan</div>
+        <div class="rule"></div>
+      </div>
+      <p class="section-desc">Dialog negosiasi bisnis, diskusi opini, dan esai panjang tentang manfaat belajar bahasa Korea.</p>
+      <div id="dialogList5"></div>
+      <div id="readingList5"></div>
+    </div>
+  </div>
+
+  <footer>천 리 길도 한 걸음부터 · PERJALANAN SERIBU LI DIMULAI DARI SATU LANGKAH</footer>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const SPEAKER_SVG = `<svg class="speaker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`;
+
+let koVoice = null;
+function pickVoice(){
+  const voices = window.speechSynthesis.getVoices();
+  koVoice = voices.find(v => v.lang === 'ko-KR') || voices.find(v => v.lang && v.lang.startsWith('ko')) || null;
+}
+if('speechSynthesis' in window){
+  pickVoice();
+  window.speechSynthesis.onvoiceschanged = pickVoice;
+}
+
+function speak(text, el){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  document.querySelectorAll('.speaking').forEach(x=>x.classList.remove('speaking'));
+  if(el) el.classList.add('speaking');
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'ko-KR';
+  if(koVoice) utter.voice = koVoice;
+  utter.rate = 0.85;
+  utter.onend = () => { if(el) el.classList.remove('speaking'); };
+  utter.onerror = () => { if(el) el.classList.remove('speaking'); };
+  window.speechSynthesis.speak(utter);
+}
+
+/* ============ LEVEL SWITCH ============ */
+document.querySelectorAll('.level-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.level-view').forEach(v=>v.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.level).classList.add('active');
+  });
+});
+
+/* ============ LEVEL 1 DATA & LOGIC ============ */
+const VOCAB = [{"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "안녕하세요", "romaji": "annyeonghaseyo", "id": "Halo / Selamat siang"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "안녕히 가세요", "romaji": "annyeonghi gaseyo", "id": "Sampai jumpa (kpd yg pergi)"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "감사합니다", "romaji": "gamsahamnida", "id": "Terima kasih"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "천만에요", "romaji": "cheonmaneyo", "id": "Sama-sama"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "죄송합니다", "romaji": "joesonghamnida", "id": "Maaf"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "괜찮아요", "romaji": "gwaenchanayo", "id": "Tidak apa-apa"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "주세요", "romaji": "juseyo", "id": "Tolong / Silakan berikan"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "네", "romaji": "ne", "id": "Ya"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "아니요", "romaji": "aniyo", "id": "Bukan / Tidak"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "좋은 아침이에요", "romaji": "joeun achimieyo", "id": "Selamat pagi"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "안녕히 주무세요", "romaji": "annyeonghi jumuseyo", "id": "Selamat tidur"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "환영합니다", "romaji": "hwanyeonghamnida", "id": "Selamat datang"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "알겠습니다", "romaji": "algesseumnida", "id": "Baiklah / Mengerti"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "어때요", "romaji": "eottaeyo", "id": "Bagaimana"}, {"cat": "인사 & 표현 (Salam & Ungkapan)", "kr": "반갑습니다", "romaji": "bangapseumnida", "id": "Senang bertemu"}, {"cat": "숫자 (Angka)", "kr": "일", "romaji": "il", "id": "Satu"}, {"cat": "숫자 (Angka)", "kr": "이", "romaji": "i", "id": "Dua"}, {"cat": "숫자 (Angka)", "kr": "삼", "romaji": "sam", "id": "Tiga"}, {"cat": "숫자 (Angka)", "kr": "사", "romaji": "sa", "id": "Empat"}, {"cat": "숫자 (Angka)", "kr": "오", "romaji": "o", "id": "Lima"}, {"cat": "숫자 (Angka)", "kr": "육", "romaji": "yuk", "id": "Enam"}, {"cat": "숫자 (Angka)", "kr": "칠", "romaji": "chil", "id": "Tujuh"}, {"cat": "숫자 (Angka)", "kr": "팔", "romaji": "pal", "id": "Delapan"}, {"cat": "숫자 (Angka)", "kr": "구", "romaji": "gu", "id": "Sembilan"}, {"cat": "숫자 (Angka)", "kr": "십", "romaji": "sip", "id": "Sepuluh"}, {"cat": "숫자 (Angka)", "kr": "백", "romaji": "baek", "id": "Seratus"}, {"cat": "숫자 (Angka)", "kr": "천", "romaji": "cheon", "id": "Seribu"}, {"cat": "숫자 (Angka)", "kr": "만", "romaji": "man", "id": "Sepuluh ribu"}, {"cat": "숫자 (Angka)", "kr": "영", "romaji": "yeong", "id": "Nol"}, {"cat": "숫자 (Angka)", "kr": "첫 번째", "romaji": "cheot beonjjae", "id": "Pertama"}, {"cat": "숫자 (Angka)", "kr": "하나", "romaji": "hana", "id": "Satu (asli Korea)"}, {"cat": "숫자 (Angka)", "kr": "몇 개", "romaji": "myeot gae", "id": "Berapa (jumlah)"}, {"cat": "숫자 (Angka)", "kr": "얼마", "romaji": "eolma", "id": "Berapa (harga)"}, {"cat": "숫자 (Angka)", "kr": "반", "romaji": "ban", "id": "Setengah"}, {"cat": "숫자 (Angka)", "kr": "한 쌍", "romaji": "han ssang", "id": "Sepasang"}, {"cat": "가족 (Keluarga)", "kr": "가족", "romaji": "gajok", "id": "Keluarga"}, {"cat": "가족 (Keluarga)", "kr": "아버지", "romaji": "abeoji", "id": "Ayah"}, {"cat": "가족 (Keluarga)", "kr": "어머니", "romaji": "eomeoni", "id": "Ibu"}, {"cat": "가족 (Keluarga)", "kr": "아들", "romaji": "adeul", "id": "Anak laki-laki"}, {"cat": "가족 (Keluarga)", "kr": "딸", "romaji": "ttal", "id": "Anak perempuan"}, {"cat": "가족 (Keluarga)", "kr": "형／오빠", "romaji": "hyeong / oppa", "id": "Kakak laki-laki"}, {"cat": "가족 (Keluarga)", "kr": "누나／언니", "romaji": "nuna / eonni", "id": "Kakak perempuan"}, {"cat": "가족 (Keluarga)", "kr": "남동생", "romaji": "namdongsaeng", "id": "Adik laki-laki"}, {"cat": "가족 (Keluarga)", "kr": "여동생", "romaji": "yeodongsaeng", "id": "Adik perempuan"}, {"cat": "가족 (Keluarga)", "kr": "할아버지", "romaji": "harabeoji", "id": "Kakek"}, {"cat": "가족 (Keluarga)", "kr": "할머니", "romaji": "halmeoni", "id": "Nenek"}, {"cat": "가족 (Keluarga)", "kr": "남편", "romaji": "nampyeon", "id": "Suami"}, {"cat": "가족 (Keluarga)", "kr": "아내", "romaji": "anae", "id": "Istri"}, {"cat": "가족 (Keluarga)", "kr": "친구", "romaji": "chingu", "id": "Teman"}, {"cat": "가족 (Keluarga)", "kr": "아이", "romaji": "ai", "id": "Anak"}, {"cat": "가족 (Keluarga)", "kr": "삼촌", "romaji": "samchon", "id": "Paman"}, {"cat": "가족 (Keluarga)", "kr": "이모／고모", "romaji": "imo / gomo", "id": "Bibi"}, {"cat": "가족 (Keluarga)", "kr": "씨", "romaji": "ssi", "id": "Sapaan sopan (setelah nama)"}, {"cat": "대명사 (Kata Ganti)", "kr": "저／나", "romaji": "jeo / na", "id": "Saya"}, {"cat": "대명사 (Kata Ganti)", "kr": "당신", "romaji": "dangsin", "id": "Kamu / Anda"}, {"cat": "대명사 (Kata Ganti)", "kr": "그", "romaji": "geu", "id": "Dia (laki-laki)"}, {"cat": "대명사 (Kata Ganti)", "kr": "그녀", "romaji": "geunyeo", "id": "Dia (perempuan)"}, {"cat": "대명사 (Kata Ganti)", "kr": "우리", "romaji": "uri", "id": "Kami / Kita"}, {"cat": "대명사 (Kata Ganti)", "kr": "당신들", "romaji": "dangsindeul", "id": "Kalian"}, {"cat": "대명사 (Kata Ganti)", "kr": "그들", "romaji": "geudeul", "id": "Mereka"}, {"cat": "대명사 (Kata Ganti)", "kr": "이것", "romaji": "igeot", "id": "Ini"}, {"cat": "대명사 (Kata Ganti)", "kr": "저것／그것", "romaji": "jeogeot / geugeot", "id": "Itu"}, {"cat": "대명사 (Kata Ganti)", "kr": "누구", "romaji": "nugu", "id": "Siapa"}, {"cat": "색깔 (Warna)", "kr": "색깔", "romaji": "saekkkal", "id": "Warna"}, {"cat": "색깔 (Warna)", "kr": "빨간색", "romaji": "ppalgansaek", "id": "Merah"}, {"cat": "색깔 (Warna)", "kr": "노란색", "romaji": "noransaek", "id": "Kuning"}, {"cat": "색깔 (Warna)", "kr": "파란색", "romaji": "paransaek", "id": "Biru"}, {"cat": "색깔 (Warna)", "kr": "초록색", "romaji": "choroksaek", "id": "Hijau"}, {"cat": "색깔 (Warna)", "kr": "하얀색", "romaji": "hayansaek", "id": "Putih"}, {"cat": "색깔 (Warna)", "kr": "검은색", "romaji": "geomeunsaek", "id": "Hitam"}, {"cat": "색깔 (Warna)", "kr": "보라색", "romaji": "borasaek", "id": "Ungu"}, {"cat": "색깔 (Warna)", "kr": "주황색", "romaji": "juhwangsaek", "id": "Oranye"}, {"cat": "색깔 (Warna)", "kr": "분홍색", "romaji": "bunhongsaek", "id": "Merah muda"}, {"cat": "색깔 (Warna)", "kr": "회색", "romaji": "hoesaek", "id": "Abu-abu"}, {"cat": "색깔 (Warna)", "kr": "갈색", "romaji": "galsaek", "id": "Cokelat"}, {"cat": "시간 (Waktu)", "kr": "시간", "romaji": "sigan", "id": "Waktu"}, {"cat": "시간 (Waktu)", "kr": "지금", "romaji": "jigeum", "id": "Sekarang"}, {"cat": "시간 (Waktu)", "kr": "오늘", "romaji": "oneul", "id": "Hari ini"}, {"cat": "시간 (Waktu)", "kr": "내일", "romaji": "naeil", "id": "Besok"}, {"cat": "시간 (Waktu)", "kr": "어제", "romaji": "eoje", "id": "Kemarin"}, {"cat": "시간 (Waktu)", "kr": "아침", "romaji": "achim", "id": "Pagi"}, {"cat": "시간 (Waktu)", "kr": "낮", "romaji": "nat", "id": "Siang"}, {"cat": "시간 (Waktu)", "kr": "오후", "romaji": "ohu", "id": "Sore"}, {"cat": "시간 (Waktu)", "kr": "밤", "romaji": "bam", "id": "Malam"}, {"cat": "시간 (Waktu)", "kr": "〜시간", "romaji": "sigan", "id": "Jam (durasi)"}, {"cat": "시간 (Waktu)", "kr": "〜분", "romaji": "bun", "id": "Menit"}, {"cat": "시간 (Waktu)", "kr": "〜시", "romaji": "si", "id": "Pukul / Jam"}, {"cat": "시간 (Waktu)", "kr": "년", "romaji": "nyeon", "id": "Tahun"}, {"cat": "시간 (Waktu)", "kr": "월", "romaji": "wol", "id": "Bulan"}, {"cat": "시간 (Waktu)", "kr": "주", "romaji": "ju", "id": "Minggu (satuan)"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "월요일", "romaji": "woryoil", "id": "Senin"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "화요일", "romaji": "hwayoil", "id": "Selasa"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "수요일", "romaji": "suyoil", "id": "Rabu"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "목요일", "romaji": "mogyoil", "id": "Kamis"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "금요일", "romaji": "geumyoil", "id": "Jumat"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "토요일", "romaji": "toyoil", "id": "Sabtu"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "일요일", "romaji": "iryoil", "id": "Minggu"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "일월", "romaji": "irwol", "id": "Januari"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "이월", "romaji": "iwol", "id": "Februari"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "삼월", "romaji": "samwol", "id": "Maret"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "사월", "romaji": "sawol", "id": "April"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "오월", "romaji": "owol", "id": "Mei"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "유월", "romaji": "yuwol", "id": "Juni"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "칠월", "romaji": "chirwol", "id": "Juli"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "팔월", "romaji": "parwol", "id": "Agustus"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "봄", "romaji": "bom", "id": "Musim semi"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "여름", "romaji": "yeoreum", "id": "Musim panas"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "가을", "romaji": "gaeul", "id": "Musim gugur"}, {"cat": "요일과 계절 (Hari & Musim)", "kr": "겨울", "romaji": "gyeoul", "id": "Musim dingin"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "먹다", "romaji": "meokda", "id": "Makan"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "마시다", "romaji": "masida", "id": "Minum"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "밥", "romaji": "bap", "id": "Nasi"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "면", "romaji": "myeon", "id": "Mi"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "빵", "romaji": "ppang", "id": "Roti"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "계란", "romaji": "gyeran", "id": "Telur"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "소고기", "romaji": "sogogi", "id": "Daging sapi"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "돼지고기", "romaji": "dwaejigogi", "id": "Daging babi"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "닭고기", "romaji": "dalgogi", "id": "Daging ayam"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "생선", "romaji": "saengseon", "id": "Ikan"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "채소", "romaji": "chaeso", "id": "Sayur"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "과일", "romaji": "gwail", "id": "Buah"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "사과", "romaji": "sagwa", "id": "Apel"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "바나나", "romaji": "banana", "id": "Pisang"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "귤", "romaji": "gyul", "id": "Jeruk"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "수박", "romaji": "subak", "id": "Semangka"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "물", "romaji": "mul", "id": "Air"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "차", "romaji": "cha", "id": "Teh"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "커피", "romaji": "keopi", "id": "Kopi"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "우유", "romaji": "uyu", "id": "Susu"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "설탕", "romaji": "seoltang", "id": "Gula"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "소금", "romaji": "sogeum", "id": "Garam"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "국", "romaji": "guk", "id": "Sup"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "요리", "romaji": "yori", "id": "Masakan"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "아침밥", "romaji": "achimbap", "id": "Sarapan"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "점심밥", "romaji": "jeomsimbap", "id": "Makan siang"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "저녁밥", "romaji": "jeonyeokbap", "id": "Makan malam"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "배고파요", "romaji": "baegopayo", "id": "Lapar"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "목말라요", "romaji": "mongmallayo", "id": "Haus"}, {"cat": "음식과 음료 (Makanan & Minuman)", "kr": "맛있어요", "romaji": "masisseoyo", "id": "Enak"}, {"cat": "신체 (Anggota Tubuh)", "kr": "머리", "romaji": "meori", "id": "Kepala"}, {"cat": "신체 (Anggota Tubuh)", "kr": "얼굴", "romaji": "eolgul", "id": "Wajah"}, {"cat": "신체 (Anggota Tubuh)", "kr": "눈", "romaji": "nun", "id": "Mata"}, {"cat": "신체 (Anggota Tubuh)", "kr": "코", "romaji": "ko", "id": "Hidung"}, {"cat": "신체 (Anggota Tubuh)", "kr": "입", "romaji": "ip", "id": "Mulut"}, {"cat": "신체 (Anggota Tubuh)", "kr": "귀", "romaji": "gwi", "id": "Telinga"}, {"cat": "신체 (Anggota Tubuh)", "kr": "머리카락", "romaji": "meorikarak", "id": "Rambut"}, {"cat": "신체 (Anggota Tubuh)", "kr": "손", "romaji": "son", "id": "Tangan"}, {"cat": "신체 (Anggota Tubuh)", "kr": "발", "romaji": "bal", "id": "Kaki"}, {"cat": "신체 (Anggota Tubuh)", "kr": "배", "romaji": "bae", "id": "Perut"}, {"cat": "신체 (Anggota Tubuh)", "kr": "마음", "romaji": "maeum", "id": "Hati"}, {"cat": "신체 (Anggota Tubuh)", "kr": "몸", "romaji": "mom", "id": "Tubuh"}, {"cat": "신체 (Anggota Tubuh)", "kr": "이", "romaji": "i", "id": "Gigi"}, {"cat": "신체 (Anggota Tubuh)", "kr": "등", "romaji": "deung", "id": "Punggung"}, {"cat": "신체 (Anggota Tubuh)", "kr": "손가락", "romaji": "songarak", "id": "Jari tangan"}, {"cat": "신체 (Anggota Tubuh)", "kr": "어깨", "romaji": "eokkae", "id": "Bahu"}, {"cat": "신체 (Anggota Tubuh)", "kr": "피부", "romaji": "pibu", "id": "Kulit"}, {"cat": "장소 (Tempat)", "kr": "학교", "romaji": "hakgyo", "id": "Sekolah"}, {"cat": "장소 (Tempat)", "kr": "병원", "romaji": "byeongwon", "id": "Rumah sakit"}, {"cat": "장소 (Tempat)", "kr": "가게", "romaji": "gage", "id": "Toko"}, {"cat": "장소 (Tempat)", "kr": "식당", "romaji": "sikdang", "id": "Restoran"}, {"cat": "장소 (Tempat)", "kr": "은행", "romaji": "eunhaeng", "id": "Bank"}, {"cat": "장소 (Tempat)", "kr": "공원", "romaji": "gongwon", "id": "Taman"}, {"cat": "장소 (Tempat)", "kr": "공항", "romaji": "gonghang", "id": "Bandara"}, {"cat": "장소 (Tempat)", "kr": "역", "romaji": "yeok", "id": "Stasiun"}, {"cat": "장소 (Tempat)", "kr": "시장", "romaji": "sijang", "id": "Pasar"}, {"cat": "장소 (Tempat)", "kr": "도서관", "romaji": "doseogwan", "id": "Perpustakaan"}, {"cat": "장소 (Tempat)", "kr": "호텔", "romaji": "hotel", "id": "Hotel"}, {"cat": "장소 (Tempat)", "kr": "부엌", "romaji": "bueok", "id": "Dapur"}, {"cat": "장소 (Tempat)", "kr": "침실", "romaji": "chimsil", "id": "Kamar tidur"}, {"cat": "장소 (Tempat)", "kr": "화장실", "romaji": "hwajangsil", "id": "Kamar mandi"}, {"cat": "장소 (Tempat)", "kr": "사무실", "romaji": "samusil", "id": "Kantor"}, {"cat": "장소 (Tempat)", "kr": "도시", "romaji": "dosi", "id": "Kota"}, {"cat": "장소 (Tempat)", "kr": "나라", "romaji": "nara", "id": "Negara"}, {"cat": "장소 (Tempat)", "kr": "길", "romaji": "gil", "id": "Jalan"}, {"cat": "장소 (Tempat)", "kr": "문", "romaji": "mun", "id": "Pintu"}, {"cat": "장소 (Tempat)", "kr": "교실", "romaji": "gyosil", "id": "Ruang kelas"}, {"cat": "동사 (Kata Kerja)", "kr": "이다", "romaji": "ida", "id": "Adalah"}, {"cat": "동사 (Kata Kerja)", "kr": "있다", "romaji": "itda", "id": "Ada / Punya"}, {"cat": "동사 (Kata Kerja)", "kr": "가다", "romaji": "gada", "id": "Pergi"}, {"cat": "동사 (Kata Kerja)", "kr": "오다", "romaji": "oda", "id": "Datang"}, {"cat": "동사 (Kata Kerja)", "kr": "보다", "romaji": "boda", "id": "Melihat"}, {"cat": "동사 (Kata Kerja)", "kr": "듣다", "romaji": "deutda", "id": "Mendengar"}, {"cat": "동사 (Kata Kerja)", "kr": "말하다", "romaji": "malhada", "id": "Berbicara"}, {"cat": "동사 (Kata Kerja)", "kr": "읽다", "romaji": "ikda", "id": "Membaca"}, {"cat": "동사 (Kata Kerja)", "kr": "쓰다", "romaji": "sseuda", "id": "Menulis"}, {"cat": "동사 (Kata Kerja)", "kr": "공부하다", "romaji": "gongbuhada", "id": "Belajar"}, {"cat": "동사 (Kata Kerja)", "kr": "일하다", "romaji": "ilhada", "id": "Bekerja"}, {"cat": "동사 (Kata Kerja)", "kr": "자다", "romaji": "jada", "id": "Tidur"}, {"cat": "동사 (Kata Kerja)", "kr": "일어나다", "romaji": "ireonada", "id": "Bangun tidur"}, {"cat": "동사 (Kata Kerja)", "kr": "걷다", "romaji": "geotda", "id": "Berjalan"}, {"cat": "동사 (Kata Kerja)", "kr": "뛰다", "romaji": "ttwida", "id": "Berlari"}, {"cat": "동사 (Kata Kerja)", "kr": "앉다", "romaji": "antda", "id": "Duduk"}, {"cat": "동사 (Kata Kerja)", "kr": "서다", "romaji": "seoda", "id": "Berdiri"}, {"cat": "동사 (Kata Kerja)", "kr": "사다", "romaji": "sada", "id": "Membeli"}, {"cat": "동사 (Kata Kerja)", "kr": "팔다", "romaji": "palda", "id": "Menjual"}, {"cat": "동사 (Kata Kerja)", "kr": "주다", "romaji": "juda", "id": "Memberi"}, {"cat": "동사 (Kata Kerja)", "kr": "하다", "romaji": "hada", "id": "Melakukan"}, {"cat": "동사 (Kata Kerja)", "kr": "놀다", "romaji": "nolda", "id": "Bermain"}, {"cat": "동사 (Kata Kerja)", "kr": "웃다", "romaji": "utda", "id": "Tertawa"}, {"cat": "동사 (Kata Kerja)", "kr": "울다", "romaji": "ulda", "id": "Menangis"}, {"cat": "동사 (Kata Kerja)", "kr": "사랑하다", "romaji": "saranghada", "id": "Mencintai"}, {"cat": "동사 (Kata Kerja)", "kr": "좋아하다", "romaji": "joahada", "id": "Menyukai"}, {"cat": "동사 (Kata Kerja)", "kr": "생각하다", "romaji": "saenggakhada", "id": "Berpikir"}, {"cat": "동사 (Kata Kerja)", "kr": "알다", "romaji": "alda", "id": "Tahu"}, {"cat": "동사 (Kata Kerja)", "kr": "만나다", "romaji": "mannada", "id": "Bertemu"}, {"cat": "동사 (Kata Kerja)", "kr": "열다", "romaji": "yeolda", "id": "Membuka"}, {"cat": "형용사 (Kata Sifat)", "kr": "크다", "romaji": "keuda", "id": "Besar"}, {"cat": "형용사 (Kata Sifat)", "kr": "작다", "romaji": "jakda", "id": "Kecil"}, {"cat": "형용사 (Kata Sifat)", "kr": "많다", "romaji": "manta", "id": "Banyak"}, {"cat": "형용사 (Kata Sifat)", "kr": "적다", "romaji": "jeokda", "id": "Sedikit"}, {"cat": "형용사 (Kata Sifat)", "kr": "좋다", "romaji": "jota", "id": "Baik"}, {"cat": "형용사 (Kata Sifat)", "kr": "나쁘다", "romaji": "nappeuda", "id": "Buruk"}, {"cat": "형용사 (Kata Sifat)", "kr": "새롭다", "romaji": "saeropda", "id": "Baru"}, {"cat": "형용사 (Kata Sifat)", "kr": "오래되다", "romaji": "oraedoeda", "id": "Lama / Usang"}, {"cat": "형용사 (Kata Sifat)", "kr": "높다", "romaji": "nopda", "id": "Tinggi"}, {"cat": "형용사 (Kata Sifat)", "kr": "낮다", "romaji": "natda", "id": "Rendah"}, {"cat": "형용사 (Kata Sifat)", "kr": "길다", "romaji": "gilda", "id": "Panjang"}, {"cat": "형용사 (Kata Sifat)", "kr": "짧다", "romaji": "jjalda", "id": "Pendek"}, {"cat": "형용사 (Kata Sifat)", "kr": "빠르다", "romaji": "ppareuda", "id": "Cepat"}, {"cat": "형용사 (Kata Sifat)", "kr": "느리다", "romaji": "neurida", "id": "Lambat"}, {"cat": "형용사 (Kata Sifat)", "kr": "덥다", "romaji": "deopda", "id": "Panas"}, {"cat": "형용사 (Kata Sifat)", "kr": "춥다", "romaji": "chupda", "id": "Dingin"}, {"cat": "형용사 (Kata Sifat)", "kr": "예쁘다", "romaji": "yeppeuda", "id": "Cantik"}, {"cat": "형용사 (Kata Sifat)", "kr": "귀엽다", "romaji": "gwiyeopda", "id": "Lucu / Imut"}, {"cat": "형용사 (Kata Sifat)", "kr": "뚱뚱하다", "romaji": "ttungttunghada", "id": "Gemuk"}, {"cat": "형용사 (Kata Sifat)", "kr": "마르다", "romaji": "mareuda", "id": "Kurus"}, {"cat": "형용사 (Kata Sifat)", "kr": "비싸다", "romaji": "bissada", "id": "Mahal"}, {"cat": "동물 (Hewan)", "kr": "동물", "romaji": "dongmul", "id": "Hewan"}, {"cat": "동물 (Hewan)", "kr": "개", "romaji": "gae", "id": "Anjing"}, {"cat": "동물 (Hewan)", "kr": "고양이", "romaji": "goyangi", "id": "Kucing"}, {"cat": "동물 (Hewan)", "kr": "새", "romaji": "sae", "id": "Burung"}, {"cat": "동물 (Hewan)", "kr": "물고기", "romaji": "mulgogi", "id": "Ikan"}, {"cat": "동물 (Hewan)", "kr": "말", "romaji": "mal", "id": "Kuda"}, {"cat": "동물 (Hewan)", "kr": "소", "romaji": "so", "id": "Sapi"}, {"cat": "동물 (Hewan)", "kr": "양", "romaji": "yang", "id": "Domba"}, {"cat": "동물 (Hewan)", "kr": "돼지", "romaji": "dwaeji", "id": "Babi"}, {"cat": "동물 (Hewan)", "kr": "닭", "romaji": "dak", "id": "Ayam"}, {"cat": "동물 (Hewan)", "kr": "토끼", "romaji": "tokki", "id": "Kelinci"}, {"cat": "동물 (Hewan)", "kr": "호랑이", "romaji": "horangi", "id": "Harimau"}, {"cat": "동물 (Hewan)", "kr": "사자", "romaji": "saja", "id": "Singa"}, {"cat": "동물 (Hewan)", "kr": "코끼리", "romaji": "kokkiri", "id": "Gajah"}, {"cat": "동물 (Hewan)", "kr": "판다", "romaji": "panda", "id": "Panda"}, {"cat": "동물 (Hewan)", "kr": "원숭이", "romaji": "wonsungi", "id": "Monyet"}, {"cat": "동물 (Hewan)", "kr": "뱀", "romaji": "baem", "id": "Ular"}, {"cat": "동물 (Hewan)", "kr": "쥐", "romaji": "jwi", "id": "Tikus"}, {"cat": "동물 (Hewan)", "kr": "나비", "romaji": "nabi", "id": "Kupu-kupu"}, {"cat": "동물 (Hewan)", "kr": "곤충", "romaji": "gonchung", "id": "Serangga"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "날씨", "romaji": "nalssi", "id": "Cuaca"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "태양", "romaji": "taeyang", "id": "Matahari"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "달", "romaji": "dal", "id": "Bulan (langit)"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "별", "romaji": "byeol", "id": "Bintang"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "하늘", "romaji": "haneul", "id": "Langit"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "구름", "romaji": "gureum", "id": "Awan"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "비", "romaji": "bi", "id": "Hujan"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "눈", "romaji": "nun", "id": "Salju"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "바람", "romaji": "baram", "id": "Angin"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "산", "romaji": "san", "id": "Gunung"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "강", "romaji": "gang", "id": "Sungai"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "바다", "romaji": "bada", "id": "Laut"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "나무", "romaji": "namu", "id": "Pohon"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "꽃", "romaji": "kkot", "id": "Bunga"}, {"cat": "자연과 날씨 (Alam & Cuaca)", "kr": "풀", "romaji": "pul", "id": "Rumput"}, {"cat": "옷 (Pakaian)", "kr": "옷", "romaji": "ot", "id": "Baju"}, {"cat": "옷 (Pakaian)", "kr": "바지", "romaji": "baji", "id": "Celana"}, {"cat": "옷 (Pakaian)", "kr": "치마", "romaji": "chima", "id": "Rok"}, {"cat": "옷 (Pakaian)", "kr": "신발", "romaji": "sinbal", "id": "Sepatu"}, {"cat": "옷 (Pakaian)", "kr": "양말", "romaji": "yangmal", "id": "Kaus kaki"}, {"cat": "옷 (Pakaian)", "kr": "모자", "romaji": "moja", "id": "Topi"}, {"cat": "옷 (Pakaian)", "kr": "안경", "romaji": "angyeong", "id": "Kacamata"}, {"cat": "옷 (Pakaian)", "kr": "손목시계", "romaji": "sonmoksigye", "id": "Jam tangan"}, {"cat": "옷 (Pakaian)", "kr": "가방", "romaji": "gabang", "id": "Tas"}, {"cat": "옷 (Pakaian)", "kr": "외투", "romaji": "oetu", "id": "Jaket"}, {"cat": "교통 (Transportasi)", "kr": "차", "romaji": "cha", "id": "Mobil / Kendaraan"}, {"cat": "교통 (Transportasi)", "kr": "자동차", "romaji": "jadongcha", "id": "Mobil"}, {"cat": "교통 (Transportasi)", "kr": "버스", "romaji": "beoseu", "id": "Bus"}, {"cat": "교통 (Transportasi)", "kr": "택시", "romaji": "taeksi", "id": "Taksi"}, {"cat": "교통 (Transportasi)", "kr": "기차", "romaji": "gicha", "id": "Kereta api"}, {"cat": "교통 (Transportasi)", "kr": "비행기", "romaji": "bihaenggi", "id": "Pesawat"}, {"cat": "교통 (Transportasi)", "kr": "자전거", "romaji": "jajeongeo", "id": "Sepeda"}, {"cat": "교통 (Transportasi)", "kr": "배", "romaji": "bae", "id": "Kapal"}, {"cat": "교통 (Transportasi)", "kr": "지하철", "romaji": "jihacheol", "id": "Kereta bawah tanah"}, {"cat": "교통 (Transportasi)", "kr": "오토바이", "romaji": "otobai", "id": "Sepeda motor"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "선생님", "romaji": "seonsaengnim", "id": "Guru"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "학생", "romaji": "haksaeng", "id": "Murid"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "책", "romaji": "chaek", "id": "Buku"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "펜", "romaji": "pen", "id": "Pena"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "종이", "romaji": "jongi", "id": "Kertas"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "책상", "romaji": "chaeksang", "id": "Meja"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "의자", "romaji": "uija", "id": "Kursi"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "칠판", "romaji": "chilpan", "id": "Papan tulis"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "시험", "romaji": "siheom", "id": "Ujian"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "문제", "romaji": "munje", "id": "Pertanyaan / Masalah"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "의사", "romaji": "uisa", "id": "Dokter"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "간호사", "romaji": "ganhosa", "id": "Perawat"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "경찰관", "romaji": "gyeongchalgwan", "id": "Polisi"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "운전기사", "romaji": "unjeongisa", "id": "Sopir"}, {"cat": "학교와 직업 (Sekolah & Pekerjaan)", "kr": "회사", "romaji": "hoesa", "id": "Perusahaan"}];
+
+const catOrder = [...new Set(VOCAB.map(d => d.cat))];
+let activeCat = 'ALL';
+
+function buildTabs(){
+  const tabs = document.getElementById('tabs');
+  const allTab = document.createElement('div');
+  allTab.className = 'tab active';
+  allTab.dataset.cat = 'ALL';
+  allTab.innerHTML = `Semua <span class="n">${VOCAB.length}</span>`;
+  tabs.appendChild(allTab);
+  catOrder.forEach(cat=>{
+    const n = VOCAB.filter(d=>d.cat===cat).length;
+    const el = document.createElement('div');
+    el.className = 'tab';
+    el.dataset.cat = cat;
+    el.innerHTML = `${cat} <span class="n">${n}</span>`;
+    tabs.appendChild(el);
+  });
+  tabs.addEventListener('click', e=>{
+    const t = e.target.closest('.tab');
+    if(!t) return;
+    tabs.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    activeCat = t.dataset.cat;
+    renderVocab();
+  });
+}
+
+function renderVocab(){
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const container = document.getElementById('sections');
+  container.innerHTML = '';
+  let total = 0;
+
+  catOrder.forEach((cat, idx)=>{
+    if(activeCat !== 'ALL' && activeCat !== cat) return;
+    let items = VOCAB.filter(d=>d.cat===cat);
+    if(q){
+      items = items.filter(d =>
+        d.kr.includes(q) ||
+        d.romaji.toLowerCase().includes(q) ||
+        d.id.toLowerCase().includes(q)
+      );
+    }
+    if(items.length === 0) return;
+    total += items.length;
+
+    const section = document.createElement('div');
+    section.className = 'section';
+    section.innerHTML = `
+      <div class="section-head">
+        <div class="section-num">${idx+1}</div>
+        <div class="section-title">${cat}</div>
+        <div class="rule"></div>
+      </div>
+      <div class="grid"></div>
+    `;
+    const grid = section.querySelector('.grid');
+    items.forEach(d=>{
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${d.kr}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${d.romaji}</div>
+        <div class="id">${d.id}</div>
+      `;
+      card.addEventListener('click', () => speak(d.kr, card));
+      grid.appendChild(card);
+    });
+    container.appendChild(section);
+  });
+
+  document.getElementById('countNum').textContent = total;
+  document.getElementById('emptyState').style.display = total === 0 ? 'block' : 'none';
+}
+
+document.getElementById('search').addEventListener('input', renderVocab);
+buildTabs();
+renderVocab();
+
+/* ============ LEVEL 2 DATA & LOGIC ============ */
+const L2 = {"particles": [{"kr": "은／는", "romaji": "eun / neun", "fungsi": "Penanda topik kalimat", "ch": "저는 학생이에요", "cp": "jeoneun haksaengieyo", "ci": "Saya adalah murid"}, {"kr": "이／가", "romaji": "i / ga", "fungsi": "Penanda subjek", "ch": "고양이가 있어요", "cp": "goyangiga isseoyo", "ci": "Ada seekor kucing"}, {"kr": "을／를", "romaji": "eul / reul", "fungsi": "Penanda objek langsung", "ch": "빵을 먹어요", "cp": "ppangeul meogeoyo", "ci": "Makan roti"}, {"kr": "에", "romaji": "e", "fungsi": "Penanda waktu/tempat tujuan", "ch": "일곱 시에 일어나요", "cp": "ilgop sie ireonayo", "ci": "Bangun jam tujuh"}, {"kr": "에서", "romaji": "eseo", "fungsi": "Penanda tempat kegiatan", "ch": "학교에서 공부해요", "cp": "hakgyoeseo gongbuhaeyo", "ci": "Belajar di sekolah"}, {"kr": "와／과", "romaji": "wa / gwa", "fungsi": "Penghubung 'dan' / 'bersama'", "ch": "친구와 이야기해요", "cp": "chinguwa iyagihaeyo", "ci": "Berbicara dengan teman"}, {"kr": "도", "romaji": "do", "fungsi": "Berarti 'juga'", "ch": "저도 학생이에요", "cp": "jeodo haksaengieyo", "ci": "Saya juga murid"}, {"kr": "의", "romaji": "ui", "fungsi": "Penanda kepemilikan", "ch": "제 책이에요", "cp": "je chaegieyo", "ci": "Ini buku saya"}, {"kr": "부터", "romaji": "buteo", "fungsi": "Berarti 'dari' (waktu)", "ch": "아홉 시부터 일해요", "cp": "ahop sibuteo ilhaeyo", "ci": "Bekerja mulai jam sembilan"}, {"kr": "까지", "romaji": "kkaji", "fungsi": "Berarti 'sampai'", "ch": "다섯 시까지 공부해요", "cp": "daseot sikkaji gongbuhaeyo", "ci": "Belajar sampai jam lima"}, {"kr": "에게／한테", "romaji": "ege / hante", "fungsi": "Penanda penerima (kepada)", "ch": "친구에게 선물을 줘요", "cp": "chingu-ege seonmureul jwoyo", "ci": "Memberi hadiah kepada teman"}, {"kr": "보다", "romaji": "boda", "fungsi": "Berarti 'daripada' (perbandingan)", "ch": "비행기가 기차보다 빨라요", "cp": "bihaenggiga gichaboda ppallayo", "ci": "Pesawat lebih cepat daripada kereta"}, {"kr": "만", "romaji": "man", "fungsi": "Berarti 'hanya'", "ch": "저만 알아요", "cp": "jeoman arayo", "ci": "Hanya saya yang tahu"}, {"kr": "이나／나", "romaji": "ina / na", "fungsi": "Berarti 'atau'", "ch": "커피나 차를 마셔요", "cp": "keopina chareul masyeoyo", "ci": "Minum kopi atau teh"}, {"kr": "요", "romaji": "yo", "fungsi": "Akhiran sopan informal", "ch": "안녕하세요", "cp": "annyeonghaseyo", "ci": "Halo (sopan)"}], "measure": [{"kr": "개", "romaji": "gae", "id": "untuk benda umum", "contoh": "사과 세 개"}, {"kr": "명／사람", "romaji": "myeong / saram", "id": "untuk orang", "contoh": "학생 두 명"}, {"kr": "권", "romaji": "gwon", "id": "untuk buku", "contoh": "책 두 권"}, {"kr": "마리", "romaji": "mari", "id": "untuk hewan", "contoh": "고양이 두 마리"}, {"kr": "장", "romaji": "jang", "id": "untuk benda tipis/datar", "contoh": "종이 세 장"}, {"kr": "대", "romaji": "dae", "id": "untuk mesin/kendaraan", "contoh": "차 한 대"}, {"kr": "잔", "romaji": "jan", "id": "untuk gelas/cangkir", "contoh": "커피 한 잔"}, {"kr": "번", "romaji": "beon", "id": "untuk kali/frekuensi", "contoh": "세 번"}, {"kr": "살", "romaji": "sal", "id": "untuk usia", "contoh": "스무 살"}, {"kr": "층", "romaji": "cheung", "id": "untuk lantai bangunan", "contoh": "삼 층"}, {"kr": "켤레", "romaji": "kyeolle", "id": "untuk sepasang sepatu/kaus kaki", "contoh": "신발 한 켤레"}, {"kr": "병", "romaji": "byeong", "id": "untuk botol", "contoh": "물 한 병"}], "patterns": [{"nama": "A adalah B", "formula": "N1 + 은／는 + N2 + 이에요／예요", "kr": "저는 선생님이에요", "romaji": "jeoneun seonsaengnimieyo", "id": "Saya adalah guru", "note": ""}, {"nama": "Menyatakan keberadaan", "formula": "Tempat + 에 + N + 이／가 + 있어요", "kr": "책상 위에 책이 있어요", "romaji": "chaeksang wie chaegi isseoyo", "id": "Ada buku di atas meja", "note": ""}, {"nama": "Tidak ada", "formula": "N + 이／가 + 없어요", "kr": "시간이 없어요", "romaji": "sigani eopseoyo", "id": "Tidak ada waktu", "note": ""}, {"nama": "Kata sifat present", "formula": "N + 이／가 + Kata sifat아요／어요", "kr": "이 꽃이 아름다워요", "romaji": "i kkoci areumdawoyo", "id": "Bunga ini indah", "note": ""}, {"nama": "Ingin melakukan", "formula": "Kata kerja(stem) + 고 싶어요", "kr": "한국에 가고 싶어요", "romaji": "hangug-e gago sipeoyo", "id": "Saya ingin pergi ke Korea", "note": ""}, {"nama": "Bisa melakukan", "formula": "Kata kerja(stem) + 을／ㄹ 수 있어요", "kr": "한글을 쓸 수 있어요", "romaji": "hangeureul sseul su isseoyo", "id": "Saya bisa menulis Hangeul", "note": ""}, {"nama": "Sedang melakukan", "formula": "Kata kerja(stem) + 고 있어요", "kr": "지금 공부하고 있어요", "romaji": "jigeum gongbuhago isseoyo", "id": "Sekarang saya sedang belajar", "note": ""}, {"nama": "Bentuk lampau", "formula": "Kata kerja(stem) + 았／었어요", "kr": "어제 영화를 봤어요", "romaji": "eoje yeonghwareul bwasseoyo", "id": "Kemarin saya menonton film", "note": ""}, {"nama": "Tolong lakukan", "formula": "Kata kerja(stem) + 아／어 주세요", "kr": "천천히 말해 주세요", "romaji": "cheoncheonhi malhae juseyo", "id": "Tolong bicara pelan-pelan", "note": ""}, {"nama": "Perbandingan", "formula": "N1은／는 N2보다 Kata sifat", "kr": "비행기는 기차보다 빨라요", "romaji": "bihaenggineun gichaboda ppallayo", "id": "Pesawat lebih cepat daripada kereta", "note": ""}, {"nama": "Karena...maka...", "formula": "Alasan + 아／어서, Akibat", "kr": "추워서 코트를 입어요", "romaji": "chuwoseo koteureul ibeoyo", "id": "Karena dingin, saya pakai mantel", "note": ""}, {"nama": "Kalau (만약〜면)", "formula": "Kata kerja(stem) + 으면／면", "kr": "비가 오면 안 가요", "romaji": "biga omyeon an gayo", "id": "Kalau hujan turun, saya tidak pergi", "note": ""}, {"nama": "Ayo", "formula": "Kata kerja(stem) + 읍시다／ㅂ시다", "kr": "같이 먹읍시다", "romaji": "gachi meogeupsida", "id": "Ayo makan bersama", "note": ""}, {"nama": "Harus", "formula": "Kata kerja(stem) + 아／어야 해요", "kr": "숙제를 해야 해요", "romaji": "sukjereul haeya haeyo", "id": "Saya harus mengerjakan PR", "note": ""}, {"nama": "Pernah melakukan", "formula": "Kata kerja(stem) + 은／ㄴ 적이 있어요", "kr": "한국에 간 적이 있어요", "romaji": "hangug-e gan jeogi isseoyo", "id": "Saya pernah pergi ke Korea", "note": ""}, {"nama": "Sebelum melakukan", "formula": "Kata kerja(stem) + 기 전에", "kr": "먹기 전에 손을 씻어요", "romaji": "meokgi jeone soneul ssiseoyo", "id": "Sebelum makan, cuci tangan dulu", "note": ""}, {"nama": "Setelah melakukan", "formula": "Kata kerja(stem) + 은／ㄴ 후에", "kr": "숙제를 한 후에 자요", "romaji": "sukjereul han hue jayo", "id": "Setelah mengerjakan PR, baru tidur", "note": ""}, {"nama": "Menurut saya", "formula": "Kalimat + 고 생각해요", "kr": "내일 맑을 거라고 생각해요", "romaji": "naeil malgeul georago saenggakhaeyo", "id": "Saya rasa besok akan cerah", "note": ""}, {"nama": "Sambil melakukan", "formula": "Kata kerja(stem) + 으면서／면서", "kr": "음악을 들으면서 공부해요", "romaji": "eumageul deureumyeonseo gongbuhaeyo", "id": "Belajar sambil mendengarkan musik", "note": ""}, {"nama": "Tampaknya", "formula": "Kata sifat/kerja + 것 같아요", "kr": "이 식당은 맛있을 것 같아요", "romaji": "i sikdangeun masisseul geot gatayo", "id": "Restoran ini kelihatannya enak", "note": ""}]};
+
+function renderParticles(){
+  const grid = document.getElementById('particleGrid');
+  L2.particles.forEach(p=>{
+    const el = document.createElement('div');
+    el.className = 'pcard';
+    el.innerHTML = `
+      <div class="top">
+        <div class="hz">${p.kr}</div>
+        <div class="py">${p.romaji}</div>
+        ${SPEAKER_SVG}
+      </div>
+      <div class="fungsi">${p.fungsi}</div>
+      <div class="ex" data-ex="1">
+        <span class="exhz">${p.ch}</span>
+        <span>${p.cp}</span>
+        <span class="exid">"${p.ci}"</span>
+      </div>
+    `;
+    el.addEventListener('click', (e) => {
+      const exEl = e.target.closest('.ex');
+      if(exEl){ speak(p.ch, exEl); }
+      else { speak(p.kr, el); }
+    });
+    grid.appendChild(el);
+  });
+}
+
+function renderMeasure(){
+  const grid = document.getElementById('measureGrid');
+  L2.measure.forEach(m=>{
+    const el = document.createElement('div');
+    el.className = 'mcard';
+    el.innerHTML = `
+      <div class="top-row">
+        <div class="hz">${m.kr}</div>
+        ${SPEAKER_SVG}
+      </div>
+      <div class="py">${m.romaji}</div>
+      <div class="id">${m.id}</div>
+      <div class="contoh">${m.contoh}</div>
+    `;
+    el.addEventListener('click', () => speak(m.kr, el));
+    grid.appendChild(el);
+  });
+}
+
+function renderPatterns(){
+  const list = document.getElementById('patternList');
+  L2.patterns.forEach((p,i)=>{
+    const el = document.createElement('div');
+    el.className = 'pattern';
+    el.innerHTML = `
+      <div class="pattern-head">
+        <div class="pattern-name">${i+1}. ${p.nama}</div>
+        <div class="pattern-formula">${p.formula}</div>
+      </div>
+      <div class="pattern-example">
+        <span class="hz">${p.kr}</span>
+        <span class="py">${p.romaji}</span>
+        <span class="id">"${p.id}"</span>
+        ${SPEAKER_SVG}
+      </div>
+      ${p.note ? `<div class="pattern-note"><b>Catatan:</b> ${p.note}</div>` : ''}
+    `;
+    el.querySelector('.pattern-example').addEventListener('click', function(){ speak(p.kr, this); });
+    list.appendChild(el);
+  });
+}
+
+renderParticles();
+renderMeasure();
+renderPatterns();
+
+/* ============ LEVEL 3 DATA ============ */
+const L3 = {"dialogs": [{"judul": "Perkenalan Diri", "baris": [{"spk": "A", "kr": "안녕하세요! 이름이 뭐예요?", "romaji": "annyeonghaseyo! ireumi mwoyeyo?", "id": "Halo! Siapa namamu?"}, {"spk": "B", "kr": "안녕하세요, 저는 김민수예요. 당신은요?", "romaji": "annyeonghaseyo, jeoneun gimminsuyeyo. dangsineunyo?", "id": "Halo, saya Kim Minsu. Kalau kamu?"}, {"spk": "A", "kr": "저는 리나예요. 만나서 반갑습니다.", "romaji": "jeoneun rinayeyo. mannaseo bangapseumnida", "id": "Saya Rina. Senang berkenalan denganmu."}, {"spk": "B", "kr": "저도 만나서 반갑습니다. 어느 나라 사람이에요?", "romaji": "jeodo mannaseo bangapseumnida. eoneu nara saramieyo?", "id": "Saya juga senang berkenalan. Kamu orang mana?"}, {"spk": "A", "kr": "저는 인도네시아 사람이에요. 당신은요?", "romaji": "jeoneun indoneshia saramieyo. dangsineunyo?", "id": "Saya orang Indonesia. Kamu?"}, {"spk": "B", "kr": "저는 한국 사람이에요, 서울에서 왔어요.", "romaji": "jeoneun hanguk saramieyo, seour-eseo wasseoyo", "id": "Saya orang Korea, dari Seoul."}]}, {"judul": "Di Restoran", "baris": [{"spk": "A", "kr": "어서 오세요! 몇 분이세요?", "romaji": "eoseo oseyo! myeot bunisseyo?", "id": "Selamat datang! Berapa orang?"}, {"spk": "B", "kr": "두 명이에요, 감사합니다.", "romaji": "du myeongieyo, gamsahamnida", "id": "Dua orang, terima kasih."}, {"spk": "A", "kr": "이쪽으로 앉으세요. 메뉴예요.", "romaji": "ijjog-euro anjeuseyo. menyuyeyo", "id": "Silakan duduk di sini. Ini menunya."}, {"spk": "B", "kr": "감사합니다. 밥이랑 계란국 주세요.", "romaji": "gamsahamnida. babirang gyerangguk juseyo", "id": "Terima kasih. Saya mau nasi dan sup telur."}, {"spk": "A", "kr": "네, 알겠습니다. 더 필요하신 거 있으세요?", "romaji": "ne, algesseumnida. deo piryohasin geo isseuseyo?", "id": "Baik. Ada pesanan lain?"}, {"spk": "B", "kr": "아니요, 그거면 충분해요.", "romaji": "aniyo, geugeomyeon chungbunhaeyo", "id": "Tidak, itu saja."}, {"spk": "A", "kr": "잠시만 기다려 주세요.", "romaji": "jamsiman gidaryeo juseyo", "id": "Mohon tunggu sebentar."}]}, {"judul": "Berbelanja di Toko", "baris": [{"spk": "A", "kr": "어서 오세요, 뭘 찾으세요?", "romaji": "eoseo oseyo, mwol chajeuseyo?", "id": "Selamat datang, sedang mencari apa?"}, {"spk": "B", "kr": "옷을 사고 싶어요.", "romaji": "oseul sago sipeoyo", "id": "Saya ingin membeli baju."}, {"spk": "A", "kr": "이건 어때요? 정말 예뻐요.", "romaji": "igeon eottaeyo? jeongmal yeoppeoyo", "id": "Yang ini bagaimana? Sangat cantik."}, {"spk": "B", "kr": "얼마예요?", "romaji": "eolmayeyo?", "id": "Berapa harganya?"}, {"spk": "A", "kr": "삼만 원이에요.", "romaji": "samman wonieyo", "id": "Tiga puluh ribu won."}, {"spk": "B", "kr": "좀 비싸네요. 좀 싸게 해 주실 수 있어요?", "romaji": "jom bissaneyo. jom ssage hae jusil su isseoyo?", "id": "Agak mahal ya. Bisa lebih murah?"}, {"spk": "A", "kr": "그럼, 이만 오천 원 어때요?", "romaji": "geureom, iman ocheon won eottaeyo?", "id": "Kalau begitu, dua puluh lima ribu won bagaimana?"}, {"spk": "B", "kr": "좋아요, 그걸로 살게요.", "romaji": "joayo, geugeollo salgeyo", "id": "Baik, saya beli itu."}]}, {"judul": "Menanyakan Arah", "baris": [{"spk": "A", "kr": "실례합니다, 기차역이 어디예요?", "romaji": "sillyehamnida, gichayeogi eodiyeyo?", "id": "Permisi, di mana stasiun kereta?"}, {"spk": "B", "kr": "곧장 가다가 오른쪽으로 도세요.", "romaji": "gotjang gadaga oreunjjog-euro doseyo", "id": "Jalan lurus, lalu belok kanan."}, {"spk": "A", "kr": "멀어요?", "romaji": "meoreoyo?", "id": "Jauh tidak?"}, {"spk": "B", "kr": "안 멀어요. 걸어서 십 분쯤 걸려요.", "romaji": "an meoreoyo. georeoseo sip bunjjeum geollyeoyo", "id": "Tidak jauh, jalan kaki sekitar sepuluh menit."}, {"spk": "A", "kr": "도와주셔서 감사합니다.", "romaji": "dowajusyeoseo gamsahamnida", "id": "Terima kasih atas bantuannya."}, {"spk": "B", "kr": "천만에요, 좋은 여행 되세요.", "romaji": "cheonmaneyo, joeun yeohaeng doeseyo", "id": "Sama-sama, semoga perjalananmu menyenangkan."}]}], "phrases": [{"kategori": "Di Bandara", "items": [{"kr": "여권", "romaji": "yeogwon", "id": "Paspor"}, {"kr": "탑승권", "romaji": "tapseunggwon", "id": "Boarding pass"}, {"kr": "짐", "romaji": "jim", "id": "Bagasi"}, {"kr": "체크인하고 싶어요", "romaji": "chekeuinhago sipeoyo", "id": "Saya mau check-in"}, {"kr": "몇 번 게이트예요?", "romaji": "myeot beon geiteuyeyo?", "id": "Gerbang berapa?"}, {"kr": "비행기가 연착됐어요", "romaji": "bihaenggiga yeonchakdwaesseoyo", "id": "Pesawatnya tertunda"}]}, {"kategori": "Di Hotel", "items": [{"kr": "방을 예약하고 싶어요", "romaji": "bangeul yeyakhago sipeoyo", "id": "Saya mau memesan kamar"}, {"kr": "빈 방 있어요?", "romaji": "bin bang isseoyo?", "id": "Ada kamar kosong?"}, {"kr": "하루에 얼마예요?", "romaji": "harue eolmayeyo?", "id": "Berapa harga semalam?"}, {"kr": "카드로 계산할 수 있어요?", "romaji": "kadeuro gyesanhal su isseoyo?", "id": "Bisa bayar dengan kartu?"}, {"kr": "체크아웃은 몇 시예요?", "romaji": "chekeuauseun myeot siyeyo?", "id": "Jam berapa check-out?"}, {"kr": "열쇠 주세요", "romaji": "yeolsoe juseyo", "id": "Tolong berikan kuncinya"}]}, {"kategori": "Di Restoran", "items": [{"kr": "종업원", "romaji": "jongeobwon", "id": "Pelayan"}, {"kr": "계산해 주세요", "romaji": "gyesanhae juseyo", "id": "Minta bon / bayar"}, {"kr": "포장해 주세요", "romaji": "pojanghae juseyo", "id": "Bungkus (take away)"}, {"kr": "매운 거 못 먹어요", "romaji": "maeun geo mot meogeoyo", "id": "Saya tidak makan pedas"}, {"kr": "채식 요리 있어요?", "romaji": "chaesik yori isseoyo?", "id": "Ada masakan vegetarian?"}, {"kr": "정말 맛있어요", "romaji": "jeongmal masisseoyo", "id": "Sangat enak"}]}, {"kategori": "Berbelanja", "items": [{"kr": "할인", "romaji": "harin", "id": "Diskon"}, {"kr": "입어 봐도 돼요?", "romaji": "ibeo bwado dwaeyo?", "id": "Boleh dicoba?"}, {"kr": "다른 걸로 바꿔 주세요", "romaji": "dareun geollo bakkwo juseyo", "id": "Ganti yang lain"}, {"kr": "영수증", "romaji": "yeongsujeung", "id": "Kwitansi"}, {"kr": "현금", "romaji": "hyeongeum", "id": "Uang tunai"}, {"kr": "거스름돈", "romaji": "geoseureumdon", "id": "Uang kembalian"}]}, {"kategori": "Keadaan Darurat", "items": [{"kr": "도와주세요!", "romaji": "dowajuseyo!", "id": "Tolong!"}, {"kr": "도움이 필요해요", "romaji": "doumi piryohaeyo", "id": "Saya butuh bantuan"}, {"kr": "경찰을 불러 주세요", "romaji": "gyeongchareul bulleo juseyo", "id": "Tolong panggil polisi"}, {"kr": "저 아파요", "romaji": "jeo apayo", "id": "Saya sakit"}, {"kr": "구급차를 불러 주세요", "romaji": "gugeupchareul bulleo juseyo", "id": "Tolong panggil ambulans"}, {"kr": "길을 잃었어요", "romaji": "gireul ireosseoyo", "id": "Saya tersesat"}]}], "reading": [{"judul": "나의 하루 (Hari Saya)", "kalimat": [{"kr": "저는 매일 아침 일곱 시에 일어나요.", "romaji": "jeoneun maeil achim ilgop sie ireonayo", "id": "Saya bangun jam tujuh setiap pagi."}, {"kr": "일어난 후에 먼저 세수하고 이를 닦아요.", "romaji": "ireonan hue meonjeo sesuhago ireul dakkayo", "id": "Setelah bangun, saya cuci muka dan gosok gigi dulu."}, {"kr": "그다음 아침을 먹고 우유를 한 잔 마셔요.", "romaji": "geudaeum achimeul meokgo uyureul han jan masyeoyo", "id": "Kemudian saya sarapan dan minum segelas susu."}, {"kr": "여덟 시에 버스를 타고 학교에 가요.", "romaji": "yeodeol sie beoseureul tago hakgyoe gayo", "id": "Jam delapan, saya naik bus ke sekolah."}, {"kr": "오후 세 시에 수업이 끝나고 집에 돌아와요.", "romaji": "ohu se sie sueobi kkeutnago jibe doraowayo", "id": "Jam tiga sore, pelajaran selesai dan saya pulang."}, {"kr": "밤에는 숙제를 하고 텔레비전을 봐요.", "romaji": "bamneneun sukjereul hago tellebijeoneul bwayo", "id": "Malam hari, saya kerjakan PR lalu menonton TV."}, {"kr": "열 시 반에 침대에 들어가서 자요.", "romaji": "yeol si bane chimdaee deureogaseo jayo", "id": "Jam setengah sebelas, saya masuk ranjang untuk tidur."}]}]};
+
+function renderDialogs(){
+  const container = document.getElementById('dialogList');
+  L3.dialogs.forEach(d=>{
+    const card = document.createElement('div');
+    card.className = 'dialog-card';
+    card.innerHTML = `<div class="dialog-title">${d.judul}</div>`;
+    d.baris.forEach(l=>{
+      const line = document.createElement('div');
+      line.className = 'dialog-line';
+      line.dataset.spk = l.spk;
+      line.innerHTML = `
+        <div class="dialog-spk">${l.spk}</div>
+        <div class="dialog-content">
+          <div class="dialog-hz">${l.kr}</div>
+          <div class="dialog-py">${l.romaji}</div>
+          <div class="dialog-id">${l.id}</div>
+        </div>
+        ${SPEAKER_SVG}
+      `;
+      line.addEventListener('click', () => speak(l.kr, line));
+      card.appendChild(line);
+    });
+    container.appendChild(card);
+  });
+}
+
+function renderPhrases(){
+  const container = document.getElementById('phraseList');
+  L3.phrases.forEach(cat=>{
+    const sec = document.createElement('div');
+    sec.className = 'phrase-section';
+    sec.innerHTML = `<div class="phrase-cat-title">${cat.kategori}</div><div class="mgrid"></div>`;
+    const grid = sec.querySelector('.mgrid');
+    cat.items.forEach(it=>{
+      const card = document.createElement('div');
+      card.className = 'phrasecard';
+      card.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${it.kr}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${it.romaji}</div>
+        <div class="id">${it.id}</div>
+      `;
+      card.addEventListener('click', () => speak(it.kr, card));
+      grid.appendChild(card);
+    });
+    container.appendChild(sec);
+  });
+}
+
+function renderReading(){
+  const container = document.getElementById('readingList');
+  L3.reading.forEach(r=>{
+    const card = document.createElement('div');
+    card.className = 'reading-card';
+    card.innerHTML = `
+      <div class="reading-title">${r.judul}</div>
+      <div class="reading-desc">Klik tiap kalimat untuk mendengar suaranya</div>
+    `;
+    r.kalimat.forEach(k=>{
+      const s = document.createElement('div');
+      s.className = 'reading-sentence';
+      s.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${k.kr}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${k.romaji}</div>
+        <div class="id">${k.id}</div>
+      `;
+      s.addEventListener('click', () => speak(k.kr, s));
+      card.appendChild(s);
+    });
+    container.appendChild(card);
+  });
+}
+
+renderDialogs();
+renderPhrases();
+renderReading();
+
+/* ============ LEVEL 4 DATA ============ */
+const L4 = {"patterns": [{"nama": "Semakin lama semakin", "formula": "〜을／ㄹ수록", "kr": "생각할수록 더 모르겠어요", "romaji": "saenggakalsurok deo moreugesseoyo", "id": "Semakin dipikirkan, semakin tidak mengerti", "note": ""}, {"nama": "Begitu...langsung...", "formula": "〜자마자", "kr": "집에 도착하자마자 비가 내리기 시작했어요", "romaji": "jibe dochakhajamaja biga naerigi sijakhaesseoyo", "id": "Begitu sampai rumah, hujan langsung turun", "note": ""}, {"nama": "Tidak hanya...tapi juga...", "formula": "〜뿐만 아니라〜도", "kr": "그는 똑똑할 뿐만 아니라 노력가예요", "romaji": "geuneun ttokttokhal ppunman anira noryeokgayeyo", "id": "Dia tidak hanya pintar, tapi juga pekerja keras", "note": ""}, {"nama": "Selain...juga...", "formula": "〜뿐만 아니라 〜도", "kr": "영어뿐만 아니라 프랑스어도 할 수 있어요", "romaji": "yeongeoppunman anira peurangseueodo hal su isseoyo", "id": "Selain bahasa Inggris, saya juga bisa bahasa Prancis", "note": ""}, {"nama": "Kalau...maka...", "formula": "만약〜으면／면", "kr": "만약 시간이 있으면 우리 집에 놀러 오세요", "romaji": "manyak sigani isseumyeon uri jibe nolleo oseyo", "id": "Kalau senggang, silakan main ke rumah", "note": ""}, {"nama": "Asalkan...maka...", "formula": "〜기만 하면", "kr": "노력하기만 하면 성공할 수 있어요", "romaji": "noryeokhagiman hamyeon seonggonghal su isseoyo", "id": "Asalkan berusaha, pasti bisa sukses", "note": ""}, {"nama": "Sudah tuntas (menyesal/lega)", "formula": "Kata kerja(아／어) + 버리다", "kr": "이 책을 다 읽어 버렸어요", "romaji": "i chaegeul da ilgeo beoryeosseoyo", "id": "Buku ini sudah selesai saya baca", "note": "버리다 menekankan tuntas/final"}, {"nama": "Menyatakan kemampuan", "formula": "〜을／ㄹ 수 있다", "kr": "이 한자를 읽을 수 있어요", "romaji": "i hanjareul ilgeul su isseoyo", "id": "Kanji ini bisa saya baca", "note": ""}, {"nama": "Coba melakukan", "formula": "Kata kerja(아／어) + 보다", "kr": "이 음식을 먹어 보세요", "romaji": "i eumsigeul meogeo boseyo", "id": "Cobalah makan masakan ini", "note": ""}, {"nama": "Menjadi (perubahan)", "formula": "Kata sifat/kerja + 아／어지다", "kr": "한국어가 유창해졌어요", "romaji": "hangugeoga yuchanghaejyeosseoyo", "id": "Bahasa Korea saya sudah menjadi lebih lancar", "note": ""}, {"nama": "Terlihat / kelihatannya", "formula": "〜을／ㄹ 것 같다", "kr": "이 식당은 맛있을 것 같아요", "romaji": "i sikdangeun masisseul geot gatayo", "id": "Restoran ini kelihatannya enak", "note": ""}, {"nama": "Direncanakan / berniat", "formula": "〜을／ㄹ 계획이다", "kr": "내년에 한국에 유학할 계획이에요", "romaji": "naenyeone hanguge yuhakhal gyehoegieyo", "id": "Tahun depan saya berniat kuliah di Korea", "note": ""}, {"nama": "Diharuskan", "formula": "〜아／어야 하다", "kr": "매일 한자를 연습해야 해요", "romaji": "maeil hanjareul yeonseubhaeya haeyo", "id": "Saya harus latihan kanji setiap hari", "note": ""}, {"nama": "Meskipun begitu", "formula": "〜는데도", "kr": "열심히 공부했는데도 시험에 떨어졌어요", "romaji": "yeolsimhi gongbuhaenneundedo siheome tteoreojyeosseoyo", "id": "Meski sudah belajar keras, tetap gagal ujian", "note": ""}, {"nama": "Sedang berlangsung sejak", "formula": "〜은／ㄴ 지 (waktu) 됐다", "kr": "한국에 온 지 일 년 됐어요", "romaji": "hanguge on ji il nyeon dwaesseoyo", "id": "Sudah satu tahun sejak saya datang ke Korea", "note": ""}], "vocab": [{"kategori": "직업 (Pekerjaan)", "items": [{"kr": "면접", "romaji": "myeonjeop", "id": "Wawancara"}, {"kr": "이력서", "romaji": "iryeokseo", "id": "CV / Riwayat hidup"}, {"kr": "월급", "romaji": "wolgeup", "id": "Gaji"}, {"kr": "야근", "romaji": "yageun", "id": "Lembur"}, {"kr": "상사", "romaji": "sangsa", "id": "Atasan"}, {"kr": "부하 직원", "romaji": "buha jigwon", "id": "Bawahan"}, {"kr": "동료", "romaji": "dongryo", "id": "Rekan kerja"}, {"kr": "계약", "romaji": "gyeyak", "id": "Kontrak"}, {"kr": "승진", "romaji": "seungjin", "id": "Promosi jabatan"}, {"kr": "퇴직", "romaji": "toejik", "id": "Pensiun / berhenti kerja"}, {"kr": "회의", "romaji": "hoeui", "id": "Rapat"}, {"kr": "출장", "romaji": "chuljang", "id": "Perjalanan dinas"}, {"kr": "마감", "romaji": "magam", "id": "Batas waktu"}, {"kr": "채용 공고", "romaji": "chaeyong gonggo", "id": "Lowongan kerja"}, {"kr": "경력", "romaji": "gyeongryeok", "id": "Pengalaman"}]}, {"kategori": "건강 (Kesehatan)", "items": [{"kr": "열", "romaji": "yeol", "id": "Demam"}, {"kr": "감기", "romaji": "gamgi", "id": "Flu / masuk angin"}, {"kr": "두통", "romaji": "dutong", "id": "Sakit kepala"}, {"kr": "약", "romaji": "yak", "id": "Obat"}, {"kr": "주사", "romaji": "jusa", "id": "Suntikan"}, {"kr": "검사", "romaji": "geomsa", "id": "Pemeriksaan"}, {"kr": "입원", "romaji": "ibwon", "id": "Rawat inap"}, {"kr": "수술", "romaji": "susul", "id": "Operasi"}, {"kr": "체온", "romaji": "cheon", "id": "Suhu tubuh"}, {"kr": "알레르기", "romaji": "allereugi", "id": "Alergi"}, {"kr": "부상", "romaji": "busang", "id": "Luka / cedera"}, {"kr": "건강", "romaji": "geongang", "id": "Kesehatan"}, {"kr": "보험", "romaji": "boheom", "id": "Asuransi"}, {"kr": "피곤하다", "romaji": "pigonhada", "id": "Lelah"}, {"kr": "회복하다", "romaji": "hoebokhada", "id": "Pulih"}]}, {"kategori": "기술 (Teknologi)", "items": [{"kr": "휴대폰", "romaji": "hyudaepon", "id": "Ponsel"}, {"kr": "충전하다", "romaji": "chungjeonhada", "id": "Mengisi daya"}, {"kr": "인터넷", "romaji": "inteonet", "id": "Internet"}, {"kr": "앱", "romaji": "aep", "id": "Aplikasi"}, {"kr": "화면", "romaji": "hwamyeon", "id": "Layar"}, {"kr": "설정", "romaji": "seoljeong", "id": "Pengaturan"}, {"kr": "비밀번호", "romaji": "bimilbeonho", "id": "Kata sandi"}, {"kr": "업데이트하다", "romaji": "eopdeiteuhada", "id": "Memperbarui"}, {"kr": "고장 나다", "romaji": "gojang nada", "id": "Rusak (mesin)"}, {"kr": "검색하다", "romaji": "geomsaekhada", "id": "Mencari (di internet)"}, {"kr": "데이터", "romaji": "deiteo", "id": "Data"}, {"kr": "인공지능", "romaji": "ingongjineung", "id": "Kecerdasan buatan"}, {"kr": "클라우드", "romaji": "keullaudeu", "id": "Cloud / awan digital"}, {"kr": "연결하다", "romaji": "yeongyeolhada", "id": "Menyambungkan"}, {"kr": "사진", "romaji": "sajin", "id": "Gambar / foto"}]}, {"kategori": "감정 (Emosi)", "items": [{"kr": "기쁘다", "romaji": "gippeuda", "id": "Senang"}, {"kr": "슬프다", "romaji": "seulpeuda", "id": "Sedih"}, {"kr": "화나다", "romaji": "hwanada", "id": "Marah"}, {"kr": "놀라다", "romaji": "nollada", "id": "Terkejut"}, {"kr": "걱정하다", "romaji": "geokjeonghada", "id": "Khawatir"}, {"kr": "긴장하다", "romaji": "ginjanghada", "id": "Gugup / tegang"}, {"kr": "외롭다", "romaji": "oeropda", "id": "Kesepian"}, {"kr": "안심하다", "romaji": "ansimhada", "id": "Merasa lega"}, {"kr": "부끄럽다", "romaji": "bukkeureopda", "id": "Malu"}, {"kr": "부럽다", "romaji": "bureopda", "id": "Iri"}, {"kr": "감동하다", "romaji": "gamdonghada", "id": "Terharu / tersentuh"}, {"kr": "지루하다", "romaji": "jiruhada", "id": "Bosan"}, {"kr": "만족하다", "romaji": "manjokhada", "id": "Puas"}, {"kr": "후회하다", "romaji": "huhoehada", "id": "Menyesal"}, {"kr": "자랑스럽다", "romaji": "jarangseureopda", "id": "Bangga"}]}, {"kategori": "여행 (Perjalanan)", "items": [{"kr": "여행", "romaji": "yeohaeng", "id": "Perjalanan / wisata"}, {"kr": "예약하다", "romaji": "yeyakhada", "id": "Memesan"}, {"kr": "관광지", "romaji": "gwangwangji", "id": "Tempat wisata"}, {"kr": "짐", "romaji": "jim", "id": "Barang bawaan"}, {"kr": "지도", "romaji": "jido", "id": "Peta"}, {"kr": "환전하다", "romaji": "hwanjeonhada", "id": "Menukar uang"}, {"kr": "입국 심사", "romaji": "ipguk simsa", "id": "Pemeriksaan imigrasi"}, {"kr": "비자", "romaji": "bija", "id": "Visa"}, {"kr": "기념품", "romaji": "ginyeompum", "id": "Oleh-oleh"}, {"kr": "숙박하다", "romaji": "sukbakhada", "id": "Menginap"}, {"kr": "경치", "romaji": "gyeongchi", "id": "Pemandangan"}, {"kr": "목적지", "romaji": "mokjeokji", "id": "Tempat tujuan"}, {"kr": "시차", "romaji": "sicha", "id": "Perbedaan waktu"}, {"kr": "길을 잃다", "romaji": "gireul irta", "id": "Tersesat"}, {"kr": "안내하다", "romaji": "annaehada", "id": "Memandu"}]}], "dialogs": [{"judul": "Wawancara Kerja", "baris": [{"spk": "A", "kr": "자기소개를 해 주세요.", "romaji": "jagisogaereul hae juseyo", "id": "Tolong perkenalkan diri Anda."}, {"spk": "B", "kr": "네, 저는 김민수입니다. 삼 년 동안 영업 일을 했습니다.", "romaji": "ne, jeoneun gimminsuimnida. sam nyeon dongan yeongeop ireul haetseumnida", "id": "Baik, nama saya Kim Minsu. Saya sudah tiga tahun bekerja di bidang penjualan."}, {"spk": "A", "kr": "왜 우리 회사에서 일하고 싶으세요?", "romaji": "wae uri hoesaeseo ilhago sipeuseyo?", "id": "Kenapa Anda ingin bekerja di perusahaan ini?"}, {"spk": "B", "kr": "귀사의 제품에 관심이 많고, 성장하고 싶습니다.", "romaji": "gwisaui jepume gwansimi manko, seongjanghago sipseumnida", "id": "Saya sangat tertarik dengan produk perusahaan ini, dan ingin berkembang."}, {"spk": "A", "kr": "알겠습니다. 결과는 다음 주에 알려드리겠습니다.", "romaji": "algesseumnida. gyeolgwaneun daeum jue allyeodeurigetseumnida", "id": "Baik, hasilnya akan kami beritahukan minggu depan."}]}, {"judul": "Di Dokter", "baris": [{"spk": "A", "kr": "어디가 아프세요?", "romaji": "eodiga apeuseyo?", "id": "Ada keluhan apa?"}, {"spk": "B", "kr": "어제부터 열이 있고, 머리도 아파요.", "romaji": "eojebuteo yeori itgo, meorido apayo", "id": "Sejak kemarin saya demam, dan kepala juga sakit."}, {"spk": "A", "kr": "알겠습니다. 체온을 재 볼게요.", "romaji": "algesseumnida. cheoneul jae bolgeyo", "id": "Baik, mari kita ukur suhu tubuh."}, {"spk": "B", "kr": "네, 부탁드립니다.", "romaji": "ne, butakdeurimnida", "id": "Baik, silakan."}, {"spk": "A", "kr": "감기네요. 약을 드릴 테니 푹 쉬세요.", "romaji": "gamgineyo. yageul deuril teni puk swiseyo", "id": "Ini flu biasa. Saya akan berikan obat, istirahatlah dengan baik."}]}, {"judul": "Di Bank", "baris": [{"spk": "A", "kr": "계좌를 개설하고 싶은데요.", "romaji": "gyejwareul gaeseolhago sipeundeyo", "id": "Saya ingin membuka rekening."}, {"spk": "B", "kr": "여권과 외국인등록증 있으세요?", "romaji": "yeogwongwa oegugin deungrokjeung isseuseyo?", "id": "Apakah Anda membawa paspor dan kartu izin tinggal?"}, {"spk": "A", "kr": "네, 여기 있어요.", "romaji": "ne, yeogi isseoyo", "id": "Ya, ini dia."}, {"spk": "B", "kr": "감사합니다. 이 서류를 작성해 주세요.", "romaji": "gamsahamnida. i seoryureul jakseonghae juseyo", "id": "Terima kasih. Silakan isi formulir ini."}, {"spk": "A", "kr": "알겠습니다. 카드는 언제 나와요?", "romaji": "algesseumnida. kadeuneun eonje nawayo?", "id": "Baik. Kapan kartunya jadi?"}, {"spk": "B", "kr": "일주일 후에 우편으로 보내드릴게요.", "romaji": "iljuil hue upyeon-euro bonaedeurilgeyo", "id": "Akan kami kirim melalui pos dalam satu minggu."}]}, {"judul": "Mengurus Visa", "baris": [{"spk": "A", "kr": "비자를 신청하고 싶은데, 뭐가 필요해요?", "romaji": "bijareul sincheonghago sipeunde, mwoga piryohaeyo?", "id": "Saya ingin mengajukan visa, apa saja yang diperlukan?"}, {"spk": "B", "kr": "여권, 사진, 그리고 신청서가 필요해요.", "romaji": "yeogwon, sajin, geurigo sincheongseoga piryohaeyo", "id": "Diperlukan paspor, foto, dan formulir permohonan."}, {"spk": "A", "kr": "심사는 얼마나 걸려요?", "romaji": "simsaneun eolmana geollyeoyo?", "id": "Berapa lama proses pemeriksaannya?"}, {"spk": "B", "kr": "보통 이 주 정도 걸려요.", "romaji": "botong i ju jeongdo geollyeoyo", "id": "Biasanya sekitar dua minggu."}, {"spk": "A", "kr": "알겠습니다. 오늘 신청해도 돼요?", "romaji": "algesseumnida. oneul sincheonghaedo dwaeyo?", "id": "Baik. Bolehkah saya mengajukan hari ini?"}]}, {"judul": "Rencana Liburan", "baris": [{"spk": "A", "kr": "여름 방학에 어디 갈 계획 있어요?", "romaji": "yeoreum banghage eodi gal gyehoek isseoyo?", "id": "Ada rencana pergi ke mana saat liburan musim panas?"}, {"spk": "B", "kr": "네, 부산으로 여행 갈 거예요.", "romaji": "ne, busan-euro yeohaeng gal geoyeyo", "id": "Ya, saya berencana wisata ke Busan."}, {"spk": "A", "kr": "좋네요! 며칠 동안 가요?", "romaji": "jonneyo! myeochil dongan gayo?", "id": "Bagus! Berapa hari perginya?"}, {"spk": "B", "kr": "나흘 동안이에요. 바다랑 축제를 보고 싶어요.", "romaji": "naheul dong-anieyo. badarang chukjereul bogo sipeoyo", "id": "Empat hari. Saya ingin melihat laut dan festival."}, {"spk": "A", "kr": "재미있겠네요. 조심히 다녀오세요.", "romaji": "jaemiitgenneyo. josimhi danyeooseyo", "id": "Kedengarannya menyenangkan. Hati-hati ya."}]}]};
+
+/* ============ LEVEL 5 DATA ============ */
+const L5 = {"idioms": [{"nama": "Usaha yang membuahkan hasil ganda", "formula": "일석이조", "kr": "이건 일석이조의 방법이에요", "romaji": "igeon ilseogijoui bangbeobieyo", "id": "Ini adalah cara yang menguntungkan dua kali sekaligus", "note": "Harfiah: satu batu, dua burung"}, {"nama": "Cinta pandangan pertama", "formula": "첫눈에 반하다", "kr": "그녀에게 첫눈에 반했어요", "romaji": "geunyeoege cheonnune banhaesseoyo", "id": "Saya jatuh cinta pandangan pertama padanya", "note": ""}, {"nama": "Berjuang sekuat tenaga", "formula": "최선을 다하다", "kr": "최선을 다해 공부해요", "romaji": "choeseoneul dahae gongbuhaeyo", "id": "Belajar dengan sungguh-sungguh", "note": ""}, {"nama": "Pantang menyerah", "formula": "칠전팔기", "kr": "칠전팔기의 정신이에요", "romaji": "chiljeonpalgiui jeongsinieyo", "id": "Semangat jatuh tujuh kali, bangkit delapan kali", "note": "Pantang menyerah"}, {"nama": "Pertemuan sekali seumur hidup", "formula": "일기일회", "kr": "일기일회를 소중히 여겨요", "romaji": "ilgiilhoereul sojunghi yeogyeoyo", "id": "Menghargai setiap pertemuan sebagai yang tak terulang", "note": ""}, {"nama": "Berubah pikiran total", "formula": "심기일전", "kr": "심기일전해서 새로운 일을 시작해요", "romaji": "simgiiljeonhaeseo saeroun ireul sijakhaeyo", "id": "Dengan semangat baru, memulai pekerjaan baru", "note": ""}, {"nama": "Situasi krisis", "formula": "절체절명", "kr": "절체절명의 위기예요", "romaji": "jeolchejeolmyeong-ui wigiyeyo", "id": "Situasi genting yang tak ada jalan keluar", "note": ""}, {"nama": "Tenang dalam keadaan darurat", "formula": "침착하다", "kr": "그는 항상 침착해요", "romaji": "geuneun hangsang chimchakhaeyo", "id": "Dia selalu tenang dan tidak panik", "note": ""}, {"nama": "Berkembang pesat setiap hari", "formula": "일취월장", "kr": "기술은 일취월장하고 있어요", "romaji": "gisureun ilchwiwoljanghago isseoyo", "id": "Teknologi berkembang pesat setiap hari", "note": ""}, {"nama": "Sabar membuahkan hasil", "formula": "인내는 쓰지만 열매는 달다", "kr": "인내는 쓰지만 열매는 달다고 하잖아요", "romaji": "innaeneun sseujiman yeolmaeneun daldago hajanhayo", "id": "Kesabaran itu pahit tapi buahnya manis", "note": "Kesabaran membuahkan hasil"}, {"nama": "Tidak ada gunanya menyesal", "formula": "엎질러진 물", "kr": "엎질러진 물이라고 하잖아요", "romaji": "eopjilleojin murirago hajanhayo", "id": "Nasi sudah menjadi bubur", "note": "Harfiah: air yang tumpah"}, {"nama": "Menyerupai orang tua", "formula": "부전자전", "kr": "부전자전이네요", "romaji": "bujeonjajeonineyo", "id": "Buah jatuh tidak jauh dari pohonnya", "note": "Harfiah: ayah dan anak serupa"}, {"nama": "Terlambat menyesal", "formula": "소 잃고 외양간 고친다", "kr": "소 잃고 외양간 고치지 말고 지금 준비해요", "romaji": "so ilko oeyangan gochiji malgo jigeum junbihaeyo", "id": "Jangan menyesal setelah kejadian, siapkan dari sekarang", "note": "Harfiah: memperbaiki kandang setelah sapi hilang"}, {"nama": "Kebiasaan sejak kecil terbawa terus", "formula": "세 살 버릇 여든까지 간다", "kr": "세 살 버릇 여든까지 간다고 하잖아요", "romaji": "se sal beoreut yeodeunkkaji gandago hajanhayo", "id": "Kebiasaan sejak kecil terbawa sampai tua", "note": ""}, {"nama": "Bekerja sama erat", "formula": "손발이 맞다", "kr": "우리는 손발이 잘 맞아요", "romaji": "urineun sonbari jal majayo", "id": "Kami bekerja sama dengan sangat kompak", "note": ""}, {"nama": "Melihat gambaran besar", "formula": "큰 그림을 보다", "kr": "큰 그림을 보고 판단해 주세요", "romaji": "keun geurimeul bogo pandanhae juseyo", "id": "Tolong nilai dari sudut pandang yang luas", "note": ""}, {"nama": "Berakhir dengan indah", "formula": "유종의 미", "kr": "유종의 미를 거두고 싶어요", "romaji": "yujong-ui mireul geodugo sipeoyo", "id": "Ingin mengakhiri dengan hasil yang indah", "note": ""}, {"nama": "Sangat berhati-hati", "formula": "돌다리도 두들겨 보고 건너다", "kr": "그는 항상 돌다리도 두들겨 보고 건너요", "romaji": "geuneun hangsang doldarido dudeulgyeo bogo geonneoyo", "id": "Dia selalu sangat berhati-hati sebelum bertindak", "note": "Harfiah: mengetuk jembatan batu sebelum menyeberang"}, {"nama": "Terlalu banyak pemimpin membuat kacau", "formula": "사공이 많으면 배가 산으로 간다", "kr": "사공이 많으면 배가 산으로 간다는 상황이에요", "romaji": "sagongi manheumyeon baega san-euro gandaneun sanghwang-ieyo", "id": "Terlalu banyak pemimpin membuat rencana kacau", "note": ""}, {"nama": "Kesempatan yang sangat langka", "formula": "천재일우", "kr": "이건 천재일우의 기회예요", "romaji": "igeon cheonjaeiluui gihoeyeyo", "id": "Ini adalah kesempatan langka seumur hidup", "note": ""}], "patterns": [{"nama": "Semakin (formal)", "formula": "〜을수록 점점", "kr": "나이가 들수록 점점 지혜로워져요", "romaji": "naiga deulsurok jeomjeom jihyeorowojyeoyo", "id": "Seiring bertambahnya usia, semakin bijaksana", "note": ""}, {"nama": "Bukan hanya itu, bahkan...", "formula": "그뿐만 아니라, 게다가〜", "kr": "만점을 받았을 뿐만 아니라, 게다가 장학금도 받았어요", "romaji": "manjeomeul badasseul ppunman anira, gedaga janghakgeumdo badasseoyo", "id": "Tidak hanya dapat nilai sempurna, bahkan dapat beasiswa juga", "note": ""}, {"nama": "Seandainya...maka...", "formula": "만약〜다면", "kr": "만약 내일 비가 온다면 행사는 취소돼요", "romaji": "manyak naeil biga ondamyeon haengsaneun chwisodwaeyo", "id": "Seandainya besok hujan, acaranya dibatalkan", "note": ""}, {"nama": "Sekalipun...juga...", "formula": "설령〜아／어도", "kr": "설령 실패해도 후회하지 않아요", "romaji": "seollyeong silpaehaedo huhoehaji anhayo", "id": "Sekalipun gagal, saya tidak akan menyesal", "note": ""}, {"nama": "Bukan hanya karena...tapi juga karena...", "formula": "〜뿐만 아니라 〜때문이기도 하다", "kr": "월급이 높기 때문일 뿐만 아니라 도전을 좋아하기 때문이기도 해요", "romaji": "wolgeubi nopgi ttaemunil ppunman anira dojeoneul johahagi ttaemunigido haeyo", "id": "Bukan hanya karena gajinya tinggi, tapi juga karena saya suka tantangan", "note": ""}, {"nama": "Secara bertahap", "formula": "점차", "kr": "이 도시는 점차 발전하고 있어요", "romaji": "i dosineun jeomcha baljeonhago isseoyo", "id": "Kota ini secara bertahap berkembang", "note": ""}, {"nama": "Bagaimanapun juga", "formula": "어쨌든", "kr": "어쨌든 우리는 계속 노력해야 해요", "romaji": "eojjaetdeun urineun gyesok noryeokhaeya haeyo", "id": "Bagaimanapun juga, kita harus tetap berjuang", "note": ""}, {"nama": "Meski...tetap saja...", "formula": "〜에도 불구하고", "kr": "피곤함에도 불구하고 그는 일을 계속했어요", "romaji": "pigonhame-do bulguhago geuneun ireul gyesokhaesseoyo", "id": "Meski lelah, dia tetap melanjutkan pekerjaannya", "note": ""}, {"nama": "Kecuali...baru...", "formula": "〜지 않는 한", "kr": "폭우가 내리지 않는 한 경기는 취소되지 않아요", "romaji": "pogua naeriji anhneun han gyeonggineun chwisodoeji anhayo", "id": "Kecuali hujan lebat, pertandingan tidak akan dibatalkan", "note": ""}, {"nama": "Tidak peduli...selalu...", "formula": "〜에 관계없이", "kr": "어려움에 관계없이 그는 포기하지 않아요", "romaji": "eoryeoume gwangyeeopsi geuneun pogihaji anhayo", "id": "Tidak peduli seberapa sulit, dia tidak pernah menyerah", "note": ""}, {"nama": "Bukan...melainkan...", "formula": "〜이 아니라〜이다", "kr": "이건 제 잘못이 아니라 그의 잘못이에요", "romaji": "igeon je jalmosi anira geuui jalmosieyo", "id": "Ini bukan salah saya, melainkan salahnya", "note": ""}, {"nama": "Karena terlalu...", "formula": "〜한 나머지", "kr": "너무 기쁜 나머지 울어 버렸어요", "romaji": "neomu gippeun namoji ureo beoryeosseoyo", "id": "Karena sangat senang, saya sampai menangis", "note": ""}, {"nama": "Sejauh yang saya tahu", "formula": "내가 아는 한", "kr": "내가 아는 한, 그는 아직 안 왔어요", "romaji": "naega aneun han, geuneun ajik an wasseoyo", "id": "Sejauh yang saya tahu, dia belum datang", "note": ""}, {"nama": "Bukan berarti...", "formula": "〜는 것은 아니다", "kr": "싫어하는 것은 아니지만 시간이 없어요", "romaji": "silheohaneun geoseun anijiman sigani eopseoyo", "id": "Bukan berarti saya tidak suka, tapi saya tidak ada waktu", "note": ""}], "dialogs": [{"judul": "Negosiasi Bisnis", "baris": [{"spk": "A", "kr": "이번 제휴에 대해 귀사의 견적은 얼마인가요?", "romaji": "ibeon jehyue daehae gwisaui gyeonjeogeun eolmaingayo?", "id": "Terkait kerja sama ini, berapa penawaran harga dari perusahaan Anda?"}, {"spk": "B", "kr": "견적은 오백만 원이고, 모든 서비스 요금을 포함해요.", "romaji": "gyeonjeogeun obaengman wonigo, modeun seobiseu yogeumeul pohamhaeyo", "id": "Penawaran kami lima juta won, sudah termasuk semua biaya layanan."}, {"spk": "A", "kr": "이 가격은 좀 비싼 것 같아요. 좀 더 논의할 수 있을까요?", "romaji": "i gagyeogeun jom bissan geot gatayo. jom deo nonuihal su isseulkkayo?", "id": "Harga ini agak tinggi. Bisakah kita bicarakan lagi?"}, {"spk": "B", "kr": "장기 계약을 맺으시면 십 퍼센트 할인해 드릴 수 있어요.", "romaji": "janggi gyeyageul maejeusimyeon sip peosenteu harinhae deuril su isseoyo", "id": "Kalau menandatangani kontrak jangka panjang, kami bisa beri diskon sepuluh persen."}, {"spk": "A", "kr": "좋네요. 팀과 상의해 볼 필요가 있어요.", "romaji": "jonneyo. timgwa sang-uihae bol piryoga isseoyo", "id": "Kedengarannya bagus, saya perlu mendiskusikan dengan tim saya."}, {"spk": "B", "kr": "문제없어요. 앞으로도 잘 부탁드립니다.", "romaji": "munjeeopseoyo. apeurodo jal butakdeurimnida", "id": "Tidak masalah, kami menantikan kerja sama lebih lanjut."}]}, {"judul": "Diskusi Opini", "baris": [{"spk": "A", "kr": "요즘 경제 상황에 대해 어떻게 생각하세요?", "romaji": "yojeum gyeonje sanghwang-e daehae eotteoke saenggakhaseyo?", "id": "Bagaimana pendapatmu tentang situasi ekonomi belakangan ini?"}, {"spk": "B", "kr": "과제는 있지만, 전반적으로 조금씩 회복되고 있다고 생각해요.", "romaji": "gwajeneun itjiman, jeonbanjeog-euro jogeumssik hoebokdoego itdago saenggakhaeyo", "id": "Menurut saya meski ada tantangan, secara keseluruhan sedang pulih perlahan."}, {"spk": "A", "kr": "젊은 사람들은 이 변화에 어떻게 대응해야 한다고 생각하세요?", "romaji": "jeolmeun saramdeureun i byeonhwae eotteoke daeunghaeya handago saenggakhaseyo?", "id": "Menurutmu bagaimana anak muda seharusnya menghadapi perubahan ini?"}, {"spk": "B", "kr": "새로운 기술을 계속 배우면서 경쟁력을 유지해야 한다고 생각해요.", "romaji": "saeroun gisureul gyesok baeumyeonseo gyeongjaengryeogeul yujihaeya handago saenggakhaeyo", "id": "Saya rasa harus terus belajar keterampilan baru, menjaga daya saing."}, {"spk": "A", "kr": "맞는 말이에요. 우리도 시대의 흐름을 따라가야 해요.", "romaji": "matneun marieyo. urido sidaeui heureumeul ttaragaya haeyo", "id": "Betul sekali, kita semua perlu mengikuti perkembangan zaman."}]}], "reading": [{"judul": "한국어를 배우는 장점 (Manfaat Belajar Bahasa Korea)", "kalimat": [{"kr": "한국어를 배우는 것은 한국의 문화와 역사를 이해하는 데 도움이 돼요.", "romaji": "hangugeoreul baeuneun geoseun hanguk-ui munhwawa yeoksareul ihahaneun de doumi dwaeyo", "id": "Belajar bahasa Korea membantu kita memahami budaya dan sejarah Korea."}, {"kr": "한국어는 세계 여러 나라 사람들이 배우는 언어 중 하나예요.", "romaji": "hangugeoneun segye yeoreo nara saramdeuri baeuneun eoneo jung hanayeyo", "id": "Bahasa Korea adalah salah satu bahasa yang banyak dipelajari di dunia."}, {"kr": "한국어를 잘하면 일자리 기회가 더 많아져요.", "romaji": "hangugeoreul jalhamyeon iljari gihoega deo manhajyeoyo", "id": "Menguasai bahasa Korea bisa membawa lebih banyak kesempatan kerja."}, {"kr": "많은 국제 기업들이 한국어를 할 수 있는 직원을 필요로 해요.", "romaji": "maneun gukje gieopdeuri hangugeoreul hal su itneun jigwoneul piryoro haeyo", "id": "Banyak perusahaan internasional membutuhkan karyawan yang bisa berbahasa Korea."}, {"kr": "새로운 언어를 배우는 것은 뇌 훈련에도 도움이 돼요.", "romaji": "saeroun eoneoreul baeuneun geoseun noe hullyeonedo doumi dwaeyo", "id": "Belajar bahasa baru juga bisa melatih otak."}, {"kr": "한글을 배우면서 한국인의 사고방식을 더 깊이 이해할 수 있어요.", "romaji": "hangeureul baeumyeonseo hangugin-ui sagobangsigeul deo gipi ihahal su isseoyo", "id": "Melalui belajar Hangeul, kita bisa lebih mendalam memahami cara berpikir orang Korea."}, {"kr": "한국어가 유창해지면 한국인 친구도 더 쉽게 사귈 수 있어요.", "romaji": "hangugeoga yuchanghaejimyeon hangugin chingudo deo swipge sagwil su isseoyo", "id": "Menguasai bahasa Korea juga membuat kita lebih mudah berteman dengan orang Korea."}, {"kr": "물론 한국어 공부는 쉽지 않고, 인내와 꾸준함이 필요해요.", "romaji": "mullon hangugeo gongbuneun swipji anhgo, innaewa kkujunhami piryohaeyo", "id": "Tentu saja, belajar bahasa Korea tidak mudah, membutuhkan kesabaran dan ketekunan."}, {"kr": "매일 조금씩 연습하면 조금씩 발전이 보이기 시작해요.", "romaji": "maeil jogeumssik yeonseubhamyeon jogeumssik baljeoni boigi sijakhaeyo", "id": "Berlatih sedikit setiap hari, perlahan akan terlihat kemajuannya."}, {"kr": "많이 듣고, 많이 말하고, 많이 읽고, 많이 쓰는 것이 언어 실력 향상의 열쇠예요.", "romaji": "manhi deutgo, manhi malhago, manhi ilkgo, manhi sseuneun geosi eoneo sillyeok hyangsang-ui yeolsoeyeyo", "id": "Banyak mendengar, bicara, membaca, dan menulis adalah kunci menguasai bahasa."}, {"kr": "계속하다 보면 누구나 한국어를 잘할 수 있게 돼요.", "romaji": "gyesokhada bomyeon nuguna hangugeoreul jalhal su itge dwaeyo", "id": "Asalkan terus bertahan, siapa pun bisa menguasai bahasa Korea dengan baik."}, {"kr": "공부 과정은 힘들지만, 그 결실은 모든 것을 가치 있게 만들어 줘요.", "romaji": "gongbu gwajeong-eun himdeuljiman, geu gyeolsireun modeun geoseul gachi itge mandeureo jwoyo", "id": "Proses belajar memang melelahkan, tapi hasilnya akan membuat semuanya berharga."}]}]};
+
+/* ============ RENDER HELPERS (LEVEL 4 & 5) ============ */
+function renderPatternListGeneric(containerId, patterns){
+  const list = document.getElementById(containerId);
+  patterns.forEach((p,i)=>{
+    const el = document.createElement('div');
+    el.className = 'pattern';
+    el.innerHTML = `
+      <div class="pattern-head">
+        <div class="pattern-name">${i+1}. ${p.nama}</div>
+        <div class="pattern-formula">${p.formula}</div>
+      </div>
+      <div class="pattern-example">
+        <span class="hz">${p.kr}</span>
+        <span class="py">${p.romaji}</span>
+        <span class="id">"${p.id}"</span>
+        ${SPEAKER_SVG}
+      </div>
+      ${p.note ? `<div class="pattern-note"><b>Catatan:</b> ${p.note}</div>` : ''}
+    `;
+    el.querySelector('.pattern-example').addEventListener('click', function(){ speak(p.kr, this); });
+    list.appendChild(el);
+  });
+}
+
+function renderDialogListGeneric(containerId, dialogs){
+  const container = document.getElementById(containerId);
+  dialogs.forEach(d=>{
+    const card = document.createElement('div');
+    card.className = 'dialog-card';
+    card.innerHTML = `<div class="dialog-title">${d.judul}</div>`;
+    d.baris.forEach(l=>{
+      const line = document.createElement('div');
+      line.className = 'dialog-line';
+      line.dataset.spk = l.spk;
+      line.innerHTML = `
+        <div class="dialog-spk">${l.spk}</div>
+        <div class="dialog-content">
+          <div class="dialog-hz">${l.kr}</div>
+          <div class="dialog-py">${l.romaji}</div>
+          <div class="dialog-id">${l.id}</div>
+        </div>
+        ${SPEAKER_SVG}
+      `;
+      line.addEventListener('click', () => speak(l.kr, line));
+      card.appendChild(line);
+    });
+    container.appendChild(card);
+  });
+}
+
+function renderReadingListGeneric(containerId, readings){
+  const container = document.getElementById(containerId);
+  readings.forEach(r=>{
+    const card = document.createElement('div');
+    card.className = 'reading-card';
+    card.innerHTML = `
+      <div class="reading-title">${r.judul}</div>
+      <div class="reading-desc">Klik tiap kalimat untuk mendengar suaranya</div>
+    `;
+    r.kalimat.forEach(k=>{
+      const s = document.createElement('div');
+      s.className = 'reading-sentence';
+      s.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${k.kr}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${k.romaji}</div>
+        <div class="id">${k.id}</div>
+      `;
+      s.addEventListener('click', () => speak(k.kr, s));
+      card.appendChild(s);
+    });
+    container.appendChild(card);
+  });
+}
+
+function renderVocab4(){
+  const container = document.getElementById('vocab4');
+  L4.vocab.forEach(cat=>{
+    const sec = document.createElement('div');
+    sec.className = 'phrase-section';
+    sec.innerHTML = `<div class="phrase-cat-title">${cat.kategori}</div><div class="grid"></div>`;
+    const grid = sec.querySelector('.grid');
+    cat.items.forEach(it=>{
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="top-row">
+          <div class="hz">${it.kr}</div>
+          ${SPEAKER_SVG}
+        </div>
+        <div class="py">${it.romaji}</div>
+        <div class="id">${it.id}</div>
+      `;
+      card.addEventListener('click', () => speak(it.kr, card));
+      grid.appendChild(card);
+    });
+    container.appendChild(sec);
+  });
+}
+
+/* ============ RENDER CALLS: LEVEL 4 ============ */
+renderPatternListGeneric('patternList4', L4.patterns);
+renderVocab4();
+renderDialogListGeneric('dialogList4', L4.dialogs);
+
+/* ============ RENDER CALLS: LEVEL 5 ============ */
+renderPatternListGeneric('idiomList5', L5.idioms);
+renderPatternListGeneric('patternList5', L5.patterns);
+renderDialogListGeneric('dialogList5', L5.dialogs);
+renderReadingListGeneric('readingList5', L5.reading);
+
+</script>
+</body>
+</html>
